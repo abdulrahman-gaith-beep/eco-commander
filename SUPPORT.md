@@ -3,7 +3,7 @@
 ## Supported environment
 
 - macOS on Apple Silicon or Intel.
-- Bash 5+, Git, Homebrew, SwiftBar for menu-bar usage, and Python 3.10 through
+- Bash 5+ recommended (core CLI works on macOS default bash 3.2), Git, Homebrew, SwiftBar for menu-bar usage, and Python 3.10 through
   3.13 for poller and scheduler modules.
 - The `main` branch and the latest tagged release are the supported code lines.
 

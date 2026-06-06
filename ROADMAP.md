@@ -67,11 +67,14 @@ Target: v0.4.0 adoption and integration work.
 - [x] CLI router (`eco`)
 - [x] SwiftBar status panel
 - [x] Recipe library (ask, note, research, swarm, snapshot, arabic-proof,
-      dashboard)
+      dashboard, dashboard-refresh, scheduler-seed, account-swap, hygiene,
+      n8n-start)
 - [x] Immutable snapshot system
 - [x] End-to-end Bats test suite
 - [x] Usage monitor poller (Claude, Gemini, Codex)
 - [x] Job scheduler with adapter pattern
 - [x] Bats, Python unit, and E2E test suites
 - [x] Alert system with `eco-alerts.sh`
+- [x] Account-swap credential rotation system
+- [x] Hygiene watcher with automated repo maintenance
 - [x] Gold-standard repository scaffold

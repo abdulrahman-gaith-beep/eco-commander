@@ -33,6 +33,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   into `~/.eco/`.
 
 ### Changed
+- SwiftBar plugin renamed from `eco-commander.30s.sh` to
+  `eco-commander.15s.sh` to match the 15-second refresh interval.
 - Snapshot probe semantics: n8n-offline now classified as `info`, not `high`,
   reflecting on-demand-service architecture (audit finding D2).
 - SwiftBar title now shows Ollama as `loaded/installed` instead of a bare

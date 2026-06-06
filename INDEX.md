@@ -5,7 +5,7 @@
 ## Top level
 | Path | Purpose | Audience |
 |---|---|---|
-| `README.md` | Project overview, quick start, layout | Everyone |
+| `README.md` | Project overview, quick start, usage | Everyone |
 | `INDEX.md` | This file — whole-repo file map | Everyone |
 | `LICENSE` | MIT | Everyone |
 | `VERSION` | Single-source semantic version string | Everyone |

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Purpose: ~/.eco/ runtime hygiene watcher — RAM/swap/MCP/gemini-stuck monitor; state in ~/.eco/state.json; replaces session-scoped Claude Monitor loops.
 # DESC: Mac hygiene watcher — RAM/swap/MCP/gemini-stuck monitor with state in ~/.eco/state.json
-# INPUTS: subcommand: watch|watch-fg|snapshot|stop|status|tail|install|uninstall
+# INPUTS: subcommand: watch|watch-fg|snapshot|stop|status|tail|tail-high|install|uninstall
 # OUTPUT: ~/.eco/state.json plus private hygiene logs under ~/.eco/hygiene/
 # USES: macOS vm_stat, sysctl, pgrep, launchctl, and optional osascript notifications
 # HUMAN: review status/log output and decide whether to stop or reduce workloads

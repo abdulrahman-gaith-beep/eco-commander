@@ -25,7 +25,7 @@ daemon manager), and macOS-specific paths. Linux support is on the
 
 ### `make install` failed — what do I check?
 
-1. **Bash version:** Ensure you have Bash 5+ installed via Homebrew (`brew install bash`). The core installer requires Bash 5+; the macOS system Bash (3.x) is insufficient and will cause installation or recipe failures.
+1. **Bash version:** The core `eco` CLI and `make install` work on macOS default bash (3.2). Recipes that use newer syntax (associative arrays, `[[ ]]` with regex) require Bash 5+ via Homebrew (`brew install bash`). If a recipe fails with a syntax error, check your bash version first.
 2. **Permissions:** The installer **refuses** to run as root or via `sudo`. Run all installation steps as your normal macOS user.
 3. **Dependencies:** Run `brew bundle --file=Brewfile` to install required tools like `jq`, `git`, and `curl`.
 4. **Directory health:** Ensure that the installer can create real `~/.eco/bin` and `~/.eco/recipes` directories. They should contain individual symlinks to `src/bin/*` and `src/recipes/*.sh`, not be symlinked directories themselves.

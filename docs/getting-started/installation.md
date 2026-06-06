@@ -5,7 +5,7 @@
 ## Prerequisites
 
 - macOS 13+ (Apple Silicon or Intel)
-- Bash 5+ — install via Homebrew (`brew install bash`); the macOS system bash (3.x) is insufficient for some scripts
+- Bash 5+ recommended — install via Homebrew (`brew install bash`); the core `eco` CLI works on macOS default bash (3.2) but recipes with newer syntax require Bash 5+
 - Python 3.10-3.13 (`>=3.10,<3.14`) — for the usage poller and scheduler modules
 - `jq`, `git`, `curl`
 - Optional: [SwiftBar](https://github.com/swiftbar/SwiftBar) for the menu-bar widget

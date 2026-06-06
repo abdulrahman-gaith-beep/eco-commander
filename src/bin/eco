@@ -17,7 +17,7 @@
 #   eco help                    Show this help.
 #
 # Scheduler subcommands: status, add, run-once, tail, drain, seed, cancel.
-# Hygiene subcommands: watch, snapshot, stop, status, tail.
+# Hygiene subcommands: watch, watch-fg, snapshot, stop, status, tail, tail-high, install, uninstall.
 # ECO_HELP_END
 
 set -eu
