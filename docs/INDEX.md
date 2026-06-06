@@ -57,6 +57,10 @@
 | [installation.md](./getting-started/installation.md) | Install eco-commander, SwiftBar, LaunchAgents | Operators / Everyone |
 | [usage.md](./getting-started/usage.md) | Every CLI command, flag, and exit code | Operators / Everyone |
 | [troubleshooting.md](./getting-started/troubleshooting.md) | Common problems and fixes | Operators / Everyone |
+
+### ❓ FAQ
+| Doc | Description | Audience |
+|-----|-------------|----------|
 | [FAQ.md](./FAQ.md) | Frequently asked questions | Operators / Everyone |
 
 ### ⌨️ [API](./api/)

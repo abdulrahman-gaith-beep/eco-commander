@@ -36,6 +36,7 @@ The recipe:
 1. Slugifies your topic to create a deterministic output path.
 2. Calls `gem-smart 3.5f` with a structured six-part brief prompt when that
    wrapper is available; otherwise it uses plain `gemini -p`.
+   *(Caveat: `gemini-3.5-flash` requires API Key authentication (`gem-use-apikey`) and will return a 404 error if used with OAuth (`gem-use-oauth`).)*
 3. Writes the result to `~/Documents/research/<slug>/YYYY-MM-DD-<slug>.md`.
 4. Prints a head preview to stdout and opens the file.
 
@@ -56,7 +57,7 @@ Output: ~/Documents/research/vision-2030-procurement-reforms-2026/2026-06-04-vis
 **Notes:**
 - Output is plain markdown with inline citations as `[url]`.
 - When using `gem-smart`, the recipe passes `3.5f`, `-y`, and
-  `--allowed-mcp-server-names none`.
+  `--allowed-mcp-server-names none`. *(Caveat: `gemini-3.5-flash` requires API Key authentication (`gem-use-apikey`) and will return a 404 error if used with OAuth (`gem-use-oauth`).)*
 - To run a private query without cloud calls, use `eco do ask` with a keyword
   like "internal" or "خاص"; that routes to the local Ollama model instead.
 
@@ -95,7 +96,7 @@ jobs:
       prompt: "Audit src/recipes/snapshot.sh for edge cases and missing error handling."
     model_preference:
       - provider: claude
-        model: claude-sonnet-4-20250514
+        model: claude-3-5-sonnet-20241022
         meter: claude.session
       - provider: gemini
         model: gemini-3.1-flash-lite-preview
@@ -379,6 +380,7 @@ recipe prefers `gem-smart 3.5f` and falls back to plain `gemini -p` when the
 configured/default wrapper path does not resolve, then assembles `state.json`,
 `map.md`, and `dashboard.html` and atomically creates or repoints the
 `~/.eco/current` symlink.
+*(Caveat: `gemini-3.5-flash` requires API Key authentication (`gem-use-apikey`) and will return a 404 error if used with OAuth (`gem-use-oauth`).)*
 
 **Expected output with the canonical seven-prompt library:**
 

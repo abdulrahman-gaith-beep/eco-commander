@@ -290,6 +290,8 @@ gemini -p "Reply with: eco ready"
 
 If you rely on `gem-smart`, verify the wrapper instead:
 
+> **Caveat:** `gemini-3.5-flash` requires API Key authentication (`gem-use-apikey`) and will return a 404 error if used with OAuth (`gem-use-oauth`).
+
 ```bash
 "${ECO_GEM_SMART_BIN:-$HOME/bin/gem-smart}" 3.5f \
   -p "Reply with: eco ready" \
@@ -325,6 +327,7 @@ user-space background daemons on macOS without root privileges...
 
 The answer streams from Gemini. If `gem-smart` is available, the recipe invokes
 `gem-smart 3.5f`; otherwise it invokes plain `gemini -p`.
+*(Caveat: `gemini-3.5-flash` requires API Key authentication (`gem-use-apikey`) and will return a 404 error if used with OAuth (`gem-use-oauth`).)*
 
 **Checkpoint:** you should see a multi-sentence answer in plain prose, printed to stdout,
 with no error messages.

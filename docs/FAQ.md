@@ -30,7 +30,7 @@ daemon manager), and macOS-specific paths. Linux support is on the
 3. **Dependencies:** Run `brew bundle --file=Brewfile` to install required tools like `jq`, `git`, and `curl`.
 4. **Directory health:** Ensure that the installer can create real `~/.eco/bin` and `~/.eco/recipes` directories. They should contain individual symlinks to `src/bin/*` and `src/recipes/*.sh`, not be symlinked directories themselves.
 
-See [`docs/getting-started/troubleshooting.md`](./getting-started/troubleshooting.md).
+See [`getting-started/troubleshooting.md`](./getting-started/troubleshooting.md).
 
 ### Do I need SwiftBar?
 

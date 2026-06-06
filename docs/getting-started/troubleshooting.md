@@ -61,7 +61,7 @@ Then verify the plugin folder in **SwiftBar → Preferences → Plugin folder** 
 
 ## `eco-commander.1s.sh: No such file or directory`
 
-**Cause:** You have an old version of eco-commander. Before v0.2.0 the router script was named `eco-commander.1s.sh`; it is now `eco-commander.15s.sh`.
+**Cause:** You have an old version of eco-commander. Before v0.2.0 the router script was named `eco-commander.1s.sh` (and was also briefly named `eco-commander.30s.sh`); it is now `eco-commander.15s.sh`.
 
 **Fix:**
 
