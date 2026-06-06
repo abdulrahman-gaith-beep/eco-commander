@@ -199,7 +199,7 @@ run_layer() {
     set +e
     prompt_text="$(build_layer_prompt "$prompt")"
     if [ "$GEM_BACKEND" = "gem-smart" ]; then
-      "$GEM_SMART" 3.5f \
+      "$GEM_SMART" "${ECO_GEM_MODEL:-3f}" \
         -p "$prompt_text" \
         -y \
         --allowed-mcp-server-names none \

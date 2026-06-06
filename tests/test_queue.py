@@ -115,7 +115,7 @@ class TestValidateWorkdir:
 
     def test_rejects_sibling_user(self):
         with pytest.raises(ValueError, match="prohibited"):
-            validate_workdir("/Users/otheruser/projects")
+            validate_workdir("/Users/tg/projects")
 
     def test_rejects_keychains(self):
         with pytest.raises(ValueError, match="prohibited"):

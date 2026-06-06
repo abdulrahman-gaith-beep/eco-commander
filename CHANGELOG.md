@@ -48,9 +48,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Deep Audit Wave 1-3 Fixes:
-  - Fixed hardcoded `3.5f` model IDs in recipes (`swarm.sh`, `research.sh`, `ask.sh`, `snapshot.sh`) to use `ECO_GEM_MODEL` (falling back to `3f`).
+  - Recipes (`swarm.sh`, `research.sh`, `ask.sh`, `snapshot.sh`) now use `ECO_GEM_MODEL` env var (default `3f`) instead of hardcoded `3.5f`.
   - Added `hard_wall` error classification for 404 responses in Gemini, Claude, and Codex adapters.
   - Sanitized test paths in `tests/test_queue.py` to remove privacy-sensitive sibling user references.
+  - Fixed `src/poller/__init__.py` version drift (`3.0.0` → `0.2.0`) to match `VERSION` file and scheduler.
 - Snapshot layer failures: `snapshot.sh` now uses a bounded per-layer timeout
   (`GEMINI_LAYER_TIMEOUT_SEC`, default 180s), captures stderr, reports rc=124
   timeouts, and keeps the `gem-smart` to plain `gemini` fallback path.

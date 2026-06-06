@@ -147,6 +147,7 @@ All variables have sensible defaults; none are required for basic operation.
 | Variable | Default | Purpose |
 |----------|---------|---------|
 | `ECO_GEM_SMART_BIN` | `$HOME/bin/gem-smart` | Path to the optional `gem-smart` Gemini wrapper; recipes fall back to plain `gemini` when the configured/default wrapper path does not resolve, and fail only when neither backend is available |
+| `ECO_GEM_MODEL` | `3f` | `gem-smart` model shortcut used by recipes (`ask`, `research`, `swarm`, `snapshot`). Default `3f` resolves to `gemini-3-flash-preview` via `gem-smart`. Override to e.g. `3.5f` for the flash tier or `3.1p` for pro |
 | `ECO_ASK_LOCAL_MODEL` | `qwen3.6:latest` | Ollama model used when `eco ask` detects private/secret/internal/confidential cues; there is no `--local` flag |
 | `GEMINI_LAYER_TIMEOUT_SEC` | `180` | Per-layer timeout for the snapshot recipe's Gemini analysis subprocess |
 

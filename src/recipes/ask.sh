@@ -59,7 +59,7 @@ cleanup_provider_log() {
 trap cleanup_provider_log EXIT
 
 if [ -x "$GEM_SMART" ] || command -v "$GEM_SMART" >/dev/null 2>&1; then
-  if "$GEM_SMART" 3.5f -p "$Q" -y --allowed-mcp-server-names none 2>"$ERR_LOG"; then
+  if "$GEM_SMART" "${ECO_GEM_MODEL:-3f}" -p "$Q" -y --allowed-mcp-server-names none 2>"$ERR_LOG"; then
     :
   else
     rc=$?

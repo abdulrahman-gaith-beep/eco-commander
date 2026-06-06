@@ -80,7 +80,7 @@ for i in $(seq 1 "$N"); do
   (
     cd "$HOME" || exit 1
     if [ "$GEM_BACKEND" = "gem-smart" ]; then
-      "$GEM_SMART" 3.5f -p "$PROMPT" -y --allowed-mcp-server-names none \
+      "$GEM_SMART" "${ECO_GEM_MODEL:-3f}" -p "$PROMPT" -y --allowed-mcp-server-names none \
         > "$WORK/agent-$i.md" 2> "$WORK/agent-$i.log"
     else
       gemini -p "$PROMPT" > "$WORK/agent-$i.md" 2> "$WORK/agent-$i.log"
