@@ -177,9 +177,8 @@ class ClaudeAdapter:
             tail = ""
 
         error_kind: ErrorKind
-        if any(s in tail for s in ("insufficient credits", "quota", "daily limit")):
-            error_kind = "hard_wall"
-        elif any(s in tail for s in ("code: 404", "not_found", "model not found", "is not found")):
+        if any(s in tail for s in ("insufficient credits", "quota", "daily limit",
+                                      "code: 404", "not_found", "model not found", "is not found")):
             error_kind = "hard_wall"
         elif any(s in tail for s in ("rate limit", "rate_limit_error", "429", "too many requests", "overloaded", "529")):
             error_kind = "throttle"

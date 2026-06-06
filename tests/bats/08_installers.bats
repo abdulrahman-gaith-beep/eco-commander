@@ -92,7 +92,7 @@ teardown() {
 }
 
 @test "install-launchagents.sh does not install scheduler by default" {
-  export ECO_LAUNCHAGENTS_DIR="$BATS_TEST_TMPDIR/LaunchAgents"
+  export ECO_LAUNCHAGENTS_DIR="$HOME/Library/LaunchAgents"
   run bash "$REPO_ROOT/scripts/install-launchagents.sh"
   [ "$status" -eq 0 ]
   [ -f "$ECO_LAUNCHAGENTS_DIR/com.eco-commander.usage-poller.plist" ]
@@ -100,7 +100,7 @@ teardown() {
 }
 
 @test "install-launchagents.sh persists scheduler only when explicit" {
-  export ECO_LAUNCHAGENTS_DIR="$BATS_TEST_TMPDIR/LaunchAgents"
+  export ECO_LAUNCHAGENTS_DIR="$HOME/Library/LaunchAgents"
   export ECO_SCHEDULER_PERSIST=1
   run bash "$REPO_ROOT/scripts/install-launchagents.sh"
   [ "$status" -eq 0 ]
@@ -109,7 +109,7 @@ teardown() {
 }
 
 @test "install-launchagents.sh refuses foreign existing plist label" {
-  export ECO_LAUNCHAGENTS_DIR="$BATS_TEST_TMPDIR/LaunchAgents"
+  export ECO_LAUNCHAGENTS_DIR="$HOME/Library/LaunchAgents"
   mkdir -p "$ECO_LAUNCHAGENTS_DIR"
   cat > "$ECO_LAUNCHAGENTS_DIR/com.eco-commander.usage-poller.plist" <<XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -134,7 +134,7 @@ XML
 }
 
 @test "uninstall-launchagents.sh skips plist with foreign Label key" {
-  export ECO_LAUNCHAGENTS_DIR="$BATS_TEST_TMPDIR/LaunchAgents"
+  export ECO_LAUNCHAGENTS_DIR="$HOME/Library/LaunchAgents"
   mkdir -p "$ECO_LAUNCHAGENTS_DIR"
   cat > "$ECO_LAUNCHAGENTS_DIR/com.eco-commander.scheduler.plist" <<XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -147,7 +147,7 @@ XML
 }
 
 @test "uninstall-launchagents.sh removes scheduler plist too" {
-  export ECO_LAUNCHAGENTS_DIR="$BATS_TEST_TMPDIR/LaunchAgents"
+  export ECO_LAUNCHAGENTS_DIR="$HOME/Library/LaunchAgents"
   mkdir -p "$ECO_LAUNCHAGENTS_DIR"
   for label in com.eco-commander.usage-poller com.eco-commander.swiftbar com.eco-commander.scheduler; do
     cat > "$ECO_LAUNCHAGENTS_DIR/$label.plist" <<XML

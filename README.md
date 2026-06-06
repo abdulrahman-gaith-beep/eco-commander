@@ -26,6 +26,11 @@ workflows.
 
 - **CLI router** (`eco`) — one command to reach every tool, recipe, and subsystem
 - **Live status panel** — SwiftBar menu-bar widget showing quota, RAM, and runtime health
+  <p>
+    <img src="docs/assets/swiftbar-widget-quotas.png" alt="SwiftBar token quotas and active sessions" width="245">
+    &nbsp;&nbsp;
+    <img src="docs/assets/swiftbar-widget-alerts.png" alt="SwiftBar alerts state" width="245">
+  </p>
 - **Recipe library** — named, repeatable workflows: ask, research, swarm, snapshot, and more
 - **Snapshot system** — immutable, timestamped ecosystem state under `~/.eco/snapshots/`
 

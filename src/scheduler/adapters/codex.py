@@ -170,9 +170,8 @@ class CodexAdapter:
             tail = ""
 
         error_kind: ErrorKind
-        if any(s in tail for s in ("try again at", "daily limit", "quota exhausted", "weekly limit")):
-            error_kind = "hard_wall"
-        elif any(s in tail for s in ("code: 404", "not_found", "model not found", "is not found")):
+        if any(s in tail for s in ("try again at", "daily limit", "quota exhausted", "weekly limit",
+                                      "code: 404", "not_found", "model not found", "is not found")):
             error_kind = "hard_wall"
         elif any(s in tail for s in ("rate limit", "429", "too many requests")):
             error_kind = "throttle"
