@@ -160,7 +160,7 @@ Next pending jobs (top 5):
 - To import many YAML files from a directory at once, use `eco scheduler seed --dir <path>`.
 
 **Troubleshooting:**
-- `error: yaml must contain a list of jobs` → ensure the root key is `jobs:`.
+- `error: <file>: YAML must contain a list of jobs or a {jobs: [...]} root` → ensure the root key is `jobs:`.
 - Jobs stay `gated_by_quota` → all meters are blocked. Run `eco scheduler status --json`
   to see each meter's `seconds_until_available`.
 
@@ -688,7 +688,7 @@ eco scheduler seed --dir examples/missions/
   ✅ research-v2030.yaml: 1 added, 0 skipped
   ✅ codegen-widget-test.yaml: 1 added, 0 skipped
 
-Seed complete: 3 job(s) added, 0 skipped (already in queue)
+Seed complete: 3 job(s) added, 0 skipped (already in queue), 0 invalid
 ```
 
 3. Verify the queue:
@@ -713,10 +713,164 @@ eco scheduler tail
 
 **Troubleshooting:**
 - `no .yaml/.yml files found in <dir>` → check the directory path and file extensions.
-- `bad job entry (KeyError: 'id')` → every job entry must have an `id` field.
+- `<file>: bad job entry 0 ('id')` → every job entry must have an `id` field.
 - Jobs remain `gated_by_quota` after seeding → all meters for that job are blocked.
   Run `eco scheduler status --json | python3 -m json.tool` to see per-meter
   `seconds_until_available`.
 
 **Further reading:** [Scheduler subsystem](../subsystems/scheduler.md) ·
 [Recipes subsystem](../subsystems/recipes.md)
+
+---
+
+## Scenario 9 — Cancel a queued job and drain the rest
+
+**Goal:** Remove a job you queued by mistake, then run the remaining queue to
+completion in the foreground instead of waiting for the 120-second
+LaunchAgent ticks.
+
+**Prerequisites:**
+- At least one job in the queue (`eco scheduler status` shows a non-empty queue).
+- Python 3 with the `scheduler` module importable (verified by `eco doctor`).
+
+**Steps:**
+
+1. Find the id of the job to remove:
+
+```bash
+eco scheduler status
+```
+
+2. Cancel a `pending` or `gated_by_quota` job by id:
+
+```bash
+eco scheduler cancel audit-snapshot-module-2026-06-04
+```
+
+**Expected output:**
+
+```text
+✅ cancelled job 'audit-snapshot-module-2026-06-04' (was: pending)
+```
+
+3. A job that has already advanced past `pending`/`gated_by_quota` (for example,
+   one that is `running`, `completed`, or `failed`) is protected. Force it only
+   if you are sure:
+
+```bash
+eco scheduler cancel <job-id> --force
+```
+
+Without `--force`, the command refuses and exits non-zero:
+
+```text
+error: job '<job-id>' has status 'running' — use --force to cancel anyway
+```
+
+4. Drain the remaining ready jobs immediately rather than waiting for the
+   scheduler LaunchAgent. `drain` runs one job per tick until the queue is idle,
+   all remaining jobs are gated by quota, or it hits `--max-ticks` (default 10):
+
+```bash
+eco scheduler drain
+```
+
+To pace ticks and cap their count:
+
+```bash
+eco scheduler drain --max-ticks 20 --interval-s 5
+```
+
+**Expected output (abbreviated):**
+
+```text
+--- tick 1/10 ---
+{
+  "fired": 1,
+  ...
+}
+queue idle; exit
+```
+
+**Notes:**
+- `cancel` sets the job's status to `cancelled` in `~/.eco/queue/jobs.yaml`; it
+  does not delete the row, so the audit trail is preserved.
+- `drain` stops early and exits non-zero if any attempt fails — inspect the
+  printed JSON summary before retrying.
+- `drain` fires at most one job per tick (`max_jobs_per_tick=1`), so a long
+  queue may need a higher `--max-ticks`.
+
+**Troubleshooting:**
+- `error: job '<id>' not found in queue` → re-check the id with `eco scheduler status`.
+- `all remaining jobs gated; exit` → every remaining job is `gated_by_quota`;
+  run `eco scheduler status --json` to see each meter's `seconds_until_available`.
+
+**Further reading:** [Scheduler subsystem](../subsystems/scheduler.md) ·
+[Operational Runbook § 3](../operations/runbook.md)
+
+---
+
+## Scenario 10 — Monitor system health with the hygiene watcher
+
+**Goal:** Run the background hygiene watcher that monitors RAM, swap pressure,
+MCP connection count, and stuck Gemini CLI processes, and read its current
+state.
+
+**Prerequisites:**
+- `eco` is on PATH (`eco doctor` passes).
+- macOS (the watcher uses `vm_stat`, `sysctl`, `pgrep`, and `launchctl`).
+
+**Steps:**
+
+1. Take a single one-shot snapshot without installing any daemon:
+
+```bash
+eco hygiene snapshot
+```
+
+This prints one state line and writes it to `~/.eco/state.json` under the
+`hygiene` key.
+
+2. Install and start the watcher as a managed LaunchAgent (recommended for
+   continuous monitoring):
+
+```bash
+eco hygiene watch
+```
+
+3. Check whether the daemon is running and when it last emitted an event:
+
+```bash
+eco hygiene status
+```
+
+4. Follow the live event stream (or only high-severity events):
+
+```bash
+eco hygiene tail          # all events
+eco hygiene tail-high     # high-severity events only
+```
+
+5. Stop the watcher when you no longer need it:
+
+```bash
+eco hygiene stop
+```
+
+**Notes:**
+- The watcher replaces session-scoped monitor loops with a proper
+  LaunchAgent-managed daemon (label `com.eco-commander.hygiene`).
+- Thresholds are configurable via environment variables (for example
+  `ECO_HYGIENE_RED_MEM_GB`, `ECO_HYGIENE_YEL_SWAP_MB`); see the script header in
+  `src/recipes/hygiene.sh`.
+- Event logs live under `~/.eco/hygiene/` and are private operator data — do not
+  paste raw logs into agents.
+
+**Troubleshooting:**
+- `daemon not running` from `eco hygiene status` → start it with
+  `eco hygiene watch`.
+- No notifications appear → notifications require `osascript`; the daemon still
+  logs events to `~/.eco/hygiene/events.log` regardless.
+
+**Further reading:** [Usage subcommands](../getting-started/usage.md#hygiene-subcommands) ·
+[Operational Runbook](../operations/runbook.md)

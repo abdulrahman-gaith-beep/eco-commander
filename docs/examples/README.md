@@ -8,7 +8,7 @@ All examples are verified against the actual source in `src/bin/eco`,
 
 | File | What it covers |
 |------|----------------|
-| [cookbook.md](./cookbook.md) | 8 end-to-end how-to scenarios covering the full CLI surface |
+| [cookbook.md](./cookbook.md) | 10 end-to-end how-to scenarios covering the full CLI surface |
 
 ## When to use the cookbook vs. other docs
 
@@ -32,6 +32,8 @@ All examples are verified against the actual source in `src/bin/eco`,
 | 6 | Add a new recipe to the catalog | recipe contract + header requirements |
 | 7 | Inspect widget output via `--cli` | `eco status` · `jq` on `usage.json` |
 | 8 | Seed the scheduler from a missions directory | `eco scheduler seed --dir <path>` |
+| 9 | Cancel a queued job and drain the rest | `eco scheduler cancel <id>` · `eco scheduler drain` |
+| 10 | Monitor system health with the hygiene watcher | `eco hygiene snapshot` · `eco hygiene watch` |
 
 ## Prerequisites
 

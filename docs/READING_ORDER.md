@@ -18,7 +18,7 @@ Each path lists docs in dependency order — read them top to bottom.
 ### 🐛 Debug the usage poller
 | Step | Doc | What you'll learn |
 |------|-----|-------------------|
-| 1 | [architecture.md §2.5](./architecture.md) | Poller overview and module layout |
+| 1 | [architecture.md §7](./architecture.md) | Poller overview and module layout |
 | 2 | [subsystems/usage-monitor.md](./subsystems/usage-monitor.md) | Per-tool sources, calibration, troubleshooting |
 | 3 | [reference/data-model.md §usage.json](./reference/data-model.md) | JSON schema for `usage.json` and per-tool files |
 | 4 | [operations/runbook.md §2](./operations/runbook.md) | Step-by-step: "Usage poller is not updating" |
@@ -27,7 +27,7 @@ Each path lists docs in dependency order — read them top to bottom.
 ### ⏱️ Debug the job scheduler
 | Step | Doc | What you'll learn |
 |------|-----|-------------------|
-| 1 | [architecture.md §2.6](./architecture.md) | Scheduler overview |
+| 1 | [architecture.md §8](./architecture.md) | Scheduler overview |
 | 2 | [subsystems/scheduler.md](./subsystems/scheduler.md) | Full reference: CLI, job YAML, meters, adapters |
 | 3 | [reference/data-model.md §jobs.yaml](./reference/data-model.md) | Job queue schema |
 | 4 | [reference/data-model.md §notify.json](./reference/data-model.md) | Meter state schema |
@@ -37,7 +37,7 @@ Each path lists docs in dependency order — read them top to bottom.
 | Step | Doc | What you'll learn |
 |------|-----|-------------------|
 | 1 | [subsystems/recipes.md](./subsystems/recipes.md) | Recipe contract, catalog, header annotations |
-| 2 | [architecture.md §2.3](./architecture.md) | How recipes fit in the system |
+| 2 | [architecture.md §5](./architecture.md) | How recipes fit in the system |
 | 3 | [subsystems/snapshots.md](./subsystems/snapshots.md) | Snapshot format (if your recipe creates snapshots) |
 | 4 | [contributing/testing.md](./contributing/testing.md) | How to write Bats tests for recipes |
 | 5 | [contributing/CONTRIBUTING-DOCS.md](./contributing/CONTRIBUTING-DOCS.md) | Doc update requirements |
@@ -55,7 +55,7 @@ Each path lists docs in dependency order — read them top to bottom.
 |------|-----|-------------------|
 | 1 | [subsystems/alerts.md](./subsystems/alerts.md) | Alert subcommands and lifecycle |
 | 2 | [subsystems/widget-health.md](./subsystems/widget-health.md) | Fix tiers, alert truth, 24/7 manager |
-| 3 | [architecture.md §2.2](./architecture.md) | How the widget reads alerts |
+| 3 | [architecture.md §4.2](./architecture.md) | How the widget reads alerts |
 | 4 | [operations/runbook.md §1](./operations/runbook.md) | General recovery procedure |
 
 ### 🔐 Security review / audit
@@ -80,7 +80,7 @@ Each path lists docs in dependency order — read them top to bottom.
 |------|-----|-------------------|
 | 1 | [subsystems/launchd-best-practices.md](./subsystems/launchd-best-practices.md) | Energy-efficient background scheduling |
 | 2 | [reference/configuration.md §LaunchAgent](./reference/configuration.md) | Plist templates and settings |
-| 3 | [architecture.md §4](./architecture.md) | Three LaunchAgents and their cadences |
+| 3 | [architecture.md §10](./architecture.md) | Three LaunchAgents and their cadences |
 
 ---
 
@@ -96,4 +96,4 @@ Each path lists docs in dependency order — read them top to bottom.
 Parse `MANIFEST.json` → filter by `"subsystems"` or `"tags"` → sort by `"depends_on"` (read dependencies first) → read in dependency order.
 
 ### 🤖 "I need to understand the agent audit boundary"
-`operations/security-model.md §Product vs audit behavior` → `operations/security-model.md §Credential handling` — these define what agents may and may not access.
+`operations/security-model.md §Product vs. audit behavior` → `operations/security-model.md §Credential handling` — these define what agents may and may not access.

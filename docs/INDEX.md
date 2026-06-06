@@ -158,8 +158,8 @@
 
 | Subsystem | Source | Docs |
 |-----------|--------|------|
-| **CLI Router** | `src/bin/eco` | [architecture.md §2.1](./architecture.md), [usage.md](./getting-started/usage.md) |
-| **SwiftBar Widget** | `src/bin/eco-commander.15s.sh` | [architecture.md §2.2](./architecture.md), [widget-health.md](./subsystems/widget-health.md), [alerts.md](./subsystems/alerts.md) |
+| **CLI Router** | `src/bin/eco` | [architecture.md §4.1](./architecture.md), [usage.md](./getting-started/usage.md) |
+| **SwiftBar Widget** | `src/bin/eco-commander.15s.sh` | [architecture.md §4.2](./architecture.md), [widget-health.md](./subsystems/widget-health.md), [alerts.md](./subsystems/alerts.md) |
 | **Recipes** | `src/recipes/*.sh` | [recipes.md](./subsystems/recipes.md), [snapshots.md](./subsystems/snapshots.md) |
 | **Usage Poller** | `src/poller/` | [usage-monitor.md](./subsystems/usage-monitor.md), [data-model.md](./reference/data-model.md) |
 | **Job Scheduler** | `src/scheduler/` | [scheduler.md](./subsystems/scheduler.md), [data-model.md](./reference/data-model.md) |

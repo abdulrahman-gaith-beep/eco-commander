@@ -250,7 +250,7 @@ libraries:
     description: "Shared functions: validate_install_path, plist_label_matches, die"
     sourced_by: [install.sh, uninstall.sh, install-launchagents.sh, uninstall-launchagents.sh]
     exports: [validate_install_path, plist_label_matches, die]
-    lines: 234
+    lines: 280
     notes: "Source-guarded via _ECO_LIB_COMMON_LOADED."
 
   - path: lib/snapshot-helpers.sh

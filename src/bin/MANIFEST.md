@@ -15,6 +15,7 @@
 | `eco scheduler <sub>` | `python -m scheduler.cli` | Scheduler CLI |
 | `eco hygiene <sub>` | `recipes/hygiene.sh` | Mac hygiene watcher |
 | `eco account-swap <sub>` | `recipes/account-swap.sh` | Rotate auth |
+| `eco doctor` | inline | Self-test installation (LaunchAgents, PATH, Python imports, freshness) |
 | `eco help` | inline | Show help |
 | `eco <name>` (fallback) | `recipes/<name>.sh` | Shortcut for `do` |
 
@@ -22,15 +23,14 @@
 
 | Script | Size | Shell Guards | ShellCheck | Purpose |
 |---|---|---|---|---|
-| `eco` | 3.1K | `set -u` | ⚠️ Needs audit | CLI router |
-| `eco-commander.15s.sh` | 37.3K | `set -euo pipefail` | ⚠️ Large, needs audit | SwiftBar plugin |
-| `eco-alerts.sh` | 29.2K | varies | ⚠️ Needs audit | Alert subsystem |
+| `eco` | 11K | `set -eu` | ⚠️ Needs audit | CLI router |
+| `eco-commander.15s.sh` | 40K | `set -u` | ⚠️ Large, needs audit | SwiftBar plugin |
+| `eco-alerts.sh` | 35K | `set -euo pipefail` | ⚠️ Needs audit | Alert subsystem |
 | `ai-clear.sh` | <1K | `set -u` | ✅ Deprecated no-op | Legacy compatibility only |
-| `install-commander.sh` | 2.2K | `set -euo pipefail` | ⚠️ Needs audit | Deploy symlinks |
-| `ALERT_IDEAS.md` | 2.5K | — | — | Backlog doc |
+| `install-commander.sh` | 2.4K | `set -euo pipefail` | ⚠️ Needs audit | Deploy symlinks |
 
 ## Known Issues
 
 - **E9**: `install-commander.sh` doesn't verify SwiftBar plugin directory
-- `eco-commander.15s.sh` at 37K is the largest source file — may benefit from function extraction
-- `eco-alerts.sh` at 29K is the second largest — similar concern
+- `eco-commander.15s.sh` at 40K is the largest source file — may benefit from function extraction
+- `eco-alerts.sh` at 35K is the second largest — similar concern

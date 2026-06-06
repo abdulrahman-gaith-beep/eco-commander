@@ -6,10 +6,10 @@
 
 | Engine | Runner | Scope |
 |--------|--------|-------|
-| BATS | `bash tests/run-all.sh` | Shell integration tests |
+| BATS | `bash tests/run-all.sh bats` | Shell integration tests |
 | Python | `PYTHONPATH=src python3 -m unittest discover -s tests/python` | Poller + scheduler unit tests |
 | E2E | `bash tests/e2e/run_e2e.sh` | Widget end-to-end regression |
-| **All** | `make test` | Full suite |
+| **All** | `make test` (or `bash tests/run-all.sh`) | Full suite — BATS + Python + E2E |
 
 ---
 
@@ -17,7 +17,7 @@
 
 | Path | Purpose | Engine |
 |------|---------|--------|
-| `run-all.sh` | BATS-only runner (use `make test` for full suite) | bash |
+| `run-all.sh` | Master runner — all engines (BATS + Python + E2E); accepts `bats`/`python`/`e2e`/`smoke`/… subsets | bash |
 | `README.md` | Test architecture documentation | — |
 | `INDEX.md` | This file — machine-readable test directory index | — |
 | `COVERAGE_MAP.md` | Source module → test file traceability | — |
@@ -59,6 +59,8 @@
 | `17_dashboard_refresh.bats` | `src/recipes/dashboard-refresh.sh` | `recipes`, `ui` |
 | `18_n8n_start.bats` | `src/recipes/n8n-start.sh` | `recipes`, `docker` |
 
+> `src/recipes/account-swap.sh` and `src/recipes/hygiene.sh` are covered in core BATS (`09_account_swap.bats`, `10_hygiene.bats`). `src/recipes/scheduler-seed.sh` has no dedicated test yet — see [`AGENT_AUDIT_TASKLIST.md`](AGENT_AUDIT_TASKLIST.md).
+
 ---
 
 ## `python/` — Python Unit Tests
@@ -82,6 +84,8 @@
 | `test_pace.py` | `poller.pace` | `poller`, `rate-tracking` |
 | `test_poller_main.py` | `poller.main` | `poller`, `entry-point`, `security` |
 | `test_queue.py` | `scheduler.queue` | `scheduler`, `yaml`, `flock` |
+| `test_routing.py` | `scheduler.routing` (defensive `meter_status`) | `scheduler`, `routing`, `defensive` |
+| `test_runtime_config_templates.py` | `common.config` + `config/*.example.json` contract | `config`, `templates`, `contract` |
 | `test_scheduler_cli.py` | `scheduler.cli` | `scheduler`, `cli` |
 | `test_scheduler_routing.py` | `scheduler.routing` | `scheduler`, `routing`, `meters` |
 | `test_security.py` | cross-cutting security | `security`, `hardening`, `audit` |
@@ -142,9 +146,15 @@
 
 ## `fixtures/` — Static Test Data
 
+> Paths are relative to `tests/fixtures/` unless noted.
+
 | File | Used By |
 |------|---------|
 | `state.json.good` | BATS `common.bash` setup |
 | `state.json.malformed` | State parsing error tests |
 | `state.json.no_issues` | Clean state tests |
-| `e2e/fixtures/usage_healthy.json` | All E2E tests requiring healthy usage |
+| `config.json.example` | Runtime config template contract tests |
+| `jobs.yaml.good` | Scheduler queue load tests |
+| `notify.json.good` | Meter-state parsing tests |
+| `usage.json.healthy` | Poller/widget usage fixtures |
+| `tests/e2e/fixtures/usage_healthy.json` | All E2E tests requiring healthy usage (lives under `tests/e2e/fixtures/`, not `tests/fixtures/`) |

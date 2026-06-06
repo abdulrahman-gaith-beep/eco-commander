@@ -10,20 +10,26 @@ scheduler (`src/scheduler/routing.py`). Each meter tracks one quota bucket
 stateDiagram-v2
     [*] --> unknown : First poller cycle\n(no data yet)
 
-    unknown --> use_it_or_lose_it : Poller detects\nusage &lt; 80% of cap\nAND cycle &gt; 80% elapsed
-    unknown --> throttle : Poller detects\nusage &gt; 80% of cap\nAND cycle &lt; 60% elapsed\nAND delta_pp ≥ +25
-    unknown --> hard_wall : Poller detects\nusage ≥ 95% of cap
+    unknown --> hard_wall : pct &gt;= 95
+    unknown --> throttle : pct &gt;= 80 AND target &lt;= 60 AND delta &gt;= +25
+    unknown --> use_it_or_lose_it : target &gt;= 80 AND delta &lt;= -15 AND (100 - pct) &gt;= 15
+    unknown --> healthy : else -&gt; None -&gt; written as "healthy"
 
-    use_it_or_lose_it --> throttle : Usage rises above 80%\nwith &gt; 40% cycle remaining
-    use_it_or_lose_it --> hard_wall : Usage hits ≥ 95%
-    use_it_or_lose_it --> unknown : Cycle resets\n(reset_epoch passes)
+    healthy --> hard_wall : pct &gt;= 95
+    healthy --> throttle : pct &gt;= 80 AND target &lt;= 60 AND delta &gt;= +25
+    healthy --> use_it_or_lose_it : target &gt;= 80 AND delta &lt;= -15 AND (100 - pct) &gt;= 15
 
-    throttle --> hard_wall : Usage hits ≥ 95%
-    throttle --> use_it_or_lose_it : Usage drops\n(behind pace after reset)
-    throttle --> unknown : Cycle resets\n(reset_epoch passes)
+    use_it_or_lose_it --> hard_wall : pct &gt;= 95
+    use_it_or_lose_it --> throttle : pct &gt;= 80 AND target &lt;= 60 AND delta &gt;= +25
+    use_it_or_lose_it --> healthy : else -&gt; None -&gt; written as "healthy"
 
-    hard_wall --> unknown : Cycle resets\n(reset_epoch passes)
-    hard_wall --> use_it_or_lose_it : New cycle starts\nwith low usage
+    throttle --> hard_wall : pct &gt;= 95
+    throttle --> use_it_or_lose_it : target &gt;= 80 AND delta &lt;= -15 AND (100 - pct) &gt;= 15
+    throttle --> healthy : else -&gt; None -&gt; written as "healthy"
+
+    hard_wall --> throttle : pct &gt;= 80 AND target &lt;= 60 AND delta &gt;= +25
+    hard_wall --> use_it_or_lose_it : target &gt;= 80 AND delta &lt;= -15 AND (100 - pct) &gt;= 15
+    hard_wall --> healthy : else -&gt; None -&gt; written as "healthy"
 ```
 
 ## Scheduler Availability Rules
@@ -33,11 +39,11 @@ flowchart LR
     subgraph Check["Meter Availability Check (routing.py)"]
         Read["Read meter from\nnotify.json"] --> Kind{"last_kind?"}
 
-        Kind -->|hard_wall| HWCheck{"last_reset_epoch\n> now?"}
+        Kind -->|hard_wall| HWCheck{"last_reset_epoch\n&gt; now?"}
         HWCheck -->|Yes| Blocked["🔒 BLOCKED\n(seconds_until = last_reset_epoch - now)"]
         HWCheck -->|No| Available
 
-        Kind -->|throttle| ThCheck{"now - last_fired_ts\n< 60s?"}
+        Kind -->|throttle| ThCheck{"now - last_fired_ts\n&lt; 60s?"}
         ThCheck -->|Yes| Cooldown["🔒 COOLDOWN\n(seconds_until = 60 - elapsed)"]
         ThCheck -->|No| Available
 
@@ -60,14 +66,14 @@ flowchart TB
     end
 
     subgraph Pace["Pace Classification (display only)"]
-        Idle["💤 idle\nactual < 1% AND\nexpected < 5%"]
-        Ahead["🐎 ahead\nactual - expected > +10pp"]
+        Idle["💤 idle\nactual &lt; 1% AND\nexpected &lt; 5%"]
+        Ahead["🐎 ahead\nactual - expected &gt; +10pp"]
         OnPace["🟢 on-pace\nwithin ±10pp"]
-        Behind["🐢 behind\nactual - expected < -10pp"]
+        Behind["🐢 behind\nactual - expected &lt; -10pp"]
     end
 
     subgraph Guards["Safety Guards"]
-        Wake["WAKE_DEBOUNCE_S: 300s\nSkip evaluation if previous\npoll > 5 min ago\n(laptop wake guard)"]
+        Wake["WAKE_DEBOUNCE_S: 300s\nSkip evaluation if previous\npoll &gt; 5 min ago\n(laptop wake guard)"]
     end
 ```
 

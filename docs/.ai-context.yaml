@@ -44,5 +44,7 @@ tools:
   search: "scripts/search-docs.sh <query> [--context N] [--category <name>]"
   extract_section: "scripts/extract-section.sh <file> <heading>"
   validate_links: "scripts/validate-links.sh"
+  validate_mermaid: "scripts/validate-mermaid.sh"
   doc_stats: "scripts/doc-stats.sh [--json]"
   extract_glossary: "scripts/extract-glossary.sh [--format json|csv|plain]"
+  generate_manifest: "scripts/generate-manifest.py  # regenerates MANIFEST.json"

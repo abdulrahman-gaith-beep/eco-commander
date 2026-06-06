@@ -13,7 +13,7 @@ Antigravity, Gemini CLI, Ollama, and a fleet of MCP servers. It provides:
 
 - a **CLI router** (`eco`) for ecosystem-wide operations,
 - a **SwiftBar status panel** (`eco-commander.15s.sh`) that visualises live state,
-- a **recipe library** (`recipes/*.sh`) for repeatable workflows (research, swarm, snapshot, …),
+- a **recipe library** (`src/recipes/*.sh`) for repeatable workflows (research, swarm, snapshot, …),
 - a **snapshot system** for finalized ecosystem state under `~/.eco/snapshots/`,
 - a **test suite** covering router, panel, recipe, and scheduler behavior.
 
@@ -158,6 +158,8 @@ eco-commander/
 ├── AUTHORS.md                    ← contributors
 ├── GOVERNANCE.md                 ← decision-making process
 ├── ROADMAP.md                    ← public roadmap
+├── TODO.md                       ← contributor-facing task list
+├── CITATION.cff                  ← citation metadata
 ├── VERSION                       ← single-source version string
 ├── Makefile                      ← install / test / lint / release
 ├── pyproject.toml                ← Python project metadata & tool config
@@ -191,18 +193,21 @@ eco-commander/
 │   ├── labeler.yml
 │   └── settings.yml              ← Probot repo settings
 ├── docs/
-│   ├── INDEX.md / MANIFEST.json
+│   ├── INDEX.md / MANIFEST.json / READING_ORDER.md / FAQ.md
 │   ├── architecture.md
-│   ├── adr/                      ← Architecture Decision Records
+│   ├── tutorials/                ← guided first-run walkthrough (Diátaxis: learning)
+│   ├── concepts/                 ← mental model (Diátaxis: explanation)
+│   ├── examples/                 ← task cookbook (Diátaxis: how-to)
+│   ├── getting-started/          ← installation, usage, troubleshooting
+│   ├── reference/                ← config, data model, env vars, glossary
+│   ├── subsystems/               ← alerts, scheduler, poller, recipes, …
+│   ├── operations/               ← runbook, security model
 │   ├── api/                      ← CLI reference & generation script
+│   ├── adr/                      ← Architecture Decision Records
 │   ├── contributing/             ← dev hygiene, governance, testing
 │   ├── diagrams/                 ← system architecture diagrams
-│   ├── getting-started/          ← installation, usage, troubleshooting
 │   ├── migration/                ← migration guides
-│   ├── operations/               ← runbook, security model
-│   ├── reference/                ← config, data model, env vars, glossary
 │   ├── rfcs/                     ← Request for Comments
-│   ├── subsystems/               ← alerts, scheduler, poller, recipes, …
 │   └── scripts/                  ← doc validation & search utilities
 ├── src/
 │   ├── bin/
@@ -216,7 +221,7 @@ eco-commander/
 │   │   ├── main.py               ← aggregator entry point
 │   │   ├── claude.py / gemini.py / codex.py
 │   │   ├── notify.py / pace.py / value.py
-│   │   └── adapters: claude_oauth.py, codex_oauth.py
+│   │   └── claude_oauth.py / codex_oauth.py ← OAuth token refresh
 │   ├── scheduler/                ← quota-aware job dispatcher (Python)
 │   │   ├── cli.py / dispatcher.py / queue.py / routing.py
 │   │   └── adapters/             ← base, claude, codex, gemini, ollama

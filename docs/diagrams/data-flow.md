@@ -1,74 +1,65 @@
 # Data Flow
 
-End-to-end data flow from the 60-second poller collectors through the merged
-`usage.json`, into the scheduler's meter-gated dispatch loop, and up to the
-SwiftBar widget.
+End-to-end data flow from the 60-second poller collectors through the merged `usage.json`, into the scheduler's meter-gated dispatch loop, and up to the SwiftBar widget, highlighting the on-demand snapshot recipe that rotates the base state directory.
 
 ```mermaid
 flowchart TB
-    subgraph Pollers["Poller (launchd, 60s)"]
-        ClaudeP["claude.py\n(JSONL parsing)"]
-        GeminiP["gemini.py\n(OAuth API replay)"]
-        CodexP["codex.py\n(JSONL parsing)"]
-        NotifyP["notify.py\n(meter computation)"]
+    subgraph Poller["Poller (launchd, 60s)"]
+        direction TB
+        P_C["collectors"] --> P_AW["per-tool atomic writes"]
+        P_AW --> P_Alt["alternatives"]
+        P_Alt --> P_M["merge"]
+        P_M --> P_V["value"]
+        P_V --> P_Com["comments"]
+        P_Com --> P_U["usage.json"]
+        P_U --> P_N["notify"]
     end
 
-    subgraph UsageFiles["~/.eco/current/"]
-        UClaude["usage-claude.json"]
-        UGemini["usage-gemini.json"]
-        UCodex["usage-codex.json"]
-        UMerged["usage.json"]
-    end
-
-    subgraph MeterState["~/.eco/state/"]
-        Notify["notify.json\n(meter availability)"]
+    subgraph Recipes["Recipes (On-demand)"]
+        Snap["snapshot.sh"]
     end
 
     subgraph Scheduler["Scheduler (launchd, 120s)"]
-        Routing["routing.py\n(ladder walk)"]
-        Dispatcher["dispatcher.py\n(fire jobs)"]
-    end
-
-    subgraph Queue["~/.eco/queue/"]
-        Jobs["jobs.yaml"]
-        Logs["logs/&lt;job-id&gt;/"]
+        direction TB
+        S_R["Reads notify.json &amp; jobs.yaml"] --> S_F["Fires adapters"]
+        S_F --> S_W["Writes last_fired_ts"]
     end
 
     subgraph Widget["SwiftBar (15s)"]
-        Commander["eco-commander.15s.sh"]
+        Cmd["eco-commander.15s.sh"]
     end
 
-    subgraph Recipes["Recipes"]
-        SnapshotR["snapshot.sh"]
-        Others["other recipes"]
+    subgraph Filesystem["~/.eco/ Filesystem"]
+        subgraph Snapshots["snapshots/&lt;ts&gt;/"]
+            S_State["state.json"]
+            S_Map["map.md, dashboard.html"]
+            S_Usage["usage*.json"]
+        end
+
+        Current["current/<br>(symlink to latest snapshots/&lt;ts&gt;/)"]
+
+        NotifyJSON["state/notify.json"]
+        JobsYAML["queue/jobs.yaml"]
     end
 
-    subgraph Snapshots["Snapshot outputs"]
-        SnapshotDir["~/.eco/snapshots/&lt;ts&gt;/"]
-        Current["~/.eco/current → latest snapshot"]
-        StateJSON["state.json"]
-    end
+    %% Poller writes
+    P_AW -- "usage-&lt;tool&gt;.json" --> Current
+    P_U -- "usage.json" --> Current
+    Current -. "Written through symlink" .-> S_Usage
+    P_N -- "Writes" --> NotifyJSON
 
-    ClaudeP --> UClaude
-    GeminiP --> UGemini
-    CodexP --> UCodex
-    UClaude --> UMerged
-    UGemini --> UMerged
-    UCodex --> UMerged
+    %% Snapshot writes
+    Snap -- "Writes" --> S_State
+    Snap -- "Writes" --> S_Map
+    Snap -- "Flips symlink to new &lt;ts&gt;" --> Current
 
-    NotifyP --> Notify
+    %% Scheduler interactions
+    NotifyJSON -- "Reads" --> S_R
+    JobsYAML -- "Reads" --> S_R
+    S_W -- "Updates" --> NotifyJSON
 
-    Notify --> Routing
-    Jobs --> Routing
-    Routing --> Dispatcher
-    Dispatcher --> Logs
-    Dispatcher --> Jobs
-
-    UMerged --> Commander
-    Current --> Commander
-    SnapshotR --> SnapshotDir
-    SnapshotDir --> Current
-    Others --> Current
+    %% Widget interactions
+    Current -- "Reads current/usage.json<br>&amp; current/state.json" --> Cmd
 ```
 
 ## Source References

@@ -9,6 +9,8 @@ PYTHONPATH=src python3 -m tools.dep_graph --format=mermaid
 
 ```mermaid
 graph LR
+    poller_accounts["poller.accounts"] --> common_config["common.config"]
+    poller_comments["poller.comments"] --> common_config["common.config"]
     poller_discovery["poller.discovery"] --> common_config["common.config"]
     poller_main["poller.main"] --> common_config["common.config"]
     poller_main["poller.main"] --> poller["poller"]

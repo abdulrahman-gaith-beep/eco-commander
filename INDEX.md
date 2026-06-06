@@ -35,13 +35,13 @@
 | `src/bin/eco-alerts.sh` | Alert doctor, repo health, debug-ollama, delegate-fix | Developers |
 | `src/bin/ai-clear.sh` | Deprecated no-op retained for legacy callers | Developers |
 | `src/bin/install-commander.sh` | Install the SwiftBar commander widget | Developers |
-| `src/bin/ALERT_IDEAS.md` | Backlog of widget alert ideas | Developers |
 | `src/bin/MANIFEST.md` | Bin directory file registry | Developers |
 
 ## `src/recipes/`
 | Path | Purpose | Audience |
 |---|---|---|
 | `src/recipes/README.md` | Recipe design principles and catalog | Developers |
+| `src/recipes/MANIFEST.md` | Recipe directory file registry | Developers |
 | `src/recipes/ask.sh` | One-shot Q&A | Developers |
 | `src/recipes/note.sh` | Append journal note | Developers |
 | `src/recipes/research.sh` | Multi-source research | Developers |
@@ -89,6 +89,7 @@
 | `src/scheduler/adapters/codex.py` | Codex CLI adapter | Developers |
 | `src/scheduler/adapters/gemini.py` | Gemini CLI adapter | Developers |
 | `src/scheduler/adapters/ollama.py` | Ollama adapter | Developers |
+| `src/scheduler/MANIFEST.md` | Scheduler module dependency DAG + public API surface | Developers |
 
 ## `src/common/`
 | Path | Purpose | Audience |
@@ -114,6 +115,22 @@
 | `docs/READING_ORDER.md` | Task-based recommended reading paths | Everyone |
 | `docs/architecture.md` | System architecture (5 subsystems) | Developers |
 | `docs/.ai-context.yaml` | Agent context protocol — scoped summaries | Everyone |
+| `docs/FAQ.md` | Frequently asked questions | Operators |
+
+### `docs/tutorials/` (Diátaxis: learning)
+| Path | Purpose | Audience |
+|---|---|---|
+| `docs/tutorials/first-run.md` | Guided end-to-end first run: clone → install → verify → recipe → recover | Operators / Everyone |
+
+### `docs/concepts/` (Diátaxis: explanation)
+| Path | Purpose | Audience |
+|---|---|---|
+| `docs/concepts/mental-model.md` | How to think about the system: console, snapshots, meters, ladders, boundaries | Operators / Everyone |
+
+### `docs/examples/` (Diátaxis: how-to)
+| Path | Purpose | Audience |
+|---|---|---|
+| `docs/examples/cookbook.md` | Task-oriented scenarios with goal, steps, expected output, cleanup | Operators / Everyone |
 
 ### `docs/getting-started/`
 | Path | Purpose | Audience |
@@ -180,14 +197,13 @@
 | Path | Purpose | Audience |
 |---|---|---|
 | `docs/scripts/validate-links.sh` | Internal link + orphan + INDEX-coverage checker | Contributors |
-| `docs/scripts/doc-stats.sh`, `extract-glossary.sh`, `extract-section.sh`, `search-docs.sh` | Doc maintenance utilities | Contributors |
+| `docs/scripts/doc-stats.sh`, `docs/scripts/extract-glossary.sh`, `docs/scripts/extract-section.sh`, `docs/scripts/search-docs.sh` | Doc maintenance utilities | Contributors |
 
 ### `docs/migration/`, `docs/rfcs/`
 | Path | Purpose | Audience |
 |---|---|---|
 | `docs/migration/README.md` | Version migration notes | Everyone |
 | `docs/rfcs/README.md` | Request-for-comments design proposals | Everyone |
-| `docs/FAQ.md` | Frequently asked questions | Operators |
 
 ## `scripts/`
 > Machine-readable index: [`scripts/MANIFEST.yaml`](./scripts/MANIFEST.yaml) · audit tasks: [`scripts/AGENT_AUDIT_TASKLIST.md`](./scripts/AGENT_AUDIT_TASKLIST.md)
@@ -225,7 +241,7 @@
 |---|---|---|
 | `tests/run-all.sh` | Master runner (BATS + Python + E2E tests) | Contributors |
 | `tests/README.md` | Test architecture documentation | Contributors |
-| `tests/INDEX.md` | Machine-readable file inventory with test counts | Contributors |
+| `tests/INDEX.md` | Test-file inventory: source-module coverage, tags, and E2E tier ranges | Contributors |
 | `tests/COVERAGE_MAP.md` | Source module → test file traceability matrix | Contributors |
 | `tests/AI_NAVIGATION.md` | AI agent navigation guide and decision trees | Contributors |
 | `tests/AGENT_AUDIT_TASKLIST.md` | Categorized improvement tasks for AI agents | Contributors |

@@ -162,7 +162,7 @@ config (`$ECO_HOME/accounts.json`, with older plan overrides in
 
 ### Pace-to-target
 
-Each window carries a `pace_label` (`ahead`, `on-track`, `behind`, `idle`)
+Each window carries a `pace_label` (`ahead`, `on-pace`, `behind`, `idle`)
 and `pace_delta_pp` (percentage points over/under a linear burn target).
 The widget surface shows a suggestion line when a meter is materially
 off-pace. All pace math lives in `src/poller/pace.py` as a shared module.

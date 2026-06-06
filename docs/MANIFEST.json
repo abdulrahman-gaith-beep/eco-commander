@@ -1,10 +1,10 @@
 {
   "version": 2,
   "generated_by": "docs/scripts/generate-manifest.py",
-  "generated": "2026-06-06T05:12:27+03:00",
+  "generated": "2026-06-06T05:32:06+03:00",
   "corpus_stats": {
     "total_files": 62,
-    "total_bytes": 401343,
+    "total_bytes": 409268,
     "categories": 14,
     "subdirectories": [
       "adr",
@@ -178,11 +178,13 @@
       "sections": [
         "General",
         "Installation",
+        "Recipes & Gemini",
         "Usage",
+        "Security & Privacy",
         "Development"
       ],
-      "size_bytes": 2509,
-      "read_time_minutes": 2,
+      "size_bytes": 5254,
+      "read_time_minutes": 4,
       "depends_on": [
         "adr/0004-usage-monitor-python-carveout.md",
         "getting-started/troubleshooting.md",
@@ -271,7 +273,7 @@
         "By Task",
         "Agent-Specific Paths"
       ],
-      "size_bytes": 6222,
+      "size_bytes": 6218,
       "read_time_minutes": 4,
       "depends_on": [
         "architecture.md",
@@ -662,7 +664,7 @@
         "Prerequisites",
         "Related documentation"
       ],
-      "size_bytes": 2506,
+      "size_bytes": 2713,
       "read_time_minutes": 2,
       "depends_on": [
         "examples/cookbook.md",
@@ -686,11 +688,14 @@
         "Scenario 5 — Capture and share a usage snapshot",
         "Scenario 6 — Add a new recipe to the catalog",
         "Scenario 7 — Inspect what the widget is showing via `--cli`",
-        "Scenario 8 — Seed the scheduler queue from a missions directory"
+        "Scenario 8 — Seed the scheduler queue from a missions directory",
+        "Scenario 9 — Cancel a queued job and drain the rest",
+        "Scenario 10 — Monitor system health with the hygiene watcher"
       ],
-      "size_bytes": 21505,
-      "read_time_minutes": 14,
+      "size_bytes": 25805,
+      "read_time_minutes": 17,
       "depends_on": [
+        "getting-started/usage.md",
         "operations/runbook.md",
         "subsystems/recipes.md",
         "subsystems/scheduler.md",
@@ -821,6 +826,7 @@
         "INDEX.md",
         "READING_ORDER.md",
         "examples/README.md",
+        "examples/cookbook.md",
         "getting-started/README.md",
         "getting-started/installation.md",
         "getting-started/troubleshooting.md",
@@ -1430,7 +1436,7 @@
         "Logs",
         "Related"
       ],
-      "size_bytes": 11160,
+      "size_bytes": 11159,
       "read_time_minutes": 7,
       "depends_on": [
         "adr/0004-usage-monitor-python-carveout.md",
@@ -2251,6 +2257,10 @@
       [
         "examples/README.md",
         "subsystems/scheduler.md"
+      ],
+      [
+        "examples/cookbook.md",
+        "getting-started/usage.md"
       ],
       [
         "examples/cookbook.md",

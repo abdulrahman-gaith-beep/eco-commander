@@ -32,9 +32,12 @@ Start: What did you change?
 │   ├─ pace.py       → python3 -m pytest tests/python/test_pace.py -v
 │   ├─ value.py      → python3 -m pytest tests/python/test_value.py -v
 │   ├─ discovery.py  → python3 -m pytest tests/python/test_discovery.py -v
-│   ├─ alternatives  → python3 -m pytest tests/python/test_alternatives.py -v
+│   ├─ alternatives.py → python3 -m pytest tests/python/test_alternatives.py -v
 │   ├─ comments.py   → python3 -m pytest tests/python/test_comments.py -v
-│   └─ accounts.py   → python3 -m pytest tests/python/test_accounts.py -v
+│   ├─ accounts.py   → python3 -m pytest tests/python/test_accounts.py -v
+│   ├─ claude_oauth.py → python3 -m pytest tests/python/test_claude_oauth.py -v
+│   ├─ codex_oauth.py  → python3 -m pytest tests/python/test_codex_oauth.py -v
+│   └─ time_utils.py   → covered indirectly via test_poller_main.py / test_gemini.py
 │
 ├─ src/scheduler/*.py
 │   ├─ cli.py        → python3 -m pytest tests/python/test_scheduler_cli.py -v
@@ -54,7 +57,8 @@ Start: What did you change?
 │   ├─ dashboard-refresh.sh → bats tests/bats/recipes/17_dashboard_refresh.bats
 │   ├─ n8n-start.sh        → bats tests/bats/recipes/18_n8n_start.bats
 │   ├─ hygiene.sh          → bats tests/bats/10_hygiene.bats
-│   └─ account-swap.sh     → bats tests/bats/09_account_swap.bats
+│   ├─ account-swap.sh     → bats tests/bats/09_account_swap.bats
+│   └─ scheduler-seed.sh   → (no dedicated test yet — see AGENT_AUDIT_TASKLIST.md)
 │
 └─ Cross-cutting changes (JSON schema, security, permissions)
     → PYTHONPATH=src python3 -m pytest tests/python/test_security.py tests/python/test_integration.py -v
@@ -67,8 +71,8 @@ Start: What did you change?
 
 ### BATS Tests
 - **Pattern**: `NN_descriptive_name.bats` (zero-padded two-digit prefix)
-- **Core tests**: `00-08` in `tests/bats/`
-- **Account/hygiene**: `09-10` in `tests/bats/`
+- **Core / widget / alerts**: `00-08` in `tests/bats/`
+- **Account, hygiene, ai-clear, lib helpers**: `09-12` in `tests/bats/` (note: `11` is shared by `11_ai_clear.bats` and `11_lib_common.bats`)
 - **Recipe tests**: `10-18` in `tests/bats/recipes/`
 - **Load pattern**: `load '../helpers/common.bash'` (or `'../../helpers/common.bash'` for recipes)
 - **Setup/teardown**: Always use `eco_setup` / `eco_teardown`
