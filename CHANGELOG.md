@@ -67,3 +67,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SwiftBar status panel (`eco-commander.30s.sh`).
 - Recipes: ask, note, research, swarm, snapshot, arabic-proof, dashboard.
 - Snapshot system under `~/.eco/snapshots/`.
+
+[unreleased]: https://github.com/abdulrahman-gaith-beep/eco-commander/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/abdulrahman-gaith-beep/eco-commander/compare/v0.1.0...v0.2.0
+[0.1.0]: https://github.com/abdulrahman-gaith-beep/eco-commander/releases/tag/v0.1.0

@@ -31,7 +31,7 @@ flowchart TB
 
     subgraph Fallbacks["Missing/Stale Handling"]
         NoUsage["usage.json missing → 'usage:—'"]
-        StaleUsage["usage.json > 180s → ⚠ stale marker"]
+        StaleUsage["usage.json &gt; 180s → ⚠ stale marker"]
         NoState["state.json missing → skip snapshot section"]
         NoDocker["docker not found → skip containers"]
         NoOllama["ollama not found → 0/0 count"]
@@ -64,7 +64,7 @@ flowchart LR
     end
 
     subgraph Title["Title Line"]
-        Icon["Quota contribution:\n🟢 green: < 80%\n🟡 amber: 80-94%\n🔴 red: ≥ 95%"]
+        Icon["Quota contribution:\n🟢 green: &lt; 80%\n🟡 amber: 80-94%\n🔴 red: ≥ 95%"]
         Text["profile · 🦙 L/I · RAM"]
     end
 

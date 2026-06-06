@@ -15,6 +15,8 @@ Runtime recipes live in the real directory `~/.eco/recipes/`, populated by
 
 ### `account-swap`
 
+**Related diagram:** [Account Swap Flow](../diagrams/account-swap-flow.md)
+
 Rotate registered Gemini or Codex auth snapshots, and register Claude Keychain
 snapshots for manual recovery. Stores credential snapshots under
 `~/.eco/auth-snapshots/`.

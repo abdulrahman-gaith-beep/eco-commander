@@ -10,7 +10,7 @@ flowchart TD
     Start["launchd fires scheduler (every 120s)"] --> LoadState["Load ~/.eco/state/notify.json"]
     LoadState --> LoadQueue["Load ~/.eco/queue/jobs.yaml"]
     LoadQueue --> ResetStale["Reset stale 'running' jobs (timeout + 60s grace)"]
-    ResetStale --> FilterReady["Filter to ready jobs\n(pending/gated + earliest_iso <= now + deps met)"]
+    ResetStale --> FilterReady["Filter to ready jobs\n(pending/gated + earliest_iso &lt;= now + deps met)"]
     FilterReady --> SortPriority["Sort by priority (P0→P3), earliest_iso, created_iso"]
 
     SortPriority --> NextJob{"Next job?"}

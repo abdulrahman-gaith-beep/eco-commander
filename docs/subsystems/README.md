@@ -1,6 +1,8 @@
 # Subsystems
 
 Deep-dive documentation for each of eco-commander's major subsystems. Start
+See the [Diagrams index](../diagrams/README.md) for architectural visuals.
+
 with [`../architecture.md`](../architecture.md) for the system-wide view,
 then pick the subsystem you need below.
 

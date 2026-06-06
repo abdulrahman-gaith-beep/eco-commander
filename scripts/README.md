@@ -3,7 +3,7 @@
 > Automation, lifecycle management, and operational tooling for the eco-commander
 > AI usage monitoring ecosystem.
 >
-> **20 scripts · 2 libraries · 1 config · 3 plist templates** — Last updated: 2026-06-04
+> **20 scripts · 2 libraries · 1 config · 3 plist templates** — Last updated: 2026-06-06
 
 ## Quick Reference
 

@@ -34,6 +34,7 @@ semantics. launchd invokes `scheduler.dispatcher` every 2 minutes — it is
 - [Scheduler Flow diagram](../diagrams/scheduler-flow.md)
 - [Meter State Machine diagram](../diagrams/meter-state-machine.md)
 - [ADR 0005 — Job scheduler architecture](../adr/0005-job-scheduler.md)
+- [Module Dependencies diagram](../diagrams/module-deps.md)
 
 ## CLI
 

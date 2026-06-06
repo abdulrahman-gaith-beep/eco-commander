@@ -38,21 +38,23 @@ that operational layer visible and repeatable:
 1. [Why eco-commander?](#why-eco-commander)
 2. [Quick start](#quick-start)
 3. [See it work](#see-it-work)
-4. [Architecture](#architecture)
-5. [Repository layout](#repository-layout)
-6. [Installation](#installation)
-7. [Usage](#usage)
-8. [Recipes](#recipes)
-9. [Snapshots](#snapshots)
-10. [Testing](#testing)
-11. [Contributing & roadmap](#contributing--roadmap)
-12. [Navigation index](./INDEX.md)
-13. [Documentation index](./docs/INDEX.md)
-14. [Roadmap](./ROADMAP.md)
-15. [Governance](./GOVERNANCE.md)
-16. [Contributing](./CONTRIBUTING.md)
-17. [Security policy](./SECURITY.md)
-18. [License](./LICENSE)
+4. [Documentation map](#documentation-map)
+5. [Architecture](#architecture)
+6. [Repository layout](#repository-layout)
+7. [Installation](#installation)
+8. [Usage](#usage)
+9. [Recipes](#recipes)
+10. [Job scheduler (v0.1)](#job-scheduler-v01)
+11. [Snapshots](#snapshots)
+12. [Testing](#testing)
+13. [Contributing & roadmap](#contributing--roadmap)
+14. [Navigation index](./INDEX.md)
+15. [Documentation index](./docs/INDEX.md)
+16. [Roadmap](./ROADMAP.md)
+17. [Governance](./GOVERNANCE.md)
+18. [Contributing](./CONTRIBUTING.md)
+19. [Security policy](./SECURITY.md)
+20. [License](#license)
 
 ---
 
@@ -99,6 +101,20 @@ Expected shape:
 fall back to the plain `gemini` CLI. `snapshot` also needs Gemini CLI access
 and ships a public example prompt library for a runnable capture path; see
 [`docs/subsystems/snapshots.md`](./docs/subsystems/snapshots.md).
+
+---
+
+
+## Documentation map
+
+eco-commander documentation is organized along the [Diátaxis](https://diataxis.fr/) framework:
+
+* **[Tutorials](./docs/INDEX.md#tutorials)**: Guided learning (e.g., [First-run walkthrough](./docs/tutorials/first-run.md))
+* **[How-to guides](./docs/INDEX.md#getting-started)**: Step-by-step tasks (e.g., [Installation](./docs/getting-started/installation.md), [Recipes](./docs/subsystems/recipes.md))
+* **[Reference](./docs/INDEX.md#reference)**: Technical details (e.g., [CLI API](./docs/api/cli-reference.md), [Data model](./docs/reference/data-model.md))
+* **[Explanation](./docs/INDEX.md#concepts)**: System concepts (e.g., [Architecture](./docs/architecture.md), [Snapshots](./docs/subsystems/snapshots.md))
+
+For a complete list of all documentation files, see the [Documentation index](./docs/INDEX.md).
 
 ---
 

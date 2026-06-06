@@ -35,97 +35,97 @@
 > **How-to** (getting-started + examples) · **Reference** · **Explanation** (concepts).
 
 ### 🎓 [Tutorials](./tutorials/)
-| Doc | Description | Difficulty |
-|-----|-------------|-----------|
-| [first-run.md](./tutorials/first-run.md) | End-to-end guided first run: clone → install → verify → run a recipe → recover | Beginner |
+| Doc | Description | Audience |
+|-----|-------------|----------|
+| [first-run.md](./tutorials/first-run.md) | End-to-end guided first run: clone → install → verify → run a recipe → recover | Operators / Everyone |
 
 ### 🧠 [Concepts](./concepts/)
-| Doc | Description | Difficulty |
-|-----|-------------|-----------|
-| [mental-model.md](./concepts/mental-model.md) | How to think about the system: console model, snapshots, meters, ladders, boundaries | Beginner |
+| Doc | Description | Audience |
+|-----|-------------|----------|
+| [mental-model.md](./concepts/mental-model.md) | How to think about the system: console model, snapshots, meters, ladders, boundaries | Operators / Everyone |
 
 ### 🍳 [Examples](./examples/)
-| Doc | Description | Difficulty |
-|-----|-------------|-----------|
-| [cookbook.md](./examples/cookbook.md) | Task-oriented scenarios with goal, steps, expected output, cleanup | Beginner |
+| Doc | Description | Audience |
+|-----|-------------|----------|
+| [cookbook.md](./examples/cookbook.md) | Task-oriented scenarios with goal, steps, expected output, cleanup | Operators / Everyone |
 
 ### 🚀 [Getting Started](./getting-started/)
-| Doc | Description | Difficulty |
-|-----|-------------|-----------|
-| [installation.md](./getting-started/installation.md) | Install eco-commander, SwiftBar, LaunchAgents | Beginner |
-| [usage.md](./getting-started/usage.md) | Every CLI command, flag, and exit code | Beginner |
-| [troubleshooting.md](./getting-started/troubleshooting.md) | Common problems and fixes | Beginner |
-| [FAQ.md](./FAQ.md) | Frequently asked questions | Beginner |
+| Doc | Description | Audience |
+|-----|-------------|----------|
+| [installation.md](./getting-started/installation.md) | Install eco-commander, SwiftBar, LaunchAgents | Operators / Everyone |
+| [usage.md](./getting-started/usage.md) | Every CLI command, flag, and exit code | Operators / Everyone |
+| [troubleshooting.md](./getting-started/troubleshooting.md) | Common problems and fixes | Operators / Everyone |
+| [FAQ.md](./FAQ.md) | Frequently asked questions | Operators / Everyone |
 
 ### ⌨️ [API](./api/)
-| Doc | Description | Difficulty |
-|-----|-------------|-----------|
-| [cli-reference.md](./api/cli-reference.md) | Generated CLI command reference (every `eco` subcommand) | Beginner |
+| Doc | Description | Audience |
+|-----|-------------|----------|
+| [cli-reference.md](./api/cli-reference.md) | Generated CLI command reference (every `eco` subcommand) | Operators / Everyone |
 
 ### 📋 [Reference](./reference/)
-| Doc | Description | Difficulty |
-|-----|-------------|-----------|
-| [data-model.md](./reference/data-model.md) | JSON schemas: `state.json`, `usage.json`, `notify.json`, `jobs.yaml` | Intermediate |
-| [configuration.md](./reference/configuration.md) | Config files: plists, OAuth, MCP, log rotation | Intermediate |
-| [environment-variables.md](./reference/environment-variables.md) | Every env var the system reads or sets | Beginner |
-| [versioning-compatibility.md](./reference/versioning-compatibility.md) | Supported platforms, SemVer rules, schema stability | Beginner |
-| [glossary.md](./reference/glossary.md) | 30+ project-specific terms | Beginner |
+| Doc | Description | Audience |
+|-----|-------------|----------|
+| [data-model.md](./reference/data-model.md) | JSON schemas: `state.json`, `usage.json`, `notify.json`, `jobs.yaml` | Operators / Developers |
+| [configuration.md](./reference/configuration.md) | Config files: plists, OAuth, MCP, log rotation | Operators / Developers |
+| [environment-variables.md](./reference/environment-variables.md) | Every env var the system reads or sets | Operators / Everyone |
+| [versioning-compatibility.md](./reference/versioning-compatibility.md) | Supported platforms, SemVer rules, schema stability | Operators / Everyone |
+| [glossary.md](./reference/glossary.md) | 30+ project-specific terms | Operators / Everyone |
 
 ### ⚙️ [Subsystems](./subsystems/)
-| Doc | Description | Difficulty |
-|-----|-------------|-----------|
-| [scheduler.md](./subsystems/scheduler.md) | Job scheduler: queue, dispatch, adapters, meters | Advanced |
-| [usage-monitor.md](./subsystems/usage-monitor.md) | Usage poller + menu-bar widget | Intermediate |
-| [alerts.md](./subsystems/alerts.md) | Alert system: doctor, repo-health, delegate-fix | Intermediate |
-| [widget-health.md](./subsystems/widget-health.md) | Widget health: alert truth, fix tiers | Advanced |
-| [recipes.md](./subsystems/recipes.md) | Recipe catalog and contract | Beginner |
-| [snapshots.md](./subsystems/snapshots.md) | Snapshot format and lifecycle | Beginner |
-| [launchd-best-practices.md](./subsystems/launchd-best-practices.md) | launchd energy/reliability practices | Advanced |
-| [usage-monitor-integration.md](./subsystems/usage-monitor-integration.md) | *(Historical)* Integration plan | Advanced |
+| Doc | Description | Audience |
+|-----|-------------|----------|
+| [scheduler.md](./subsystems/scheduler.md) | Job scheduler: queue, dispatch, adapters, meters | Developers |
+| [usage-monitor.md](./subsystems/usage-monitor.md) | Usage poller + menu-bar widget | Operators / Developers |
+| [alerts.md](./subsystems/alerts.md) | Alert system: doctor, repo-health, delegate-fix | Operators / Developers |
+| [widget-health.md](./subsystems/widget-health.md) | Widget health: alert truth, fix tiers | Developers |
+| [recipes.md](./subsystems/recipes.md) | Recipe catalog and contract | Operators / Everyone |
+| [snapshots.md](./subsystems/snapshots.md) | Snapshot format and lifecycle | Operators / Everyone |
+| [launchd-best-practices.md](./subsystems/launchd-best-practices.md) | launchd energy/reliability practices | Developers |
+| [usage-monitor-integration.md](./subsystems/usage-monitor-integration.md) | *(Historical)* Integration plan | Developers |
 
 ### 🔧 [Operations](./operations/)
-| Doc | Description | Difficulty |
-|-----|-------------|-----------|
-| [runbook.md](./operations/runbook.md) | 10 operational procedures | Intermediate |
-| [security-model.md](./operations/security-model.md) | Threat model, credentials, attack surface | Advanced |
+| Doc | Description | Audience |
+|-----|-------------|----------|
+| [runbook.md](./operations/runbook.md) | 10 operational procedures | Operators / Developers |
+| [security-model.md](./operations/security-model.md) | Threat model, credentials, attack surface | Developers |
 
 ### 🤝 [Contributing](./contributing/)
-| Doc | Description | Difficulty |
-|-----|-------------|-----------|
-| [CONTRIBUTING-DOCS.md](./contributing/CONTRIBUTING-DOCS.md) | Doc update rules and quality checklist | Beginner |
-| [developer-hygiene.md](./contributing/developer-hygiene.md) | Git hygiene and local quality gates | Beginner |
-| [repository-governance.md](./contributing/repository-governance.md) | Branch protection and release gates | Beginner |
-| [engineering-standards.md](./contributing/engineering-standards.md) | Reusable framework: quality gates, structure, testing, docs, release & security standards | Intermediate |
-| [testing.md](./contributing/testing.md) | Bats + Python test conventions | Beginner |
-| [../.devcontainer/README.md](../.devcontainer/README.md) | Reproducible Linux contributor environment | Beginner |
+| Doc | Description | Audience |
+|-----|-------------|----------|
+| [CONTRIBUTING-DOCS.md](./contributing/CONTRIBUTING-DOCS.md) | Doc update rules and quality checklist | Contributors |
+| [developer-hygiene.md](./contributing/developer-hygiene.md) | Git hygiene and local quality gates | Contributors |
+| [repository-governance.md](./contributing/repository-governance.md) | Branch protection and release gates | Contributors |
+| [engineering-standards.md](./contributing/engineering-standards.md) | Reusable framework: quality gates, structure, testing, docs, release & security standards | Contributors |
+| [testing.md](./contributing/testing.md) | Bats + Python test conventions | Contributors |
+| [../.devcontainer/README.md](../.devcontainer/README.md) | Reproducible Linux contributor environment | Operators / Everyone |
 
 ### 📐 [Architecture Decision Records](./adr/)
 | ADR | Decision |
 |-----|----------|
-| [0001](./adr/0001-record-architecture-decisions.md) | Record architecture decisions |
-| [0002](./adr/0002-bash-implementation.md) | Why bash, not Python |
-| [0003](./adr/0003-snapshot-immutability.md) | Snapshot immutability guarantees |
-| [0004](./adr/0004-usage-monitor-python-carveout.md) | Python carve-out for poller |
-| [0005](./adr/0005-job-scheduler.md) | Job scheduler architecture |
+| [0001](./adr/0001-record-architecture-decisions.md) | Record architecture decisions | Everyone |
+| [0002](./adr/0002-bash-implementation.md) | Why bash, not Python | Everyone |
+| [0003](./adr/0003-snapshot-immutability.md) | Snapshot immutability guarantees | Everyone |
+| [0004](./adr/0004-usage-monitor-python-carveout.md) | Python carve-out for poller | Everyone |
+| [0005](./adr/0005-job-scheduler.md) | Job scheduler architecture | Everyone |
 
 ### 📐 [Diagrams](./diagrams/)
 
 | Component | Description |
 |-----------|-------------|
-| [architecture.md](./diagrams/architecture.md) | System component topology |
-| [data-flow.md](./diagrams/data-flow.md) | Data flow between subsystems |
-| [scheduler-flow.md](./diagrams/scheduler-flow.md) | Scheduler dispatch sequence |
-| [meter-state-machine.md](./diagrams/meter-state-machine.md) | Quota meter lifecycle (poller↔scheduler bridge) |
-| [poller-pipeline.md](./diagrams/poller-pipeline.md) | Poller 60s usage-collection cycle |
-| [alert-pipeline.md](./diagrams/alert-pipeline.md) | Alert verification pipeline |
-| [account-swap-flow.md](./diagrams/account-swap-flow.md) | Credential rotation lifecycle |
-| [widget-rendering.md](./diagrams/widget-rendering.md) | SwiftBar widget data sources |
-| [filesystem-layout.md](./diagrams/filesystem-layout.md) | `~/.eco/` runtime directory ownership |
-| [install-lifecycle.md](./diagrams/install-lifecycle.md) | Installation and LaunchAgent setup |
-| [ci-pipeline.md](./diagrams/ci-pipeline.md) | GitHub Actions CI/CD flow |
-| [snapshot-lifecycle.md](./diagrams/snapshot-lifecycle.md) | Snapshot capture and consumption |
-| [module-deps.md](./diagrams/module-deps.md) | Module dependency graph (auto-generated) |
-| [test-architecture.md](./diagrams/test-architecture.md) | Test suite structure |
+| [architecture.md](./diagrams/architecture.md) | System component topology | Everyone |
+| [data-flow.md](./diagrams/data-flow.md) | Data flow between subsystems | Everyone |
+| [scheduler-flow.md](./diagrams/scheduler-flow.md) | Scheduler dispatch sequence | Everyone |
+| [meter-state-machine.md](./diagrams/meter-state-machine.md) | Quota meter lifecycle (poller↔scheduler bridge) | Everyone |
+| [poller-pipeline.md](./diagrams/poller-pipeline.md) | Poller 60s usage-collection cycle | Everyone |
+| [alert-pipeline.md](./diagrams/alert-pipeline.md) | Alert verification pipeline | Everyone |
+| [account-swap-flow.md](./diagrams/account-swap-flow.md) | Credential rotation lifecycle | Everyone |
+| [widget-rendering.md](./diagrams/widget-rendering.md) | SwiftBar widget data sources | Everyone |
+| [filesystem-layout.md](./diagrams/filesystem-layout.md) | `~/.eco/` runtime directory ownership | Everyone |
+| [install-lifecycle.md](./diagrams/install-lifecycle.md) | Installation and LaunchAgent setup | Everyone |
+| [ci-pipeline.md](./diagrams/ci-pipeline.md) | GitHub Actions CI/CD flow | Everyone |
+| [snapshot-lifecycle.md](./diagrams/snapshot-lifecycle.md) | Snapshot capture and consumption | Everyone |
+| [module-deps.md](./diagrams/module-deps.md) | Module dependency graph (auto-generated) | Everyone |
+| [test-architecture.md](./diagrams/test-architecture.md) | Test suite structure | Everyone |
 
 ---
 

@@ -10,11 +10,11 @@ scheduler (`src/scheduler/routing.py`). Each meter tracks one quota bucket
 stateDiagram-v2
     [*] --> unknown : First poller cycle\n(no data yet)
 
-    unknown --> use_it_or_lose_it : Poller detects\nusage < 80% of cap\nAND cycle > 80% elapsed
-    unknown --> throttle : Poller detects\nusage > 80% of cap\nAND cycle < 60% elapsed\nAND delta_pp ≥ +25
+    unknown --> use_it_or_lose_it : Poller detects\nusage &lt; 80% of cap\nAND cycle &gt; 80% elapsed
+    unknown --> throttle : Poller detects\nusage &gt; 80% of cap\nAND cycle &lt; 60% elapsed\nAND delta_pp ≥ +25
     unknown --> hard_wall : Poller detects\nusage ≥ 95% of cap
 
-    use_it_or_lose_it --> throttle : Usage rises above 80%\nwith > 40% cycle remaining
+    use_it_or_lose_it --> throttle : Usage rises above 80%\nwith &gt; 40% cycle remaining
     use_it_or_lose_it --> hard_wall : Usage hits ≥ 95%
     use_it_or_lose_it --> unknown : Cycle resets\n(reset_epoch passes)
 

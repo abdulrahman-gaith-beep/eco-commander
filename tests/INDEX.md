@@ -1,6 +1,6 @@
 # Tests — File Index
 
-> Last updated: 2026-06-05 · Counts are intentionally runner-discovered; use the commands below for current totals.
+> Last updated: 2026-06-06 · Counts are intentionally runner-discovered; use the commands below for current totals.
 
 ## Quick Reference
 

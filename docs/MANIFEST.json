@@ -1,10 +1,10 @@
 {
   "version": 2,
   "generated_by": "docs/scripts/generate-manifest.py",
-  "generated": "2026-06-06T04:47:09+03:00",
+  "generated": "2026-06-06T05:12:27+03:00",
   "corpus_stats": {
-    "total_files": 61,
-    "total_bytes": 397870,
+    "total_files": 62,
+    "total_bytes": 401343,
     "categories": 14,
     "subdirectories": [
       "adr",
@@ -66,6 +66,7 @@
       "path": "diagrams",
       "description": "Mermaid diagrams of system topology",
       "files": [
+        "README.md",
         "account-swap-flow.md",
         "alert-pipeline.md",
         "architecture.md",
@@ -202,8 +203,8 @@
         "By Subsystem",
         "Documentation Dependency Graph"
       ],
-      "size_bytes": 11345,
-      "read_time_minutes": 5,
+      "size_bytes": 11771,
+      "read_time_minutes": 6,
       "depends_on": [
         "FAQ.md",
         "READING_ORDER.md",
@@ -515,11 +516,12 @@
         "Cross-references",
         "Related"
       ],
-      "size_bytes": 2146,
+      "size_bytes": 2297,
       "read_time_minutes": 1,
       "depends_on": [
         "contributing/CONTRIBUTING-DOCS.md",
         "contributing/developer-hygiene.md",
+        "contributing/engineering-standards.md",
         "contributing/repository-governance.md",
         "contributing/testing.md"
       ],
@@ -587,7 +589,8 @@
         "tutorials/first-run.md"
       ],
       "depended_by": [
-        "INDEX.md"
+        "INDEX.md",
+        "contributing/README.md"
       ]
     },
     {
@@ -1169,11 +1172,12 @@
         "Subsystem dependency map",
         "Reading order"
       ],
-      "size_bytes": 4157,
+      "size_bytes": 4233,
       "read_time_minutes": 2,
       "depends_on": [
         "adr/0004-usage-monitor-python-carveout.md",
         "architecture.md",
+        "diagrams/README.md",
         "reference/data-model.md",
         "reference/environment-variables.md",
         "subsystems/alerts.md",
@@ -1276,10 +1280,11 @@
         "Recipe contract",
         "Related"
       ],
-      "size_bytes": 8414,
+      "size_bytes": 8490,
       "read_time_minutes": 5,
       "depends_on": [
         "architecture.md",
+        "diagrams/account-swap-flow.md",
         "reference/environment-variables.md",
         "subsystems/scheduler.md",
         "subsystems/snapshots.md"
@@ -1317,12 +1322,13 @@
         "LaunchAgent",
         "Related"
       ],
-      "size_bytes": 14220,
-      "read_time_minutes": 9,
+      "size_bytes": 14280,
+      "read_time_minutes": 10,
       "depends_on": [
         "adr/0005-job-scheduler.md",
         "architecture.md",
         "diagrams/meter-state-machine.md",
+        "diagrams/module-deps.md",
         "diagrams/scheduler-flow.md",
         "reference/data-model.md",
         "reference/environment-variables.md",
@@ -1424,12 +1430,13 @@
         "Logs",
         "Related"
       ],
-      "size_bytes": 11100,
+      "size_bytes": 11160,
       "read_time_minutes": 7,
       "depends_on": [
         "adr/0004-usage-monitor-python-carveout.md",
         "architecture.md",
         "diagrams/meter-state-machine.md",
+        "diagrams/module-deps.md",
         "diagrams/poller-pipeline.md",
         "reference/data-model.md",
         "reference/environment-variables.md",
@@ -1586,6 +1593,11 @@
     }
   ],
   "diagrams": [
+    {
+      "path": "diagrams/README.md",
+      "type": "mermaid",
+      "subject": "Architecture & Design Diagrams"
+    },
     {
       "path": "diagrams/account-swap-flow.md",
       "type": "mermaid",
@@ -2126,6 +2138,10 @@
       ],
       [
         "contributing/README.md",
+        "contributing/engineering-standards.md"
+      ],
+      [
+        "contributing/README.md",
         "contributing/repository-governance.md"
       ],
       [
@@ -2554,6 +2570,10 @@
       ],
       [
         "subsystems/README.md",
+        "diagrams/README.md"
+      ],
+      [
+        "subsystems/README.md",
         "reference/data-model.md"
       ],
       [
@@ -2638,6 +2658,10 @@
       ],
       [
         "subsystems/recipes.md",
+        "diagrams/account-swap-flow.md"
+      ],
+      [
+        "subsystems/recipes.md",
         "reference/environment-variables.md"
       ],
       [
@@ -2659,6 +2683,10 @@
       [
         "subsystems/scheduler.md",
         "diagrams/meter-state-machine.md"
+      ],
+      [
+        "subsystems/scheduler.md",
+        "diagrams/module-deps.md"
       ],
       [
         "subsystems/scheduler.md",
@@ -2727,6 +2755,10 @@
       [
         "subsystems/usage-monitor.md",
         "diagrams/meter-state-machine.md"
+      ],
+      [
+        "subsystems/usage-monitor.md",
+        "diagrams/module-deps.md"
       ],
       [
         "subsystems/usage-monitor.md",

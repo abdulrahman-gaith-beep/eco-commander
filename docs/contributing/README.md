@@ -7,6 +7,7 @@
 |-----|---------|
 | [CONTRIBUTING-DOCS.md](./CONTRIBUTING-DOCS.md) | When and how to update docs: change-type matrix, quality checklist, validators (`validate-links.sh`, `doc-stats.sh`), ADR conventions, staleness prevention |
 | [developer-hygiene.md](./developer-hygiene.md) | Bootstrap setup, conventional commits, pre-commit hooks (16 hooks), local quality gates |
+| [engineering-standards.md](./engineering-standards.md) | Reusable framework: quality gates, structure, testing, docs, release & security standards |
 | [repository-governance.md](./repository-governance.md) | Branch protection rules, CODEOWNERS, label taxonomy, and release gate |
 | [testing.md](./testing.md) | Test architecture: a comprehensive Bats + Python + E2E suite; how to run each suite; fixtures and helpers |
 

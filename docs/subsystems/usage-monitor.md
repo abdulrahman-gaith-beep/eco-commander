@@ -9,6 +9,7 @@ so you can see all three at a glance without opening any of them.
 - [Meter State Machine diagram](../diagrams/meter-state-machine.md)
 - [ADR 0004 — Python poller carve-out](../adr/0004-usage-monitor-python-carveout.md)
 - [Historical integration plan](./usage-monitor-integration.md)
+- [Module Dependencies diagram](../diagrams/module-deps.md)
 
 ## What you see
 
