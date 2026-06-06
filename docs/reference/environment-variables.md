@@ -95,6 +95,7 @@ All variables have sensible defaults; none are required for basic operation.
 | `ECO_EROR_SPEC` | `$ECO_AUDIT_ROOT/specs/EROR-v1-DRAFT.md` when `ECO_AUDIT_ROOT` is set | Optional EROR specification path used by the widget |
 | `ECO_DOMAIN_CHARTERS` | `$ECO_AUDIT_ROOT/specs/DOMAIN-CHARTERS.md` when `ECO_AUDIT_ROOT` is set | Optional domain-charters path used by the widget |
 | `ECO_ORG_LABEL` | (unset) | Optional organization label rendered in shipped UI/output; empty by default and omitted when unset |
+| `PREWARM_GB_LIMIT` | `10` | Maximum GB of disk allowed for resource pre-warming in the widget; used as a safety cap |
 
 ## Account swap recipe (`src/recipes/account-swap.sh`)
 
@@ -106,12 +107,17 @@ All variables have sensible defaults; none are required for basic operation.
 | `CODEX_HOME` | `$HOME/.codex` | Codex auth directory used by account-swap snapshots |
 | `ECO_ALLOW_KEYCHAIN_PROMPT` | `0` | Set to `1` to allow Keychain read/write prompts during account swap (required for the swap to proceed) |
 | `ECO_ACCOUNT_SECURITY_STDIN_PASSWORD` | `0` | Set to `1` to allow writing Claude credentials via stdin to a helper binary; gated explicitly to prevent accidental secret exposure |
+| `CLAUDE_KEYCHAIN_SERVICE` | `Claude Code-credentials` | macOS Keychain service name used for reading and writing Claude Code credentials |
 
 ## Hygiene watcher (`src/recipes/hygiene.sh`)
 
 | Variable | Default | Purpose |
 |----------|---------|---------|
 | `ECO_HYGIENE_INTERVAL` | `30` | Polling interval in seconds for the hygiene daemon |
+| `ECO_HYGIENE_DIR` | `$ECO_HOME/hygiene` | Override directory for hygiene daemon state, logs, and PID file |
+| `ECO_HYGIENE_EVT_LOG` | `$ECO_HYGIENE_DIR/events.log` | Override path for the hygiene event log |
+| `ECO_HYGIENE_HIGH_LOG` | `$ECO_HYGIENE_DIR/HIGH.log` | Override path for the hygiene high-severity log |
+| `ECO_HYGIENE_PID_FILE` | `$ECO_HYGIENE_DIR/daemon.pid` | Override path for the hygiene daemon PID file |
 | `ECO_HYGIENE_RED_MEM_GB` | `3` | Available memory threshold (GB) below which status turns red |
 | `ECO_HYGIENE_YEL_MEM_GB` | `6` | Available memory threshold (GB) below which status turns yellow |
 | `ECO_HYGIENE_RED_SWAP_MB` | `6000` | Swap used threshold (MB) above which status turns red |
@@ -127,6 +133,14 @@ All variables have sensible defaults; none are required for basic operation.
 | `ECO_ARABIC_PROOF_MODEL` | (falls back to `ECO_ARABIC_MODEL`) | Ollama model to use for Arabic proofing |
 | `ECO_ARABIC_MODEL` | `qwen3.6:latest` | Fallback Ollama model when `ECO_ARABIC_PROOF_MODEL` is unset |
 | `ECO_ARABIC_PROOF_AUTO_UNLOAD` | `0` | Set to `1` to unload the Ollama model from memory after the proof run |
+
+## Note recipe (`src/recipes/note.sh`)
+
+| Variable | Default | Purpose |
+|----------|---------|---------|
+| `AI_MEMORY_HOME` | `$HOME/.ai-memory` | Root directory for the ai-memory backend; when present, notes are written here instead of under `$ECO_HOME/notes/` |
+| `MEMORY_ROUTER` | `$HOME/.claude/hooks/memory_router.py` | Path to the memory-router rebuild script invoked after saving a note (future) |
+| `EDITOR` | `nano` | Editor opened when `eco note` is called with no content argument |
 
 ## Gem-smart / research recipes (`src/recipes/snapshot.sh`, `research.sh`, `ask.sh`, `swarm.sh`)
 

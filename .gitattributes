@@ -19,4 +19,5 @@ src/bin/eco text eol=lf
 *.jpeg binary
 *.pdf binary
 *.png binary
+*.webm binary
 *.webp binary

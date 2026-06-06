@@ -44,11 +44,12 @@ Proofread Arabic text locally with Ollama. No cloud call; private by design.
 
 - **Args:** `<file path>` or piped stdin.
 - **Output:** corrected text to stdout + a list of changes.
-- **Model:** `ECO_ARABIC_MODEL` (default `qwen3.6:latest`); must be installed via `ollama pull`.
+- **Model:** `ECO_ARABIC_PROOF_MODEL` (default falls back to `ECO_ARABIC_MODEL`,
+  then `qwen3.6:latest`); must be installed via `ollama pull`.
 
 ### `ask`
 
-One-shot Q&A with smart routing.
+Ask a question fast. Routes to Gemini (quick) by default. No ceremony.
 
 - **Args:** `<question…>` (prompted interactively if omitted).
 - **Output:** stdout answer; no files written.
@@ -86,9 +87,9 @@ with current values.
 Mac hygiene watcher — monitors RAM/swap, stale MCP servers, stuck Gemini
 processes, and workspace health. Replaces session-scoped Claude Monitor loops.
 
-- **Args:** `watch` | `watch-fg` | `snapshot` | `stop` | `status` | `tail` | `install` | `uninstall`.
+- **Args:** `watch` | `watch-fg` | `snapshot` | `stop` | `status` | `tail` | `tail-high` | `install` | `uninstall`.
 - **State:** `~/.eco/state.json`.
-- **Output:** hygiene report to stdout; logs under `~/.eco/`.
+- **Output:** `~/.eco/state.json` plus private hygiene logs under `~/.eco/hygiene/`.
 - **Side effects:** `install`/`uninstall` register a launchd job.
 
 ### `n8n-start`
@@ -105,14 +106,15 @@ Start local n8n when the daemon is missing.
 Capture a note to long-term memory in the right space.
 
 - **Args:** `<content string>` or opens `$EDITOR` if empty.
-- **Output:** file under `~/.ai-memory/spaces/<space>/` + index rebuild.
+- **Output:** file under `~/.ai-memory/spaces/<space>/` when available;
+  otherwise `~/.eco/notes/spaces/<space>/` + optional index rebuild.
 - **Routing:** auto-routes to the right memory space by current working
   directory.
-- **Uses:** filesystem write + `memory_router` index rebuild.
+- **Uses:** filesystem write + optional `memory_router` index rebuild.
 
 ### `research`
 
-Research a topic with Gemini (fast, wide — 1M context).
+Research a topic with Gemini (fast, cheap, wide — 1M context).
 
 - **Args:** `<topic string>` (prompted if omitted).
 - **Output:** `~/Documents/research/<slug>/YYYY-MM-DD-<slug>.md`.
@@ -123,14 +125,14 @@ Research a topic with Gemini (fast, wide — 1M context).
 
 Import mission YAML files into the scheduler queue.
 
-- **Args:** `<directory>` — path containing `.yaml`/`.yml` mission files
-  (default: `examples/missions/`).
+- **Args:** `<path>` — a directory of mission `.yaml`/`.yml` files, or a single
+  mission file (default directory: `examples/missions/`).
 - **Output:** jobs added to `~/.eco/queue/jobs.yaml`; prints added/skipped counts.
 - **Uses:** `python -m scheduler.cli seed --dir <directory>`.
 
 ### `snapshot`
 
-Capture ecosystem state into an immutable timestamped directory.
+Re-run the AI ecosystem snapshot and publish it to `current/`.
 
 - **Args:** none.
 - **Output:**

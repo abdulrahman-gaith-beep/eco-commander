@@ -304,6 +304,11 @@ scheduler to determine provider availability for job dispatch.
       "last_fired_by_kind": {"hard_wall": 1780600130},
       "last_reset_epoch": 1780686518
     }
+  },
+  "last_comment_ts": {
+    "gentle": 0.0,
+    "bold": 0.0,
+    "alarmed": 0.0
   }
 }
 ```
@@ -339,6 +344,18 @@ The seven tracked meters correspond to notify.py's `METERS` list:
 | `last_fired_ts` | integer | Unix epoch when any notification was last fired for this meter |
 | `last_fired_by_kind` | object | Per-notification-type last-fired timestamps (keyed by kind) |
 | `last_reset_epoch` | integer | Quota reset time from the most recent cycle; used for cycle-reset detection |
+
+### Comment cooldown: `last_comment_ts`
+
+When `ECO_COMMENTS=1`, `src/poller/comments.py` writes `last_comment_ts` to the
+same `state/notify.json` file. This tracks per-tier cooldown timestamps for
+burn-rate commentary so the same comment tier is not repeated too frequently.
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `last_comment_ts.gentle` | float | Unix epoch of the last gentle-tier comment |
+| `last_comment_ts.bold` | float | Unix epoch of the last bold-tier comment |
+| `last_comment_ts.alarmed` | float | Unix epoch of the last alarmed-tier comment |
 
 ## Job queue: `jobs.yaml`
 
@@ -390,7 +407,7 @@ jobs:
 | `timeout_s` | integer | `600` | Execution timeout in seconds (1–21600) |
 | `retry` | object | `{max: 3, backoff_s: [60, 300, 1800]}` | Retry policy |
 | `status` | string | `"pending"` | `pending` \| `running` \| `completed` \| `failed` \| `gated_by_quota` \| `cancelled` |
-| `attempts` | object[] | `[]` | Attempt history with `iso`, `provider`, `model`, `meter`, `ok`, `error_kind`, `duration_s` |
+| `attempts` | object[] | `[]` | Attempt history with `iso`, `provider`, `model`, `meter`, `ok`, `error_kind`, `duration_s`, `log_path` |
 | `created_iso` | string | now | ISO 8601 creation timestamp |
 | `started_iso` | string | `""` | Set when first attempt begins |
 | `completed_iso` | string | `""` | Set when the dispatcher marks a job `completed` or `failed` |
