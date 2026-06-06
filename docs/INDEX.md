@@ -2,6 +2,8 @@
 
 > **For AI agents:** Start with [`MANIFEST.json`](./MANIFEST.json) for machine-readable metadata, then use [`READING_ORDER.md`](./READING_ORDER.md) for task-specific reading paths.
 
+> **Prefer a browsable guide?** The [GitHub Wiki](https://github.com/abdulrahman-gaith-beep/eco-commander/wiki) is a navigable companion to this `docs/` tree. This in-repo tree is the version-pinned source of truth.
+
 ## Quick Start Router
 
 **What are you trying to do?**

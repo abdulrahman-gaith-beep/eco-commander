@@ -7,6 +7,7 @@
 [![Shell: bash](https://img.shields.io/badge/shell-bash-89e051)](#requirements)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 [![Status: Beta](https://img.shields.io/badge/status-beta-f59e0b)](./CHANGELOG.md)
+[![Docs: Wiki](https://img.shields.io/badge/docs-wiki-8a2be2)](https://github.com/abdulrahman-gaith-beep/eco-commander/wiki)
 
 `eco-commander` is the operator console for an AI ecosystem that spans Claude Code, Cursor,
 Antigravity, Gemini CLI, Ollama, and a fleet of MCP servers. It provides:
@@ -44,7 +45,7 @@ that operational layer visible and repeatable:
 7. [Installation](#installation)
 8. [Usage](#usage)
 9. [Recipes](#recipes)
-10. [Job scheduler (v0.1)](#job-scheduler-v01)
+10. [Job scheduler (experimental)](#job-scheduler-experimental)
 11. [Snapshots](#snapshots)
 12. [Testing](#testing)
 13. [Contributing & roadmap](#contributing--roadmap)
@@ -115,6 +116,8 @@ eco-commander documentation is organized along the [Diátaxis](https://diataxis.
 * **[Explanation](./docs/INDEX.md#concepts)**: System concepts (e.g., [Architecture](./docs/architecture.md), [Snapshots](./docs/subsystems/snapshots.md))
 
 For a complete list of all documentation files, see the [Documentation index](./docs/INDEX.md).
+
+The project also has a navigable **[GitHub Wiki](https://github.com/abdulrahman-gaith-beep/eco-commander/wiki)** companion (Getting Started, CLI Reference, Scheduler, Usage Monitor, and more). The repository and its in-repo `docs/` tree remain the version-pinned source of truth.
 
 ---
 
@@ -326,7 +329,7 @@ Catalog: [`docs/subsystems/recipes.md`](./docs/subsystems/recipes.md).
 
 ---
 
-## Job scheduler (v0.1)
+## Job scheduler (experimental)
 
 Quota-aware cross-project AI-job dispatcher. Reads meter state from
 `~/.eco/state/notify.json` (written by the poller) and a federated job queue at
