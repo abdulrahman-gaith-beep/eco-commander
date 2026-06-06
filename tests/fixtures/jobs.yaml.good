@@ -1,0 +1,23 @@
+jobs:
+  - id: example-audit-job
+    project: eco-commander
+    workdir: ""
+    template: raw_prompt
+    template_vars:
+      prompt: "Audit the current repository structure and return concise findings."
+    model_preference:
+      - provider: gemini
+        model: gemini-3-flash-preview
+        meter: gemini.tiers.flash
+      - provider: codex
+        model: gpt-5.5
+        meter: codex.session
+    priority: P2
+    timeout_s: 600
+    retry:
+      max: 3
+      backoff_s: [60, 300, 1800]
+    status: pending
+    requires_confirm: false
+    depends_on_jobs: []
+    notes: "Safe fixture job; not intended for live dispatch."

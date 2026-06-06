@@ -1,0 +1,2845 @@
+{
+  "version": 2,
+  "generated_by": "docs/scripts/generate-manifest.py",
+  "generated": "2026-06-06T04:47:09+03:00",
+  "corpus_stats": {
+    "total_files": 61,
+    "total_bytes": 397870,
+    "categories": 14,
+    "subdirectories": [
+      "adr",
+      "api",
+      "concepts",
+      "contributing",
+      "diagrams",
+      "examples",
+      "getting-started",
+      "migration",
+      "operations",
+      "reference",
+      "rfcs",
+      "subsystems",
+      "tutorials"
+    ]
+  },
+  "categories": {
+    "adr": {
+      "path": "adr",
+      "description": "Architecture Decision Records",
+      "files": [
+        "0001-record-architecture-decisions.md",
+        "0002-bash-implementation.md",
+        "0003-snapshot-immutability.md",
+        "0004-usage-monitor-python-carveout.md",
+        "0005-job-scheduler.md",
+        "README.md"
+      ]
+    },
+    "api": {
+      "path": "api",
+      "description": "Generated CLI reference",
+      "files": [
+        "cli-reference.md"
+      ]
+    },
+    "concepts": {
+      "path": "concepts",
+      "description": "Understanding-oriented explanations and mental models (Diataxis: explanation)",
+      "files": [
+        "README.md",
+        "mental-model.md"
+      ]
+    },
+    "contributing": {
+      "path": "contributing",
+      "description": "Contributor guidelines, testing, and governance",
+      "files": [
+        "CONTRIBUTING-DOCS.md",
+        "README.md",
+        "developer-hygiene.md",
+        "engineering-standards.md",
+        "repository-governance.md",
+        "testing.md"
+      ]
+    },
+    "diagrams": {
+      "path": "diagrams",
+      "description": "Mermaid diagrams of system topology",
+      "files": [
+        "account-swap-flow.md",
+        "alert-pipeline.md",
+        "architecture.md",
+        "ci-pipeline.md",
+        "data-flow.md",
+        "filesystem-layout.md",
+        "install-lifecycle.md",
+        "meter-state-machine.md",
+        "module-deps.md",
+        "poller-pipeline.md",
+        "scheduler-flow.md",
+        "snapshot-lifecycle.md",
+        "test-architecture.md",
+        "widget-rendering.md"
+      ]
+    },
+    "examples": {
+      "path": "examples",
+      "description": "Task-oriented cookbook scenarios (Diataxis: how-to)",
+      "files": [
+        "README.md",
+        "cookbook.md"
+      ]
+    },
+    "getting-started": {
+      "path": "getting-started",
+      "description": "Onboarding: install, use, and troubleshoot (Diataxis: how-to)",
+      "files": [
+        "README.md",
+        "installation.md",
+        "troubleshooting.md",
+        "usage.md"
+      ]
+    },
+    "migration": {
+      "path": "migration",
+      "description": "Version-to-version upgrade notes",
+      "files": [
+        "README.md"
+      ]
+    },
+    "operations": {
+      "path": "operations",
+      "description": "Runbooks, security model, and performance for production operation",
+      "files": [
+        "README.md",
+        "runbook.md",
+        "security-model.md"
+      ]
+    },
+    "overview": {
+      "path": ".",
+      "description": "Cross-cutting system overview and navigation",
+      "files": [
+        "FAQ.md",
+        "INDEX.md",
+        "READING_ORDER.md",
+        "architecture.md"
+      ]
+    },
+    "reference": {
+      "path": "reference",
+      "description": "Technical reference: schemas, config, env vars, glossary (Diataxis: reference)",
+      "files": [
+        "README.md",
+        "configuration.md",
+        "data-model.md",
+        "environment-variables.md",
+        "glossary.md",
+        "versioning-compatibility.md"
+      ]
+    },
+    "rfcs": {
+      "path": "rfcs",
+      "description": "Request-for-comments design proposals",
+      "files": [
+        "README.md"
+      ]
+    },
+    "subsystems": {
+      "path": "subsystems",
+      "description": "Deep dives into each major subsystem",
+      "files": [
+        "README.md",
+        "alerts.md",
+        "launchd-best-practices.md",
+        "recipes.md",
+        "scheduler.md",
+        "snapshots.md",
+        "usage-monitor-integration.md",
+        "usage-monitor.md",
+        "widget-health.md"
+      ]
+    },
+    "tutorials": {
+      "path": "tutorials",
+      "description": "Learning-oriented guided walkthroughs (Diataxis: tutorial)",
+      "files": [
+        "README.md",
+        "first-run.md"
+      ]
+    }
+  },
+  "documents": [
+    {
+      "path": "FAQ.md",
+      "title": "Frequently Asked Questions",
+      "category": "overview",
+      "sections": [
+        "General",
+        "Installation",
+        "Usage",
+        "Development"
+      ],
+      "size_bytes": 2509,
+      "read_time_minutes": 2,
+      "depends_on": [
+        "adr/0004-usage-monitor-python-carveout.md",
+        "getting-started/troubleshooting.md",
+        "subsystems/recipes.md"
+      ],
+      "depended_by": [
+        "INDEX.md"
+      ]
+    },
+    {
+      "path": "INDEX.md",
+      "title": "Documentation Index",
+      "category": "overview",
+      "sections": [
+        "Quick Start Router",
+        "By Category",
+        "By Role",
+        "By Subsystem",
+        "Documentation Dependency Graph"
+      ],
+      "size_bytes": 11345,
+      "read_time_minutes": 5,
+      "depends_on": [
+        "FAQ.md",
+        "READING_ORDER.md",
+        "adr/0001-record-architecture-decisions.md",
+        "adr/0002-bash-implementation.md",
+        "adr/0003-snapshot-immutability.md",
+        "adr/0004-usage-monitor-python-carveout.md",
+        "adr/0005-job-scheduler.md",
+        "api/cli-reference.md",
+        "architecture.md",
+        "concepts/mental-model.md",
+        "contributing/CONTRIBUTING-DOCS.md",
+        "contributing/developer-hygiene.md",
+        "contributing/engineering-standards.md",
+        "contributing/repository-governance.md",
+        "contributing/testing.md",
+        "diagrams/account-swap-flow.md",
+        "diagrams/alert-pipeline.md",
+        "diagrams/architecture.md",
+        "diagrams/ci-pipeline.md",
+        "diagrams/data-flow.md",
+        "diagrams/filesystem-layout.md",
+        "diagrams/install-lifecycle.md",
+        "diagrams/meter-state-machine.md",
+        "diagrams/module-deps.md",
+        "diagrams/poller-pipeline.md",
+        "diagrams/scheduler-flow.md",
+        "diagrams/snapshot-lifecycle.md",
+        "diagrams/test-architecture.md",
+        "diagrams/widget-rendering.md",
+        "examples/cookbook.md",
+        "getting-started/installation.md",
+        "getting-started/troubleshooting.md",
+        "getting-started/usage.md",
+        "operations/runbook.md",
+        "operations/security-model.md",
+        "reference/configuration.md",
+        "reference/data-model.md",
+        "reference/environment-variables.md",
+        "reference/glossary.md",
+        "reference/versioning-compatibility.md",
+        "subsystems/alerts.md",
+        "subsystems/launchd-best-practices.md",
+        "subsystems/recipes.md",
+        "subsystems/scheduler.md",
+        "subsystems/snapshots.md",
+        "subsystems/usage-monitor-integration.md",
+        "subsystems/usage-monitor.md",
+        "subsystems/widget-health.md",
+        "tutorials/first-run.md"
+      ],
+      "depended_by": [
+        "adr/README.md",
+        "contributing/engineering-standards.md",
+        "migration/README.md",
+        "rfcs/README.md"
+      ]
+    },
+    {
+      "path": "READING_ORDER.md",
+      "title": "Reading Order",
+      "category": "overview",
+      "sections": [
+        "By Task",
+        "Agent-Specific Paths"
+      ],
+      "size_bytes": 6222,
+      "read_time_minutes": 4,
+      "depends_on": [
+        "architecture.md",
+        "concepts/mental-model.md",
+        "contributing/CONTRIBUTING-DOCS.md",
+        "contributing/developer-hygiene.md",
+        "contributing/repository-governance.md",
+        "contributing/testing.md",
+        "getting-started/installation.md",
+        "getting-started/usage.md",
+        "operations/runbook.md",
+        "operations/security-model.md",
+        "reference/configuration.md",
+        "reference/data-model.md",
+        "reference/environment-variables.md",
+        "reference/glossary.md",
+        "subsystems/alerts.md",
+        "subsystems/launchd-best-practices.md",
+        "subsystems/recipes.md",
+        "subsystems/scheduler.md",
+        "subsystems/snapshots.md",
+        "subsystems/usage-monitor.md",
+        "subsystems/widget-health.md",
+        "tutorials/first-run.md"
+      ],
+      "depended_by": [
+        "INDEX.md"
+      ]
+    },
+    {
+      "path": "adr/README.md",
+      "title": "Architecture Decision Records",
+      "category": "adr",
+      "sections": [
+        "Index",
+        "What Is an ADR?",
+        "When to Add an ADR",
+        "How to Add an ADR",
+        "Context",
+        "Decision",
+        "Consequences",
+        "Related",
+        "Numbering Convention"
+      ],
+      "size_bytes": 3526,
+      "read_time_minutes": 3,
+      "depends_on": [
+        "INDEX.md",
+        "adr/0001-record-architecture-decisions.md",
+        "adr/0002-bash-implementation.md",
+        "adr/0003-snapshot-immutability.md",
+        "adr/0004-usage-monitor-python-carveout.md",
+        "adr/0005-job-scheduler.md"
+      ],
+      "depended_by": [
+        "migration/README.md",
+        "rfcs/README.md"
+      ]
+    },
+    {
+      "path": "api/cli-reference.md",
+      "title": "CLI Reference",
+      "category": "api",
+      "sections": [
+        "`eco` — CLI Router",
+        "Recipes",
+        "`eco scheduler` — Job Scheduler",
+        "Environment Variables",
+        "Source References"
+      ],
+      "size_bytes": 7932,
+      "read_time_minutes": 6,
+      "depends_on": [
+        "reference/environment-variables.md"
+      ],
+      "depended_by": [
+        "INDEX.md",
+        "architecture.md",
+        "contributing/engineering-standards.md",
+        "reference/versioning-compatibility.md"
+      ]
+    },
+    {
+      "path": "architecture.md",
+      "title": "Architecture",
+      "category": "overview",
+      "sections": [
+        "1. Overview",
+        "2. Source Layout",
+        "3. Runtime Layout",
+        "4. Entry Points",
+        "5. Recipes",
+        "6. Snapshots",
+        "7. Usage Poller",
+        "8. Scheduler",
+        "9. Data Flow",
+        "10. LaunchAgents",
+        "11. External Integrations",
+        "12. Security Boundaries",
+        "13. Non-goals",
+        "See Also"
+      ],
+      "size_bytes": 14908,
+      "read_time_minutes": 9,
+      "depends_on": [
+        "adr/0004-usage-monitor-python-carveout.md",
+        "adr/0005-job-scheduler.md",
+        "api/cli-reference.md",
+        "concepts/mental-model.md",
+        "diagrams/architecture.md",
+        "operations/security-model.md",
+        "reference/data-model.md",
+        "subsystems/README.md",
+        "subsystems/launchd-best-practices.md",
+        "subsystems/recipes.md",
+        "subsystems/scheduler.md",
+        "subsystems/snapshots.md",
+        "subsystems/usage-monitor.md"
+      ],
+      "depended_by": [
+        "INDEX.md",
+        "READING_ORDER.md",
+        "concepts/README.md",
+        "concepts/mental-model.md",
+        "contributing/engineering-standards.md",
+        "getting-started/README.md",
+        "getting-started/installation.md",
+        "getting-started/troubleshooting.md",
+        "getting-started/usage.md",
+        "operations/README.md",
+        "operations/security-model.md",
+        "reference/README.md",
+        "subsystems/README.md",
+        "subsystems/alerts.md",
+        "subsystems/launchd-best-practices.md",
+        "subsystems/recipes.md",
+        "subsystems/scheduler.md",
+        "subsystems/snapshots.md",
+        "subsystems/usage-monitor.md",
+        "subsystems/widget-health.md",
+        "tutorials/README.md",
+        "tutorials/first-run.md"
+      ]
+    },
+    {
+      "path": "concepts/README.md",
+      "title": "Concepts",
+      "category": "concepts",
+      "sections": [
+        "In this directory",
+        "Diataxis note",
+        "Related directories"
+      ],
+      "size_bytes": 1416,
+      "read_time_minutes": 1,
+      "depends_on": [
+        "architecture.md",
+        "concepts/mental-model.md",
+        "getting-started/README.md",
+        "reference/README.md",
+        "subsystems/README.md"
+      ],
+      "depended_by": []
+    },
+    {
+      "path": "concepts/mental-model.md",
+      "title": "Mental Model: How to Think About eco-commander",
+      "category": "concepts",
+      "sections": [
+        "The Core Idea",
+        "The Map",
+        "The Five Runtime Ideas",
+        "The Main Invariant",
+        "What eco-commander Deliberately Is Not",
+        "See Also"
+      ],
+      "size_bytes": 10134,
+      "read_time_minutes": 7,
+      "depends_on": [
+        "adr/0003-snapshot-immutability.md",
+        "adr/0004-usage-monitor-python-carveout.md",
+        "adr/0005-job-scheduler.md",
+        "architecture.md",
+        "diagrams/meter-state-machine.md",
+        "diagrams/scheduler-flow.md",
+        "diagrams/snapshot-lifecycle.md",
+        "diagrams/widget-rendering.md",
+        "reference/data-model.md",
+        "subsystems/recipes.md",
+        "subsystems/scheduler.md",
+        "subsystems/snapshots.md",
+        "subsystems/usage-monitor.md"
+      ],
+      "depended_by": [
+        "INDEX.md",
+        "READING_ORDER.md",
+        "architecture.md",
+        "concepts/README.md",
+        "contributing/engineering-standards.md"
+      ]
+    },
+    {
+      "path": "contributing/CONTRIBUTING-DOCS.md",
+      "title": "Contributing to Documentation",
+      "category": "contributing",
+      "sections": [
+        "When to update docs",
+        "Doc quality checklist",
+        "Validators",
+        "First-time dev setup",
+        "Diagrams",
+        "ADR conventions",
+        "Context",
+        "Decision",
+        "Consequences",
+        "Alternatives considered",
+        "Glossary",
+        "Staleness prevention",
+        "Related"
+      ],
+      "size_bytes": 4594,
+      "read_time_minutes": 3,
+      "depends_on": [
+        "contributing/developer-hygiene.md",
+        "contributing/repository-governance.md"
+      ],
+      "depended_by": [
+        "INDEX.md",
+        "READING_ORDER.md",
+        "contributing/README.md",
+        "contributing/engineering-standards.md",
+        "contributing/repository-governance.md",
+        "tutorials/README.md"
+      ]
+    },
+    {
+      "path": "contributing/README.md",
+      "title": "Contributing — cluster landing page",
+      "category": "contributing",
+      "sections": [
+        "Before your first PR",
+        "Cross-references",
+        "Related"
+      ],
+      "size_bytes": 2146,
+      "read_time_minutes": 1,
+      "depends_on": [
+        "contributing/CONTRIBUTING-DOCS.md",
+        "contributing/developer-hygiene.md",
+        "contributing/repository-governance.md",
+        "contributing/testing.md"
+      ],
+      "depended_by": []
+    },
+    {
+      "path": "contributing/developer-hygiene.md",
+      "title": "Developer Hygiene",
+      "category": "contributing",
+      "sections": [
+        "Bootstrap (first-time setup)",
+        "Daily checks",
+        "Pre-commit hooks",
+        "Quality gates in CI",
+        "Conventional Commits",
+        "Dependency updates",
+        "Related"
+      ],
+      "size_bytes": 5308,
+      "read_time_minutes": 4,
+      "depends_on": [
+        "contributing/repository-governance.md",
+        "contributing/testing.md"
+      ],
+      "depended_by": [
+        "INDEX.md",
+        "READING_ORDER.md",
+        "contributing/CONTRIBUTING-DOCS.md",
+        "contributing/README.md",
+        "contributing/engineering-standards.md",
+        "contributing/repository-governance.md",
+        "contributing/testing.md"
+      ]
+    },
+    {
+      "path": "contributing/engineering-standards.md",
+      "title": "Engineering Standards",
+      "category": "contributing",
+      "sections": [
+        "Standard 1: Make Quality Gates Explicit",
+        "Standard 2: Separate Source, Runtime State, and Contributor Fixtures",
+        "Standard 3: Build a Test Pyramid Around Real Risk",
+        "Standard 4: Treat Documentation as a Tested Surface",
+        "Standard 5: Version and Release Through Auditable Gates",
+        "Standard 6: Make Security a Default Gate",
+        "Standard 7: Use CI/CD as a Contributor Contract",
+        "Adoption Checklist",
+        "Related"
+      ],
+      "size_bytes": 15982,
+      "read_time_minutes": 11,
+      "depends_on": [
+        "INDEX.md",
+        "api/cli-reference.md",
+        "architecture.md",
+        "concepts/mental-model.md",
+        "contributing/CONTRIBUTING-DOCS.md",
+        "contributing/developer-hygiene.md",
+        "contributing/repository-governance.md",
+        "contributing/testing.md",
+        "examples/cookbook.md",
+        "getting-started/installation.md",
+        "reference/data-model.md",
+        "reference/versioning-compatibility.md",
+        "tutorials/first-run.md"
+      ],
+      "depended_by": [
+        "INDEX.md"
+      ]
+    },
+    {
+      "path": "contributing/repository-governance.md",
+      "title": "Repository Governance",
+      "category": "contributing",
+      "sections": [
+        "Branch protection (`main`)",
+        "CODEOWNERS",
+        "Labels",
+        "Release gate",
+        "Related"
+      ],
+      "size_bytes": 4664,
+      "read_time_minutes": 3,
+      "depends_on": [
+        "contributing/CONTRIBUTING-DOCS.md",
+        "contributing/developer-hygiene.md",
+        "contributing/testing.md"
+      ],
+      "depended_by": [
+        "INDEX.md",
+        "READING_ORDER.md",
+        "contributing/CONTRIBUTING-DOCS.md",
+        "contributing/README.md",
+        "contributing/developer-hygiene.md",
+        "contributing/engineering-standards.md",
+        "contributing/testing.md",
+        "reference/versioning-compatibility.md"
+      ]
+    },
+    {
+      "path": "contributing/testing.md",
+      "title": "Testing",
+      "category": "contributing",
+      "sections": [
+        "Stack",
+        "Layout",
+        "Running the suites",
+        "pytest markers",
+        "Conventions",
+        "Fixtures and helpers",
+        "CI",
+        "Related"
+      ],
+      "size_bytes": 8086,
+      "read_time_minutes": 5,
+      "depends_on": [
+        "contributing/developer-hygiene.md",
+        "contributing/repository-governance.md"
+      ],
+      "depended_by": [
+        "INDEX.md",
+        "READING_ORDER.md",
+        "contributing/README.md",
+        "contributing/developer-hygiene.md",
+        "contributing/engineering-standards.md",
+        "contributing/repository-governance.md"
+      ]
+    },
+    {
+      "path": "examples/README.md",
+      "title": "Examples",
+      "category": "examples",
+      "sections": [
+        "Documents in this directory",
+        "When to use the cookbook vs. other docs",
+        "Scenario index",
+        "Prerequisites",
+        "Related documentation"
+      ],
+      "size_bytes": 2506,
+      "read_time_minutes": 2,
+      "depends_on": [
+        "examples/cookbook.md",
+        "getting-started/usage.md",
+        "operations/runbook.md",
+        "subsystems/README.md",
+        "subsystems/recipes.md",
+        "subsystems/scheduler.md"
+      ],
+      "depended_by": []
+    },
+    {
+      "path": "examples/cookbook.md",
+      "title": "Eco-Commander How-To Cookbook",
+      "category": "examples",
+      "sections": [
+        "Scenario 1 — Run a one-shot research query with Gemini",
+        "Scenario 2 — Queue a scheduler job from a YAML file",
+        "Scenario 3 — Debug a stale usage meter",
+        "Scenario 4 — Rotate CLI accounts safely",
+        "Scenario 5 — Capture and share a usage snapshot",
+        "Scenario 6 — Add a new recipe to the catalog",
+        "Scenario 7 — Inspect what the widget is showing via `--cli`",
+        "Scenario 8 — Seed the scheduler queue from a missions directory"
+      ],
+      "size_bytes": 21505,
+      "read_time_minutes": 14,
+      "depends_on": [
+        "operations/runbook.md",
+        "subsystems/recipes.md",
+        "subsystems/scheduler.md",
+        "subsystems/widget-health.md"
+      ],
+      "depended_by": [
+        "INDEX.md",
+        "contributing/engineering-standards.md",
+        "examples/README.md"
+      ]
+    },
+    {
+      "path": "getting-started/README.md",
+      "title": "Getting Started",
+      "category": "getting-started",
+      "sections": [
+        "Reading order",
+        "Five-minute quick start",
+        "Related"
+      ],
+      "size_bytes": 1954,
+      "read_time_minutes": 1,
+      "depends_on": [
+        "architecture.md",
+        "getting-started/installation.md",
+        "getting-started/troubleshooting.md",
+        "getting-started/usage.md"
+      ],
+      "depended_by": [
+        "concepts/README.md",
+        "tutorials/README.md"
+      ]
+    },
+    {
+      "path": "getting-started/installation.md",
+      "title": "Installation",
+      "category": "getting-started",
+      "sections": [
+        "Prerequisites",
+        "Install",
+        "Verify",
+        "SwiftBar wiring",
+        "Uninstall",
+        "Related"
+      ],
+      "size_bytes": 5807,
+      "read_time_minutes": 4,
+      "depends_on": [
+        "architecture.md",
+        "diagrams/install-lifecycle.md",
+        "getting-started/troubleshooting.md",
+        "getting-started/usage.md"
+      ],
+      "depended_by": [
+        "INDEX.md",
+        "READING_ORDER.md",
+        "contributing/engineering-standards.md",
+        "getting-started/README.md",
+        "getting-started/troubleshooting.md",
+        "getting-started/usage.md"
+      ]
+    },
+    {
+      "path": "getting-started/troubleshooting.md",
+      "title": "Troubleshooting",
+      "category": "getting-started",
+      "sections": [
+        "Quick-reference table",
+        "`eco: command not found`",
+        "Widget shows stale icon and never refreshes",
+        "`eco-commander.1s.sh: No such file or directory`",
+        "`eco status` prints nothing or hangs",
+        "`usage.json` missing or stale",
+        "Snapshots disagree with reality",
+        "Llama count is `0/N`",
+        "`eco doctor` reports Python import failed",
+        "Bats tests fail: `command not found: bats`",
+        "A recipe leaks a secret into `_outputs/`",
+        "Related"
+      ],
+      "size_bytes": 7202,
+      "read_time_minutes": 5,
+      "depends_on": [
+        "architecture.md",
+        "getting-started/installation.md",
+        "getting-started/usage.md",
+        "operations/runbook.md"
+      ],
+      "depended_by": [
+        "FAQ.md",
+        "INDEX.md",
+        "getting-started/README.md",
+        "getting-started/installation.md",
+        "getting-started/usage.md",
+        "operations/README.md",
+        "operations/runbook.md",
+        "subsystems/alerts.md",
+        "subsystems/widget-health.md",
+        "tutorials/first-run.md"
+      ]
+    },
+    {
+      "path": "getting-started/usage.md",
+      "title": "Usage",
+      "category": "getting-started",
+      "sections": [
+        "Synopsis",
+        "Top-level subcommands",
+        "Recipes",
+        "Scheduler subcommands",
+        "Hygiene subcommands",
+        "Account-swap subcommands",
+        "Health tools",
+        "SwiftBar widget",
+        "Related"
+      ],
+      "size_bytes": 10323,
+      "read_time_minutes": 7,
+      "depends_on": [
+        "architecture.md",
+        "getting-started/installation.md",
+        "getting-started/troubleshooting.md",
+        "subsystems/alerts.md",
+        "subsystems/recipes.md",
+        "subsystems/scheduler.md"
+      ],
+      "depended_by": [
+        "INDEX.md",
+        "READING_ORDER.md",
+        "examples/README.md",
+        "getting-started/README.md",
+        "getting-started/installation.md",
+        "getting-started/troubleshooting.md",
+        "tutorials/README.md",
+        "tutorials/first-run.md"
+      ]
+    },
+    {
+      "path": "migration/README.md",
+      "title": "Migration Notes",
+      "category": "migration",
+      "sections": [
+        "Purpose",
+        "Current Status",
+        "How Migration Guides Are Structured",
+        "What changed",
+        "Why",
+        "Migration steps",
+        "Rollback",
+        "How to Add a Guide"
+      ],
+      "size_bytes": 2815,
+      "read_time_minutes": 2,
+      "depends_on": [
+        "INDEX.md",
+        "adr/README.md",
+        "reference/data-model.md"
+      ],
+      "depended_by": [
+        "reference/versioning-compatibility.md"
+      ]
+    },
+    {
+      "path": "operations/README.md",
+      "title": "Operations",
+      "category": "operations",
+      "sections": [
+        "Documents in this cluster",
+        "Reading order",
+        "Quick links",
+        "Agent boundary",
+        "Related"
+      ],
+      "size_bytes": 2080,
+      "read_time_minutes": 1,
+      "depends_on": [
+        "architecture.md",
+        "getting-started/troubleshooting.md",
+        "operations/runbook.md",
+        "operations/security-model.md",
+        "subsystems/alerts.md",
+        "subsystems/widget-health.md"
+      ],
+      "depended_by": []
+    },
+    {
+      "path": "operations/runbook.md",
+      "title": "Operational Runbook",
+      "category": "operations",
+      "sections": [
+        "Procedure index",
+        "1. System is degraded — general recovery",
+        "2. Usage poller is not updating",
+        "3. Scheduler is stuck / not dispatching",
+        "4. Gemini OAuth expired",
+        "5. SwiftBar not showing widget",
+        "6. Full reinstall from clean state",
+        "7. Rotating CLI accounts",
+        "8. Adding new jobs to the scheduler",
+        "9. Checking system health after updates",
+        "10. Emergency: poller or scheduler crash-looping",
+        "LaunchAgent labels",
+        "Key log locations",
+        "Related"
+      ],
+      "size_bytes": 10725,
+      "read_time_minutes": 7,
+      "depends_on": [
+        "getting-started/troubleshooting.md",
+        "operations/security-model.md",
+        "subsystems/alerts.md",
+        "subsystems/widget-health.md"
+      ],
+      "depended_by": [
+        "INDEX.md",
+        "READING_ORDER.md",
+        "examples/README.md",
+        "examples/cookbook.md",
+        "getting-started/troubleshooting.md",
+        "operations/README.md",
+        "operations/security-model.md",
+        "tutorials/first-run.md"
+      ]
+    },
+    {
+      "path": "operations/security-model.md",
+      "title": "Security Model",
+      "category": "operations",
+      "sections": [
+        "Trust boundaries",
+        "Credential handling",
+        "Data sensitivity",
+        "Attack surface",
+        "Permissions",
+        "Related"
+      ],
+      "size_bytes": 10186,
+      "read_time_minutes": 6,
+      "depends_on": [
+        "architecture.md",
+        "operations/runbook.md"
+      ],
+      "depended_by": [
+        "INDEX.md",
+        "READING_ORDER.md",
+        "architecture.md",
+        "operations/README.md",
+        "operations/runbook.md"
+      ]
+    },
+    {
+      "path": "reference/README.md",
+      "title": "Reference",
+      "category": "reference",
+      "sections": [
+        "Documents in this cluster",
+        "Reading order",
+        "When to use each document",
+        "Subsystem consumers",
+        "Architecture context"
+      ],
+      "size_bytes": 3135,
+      "read_time_minutes": 2,
+      "depends_on": [
+        "architecture.md",
+        "reference/configuration.md",
+        "reference/data-model.md",
+        "reference/environment-variables.md",
+        "reference/glossary.md",
+        "subsystems/alerts.md",
+        "subsystems/scheduler.md",
+        "subsystems/snapshots.md",
+        "subsystems/usage-monitor.md",
+        "subsystems/widget-health.md"
+      ],
+      "depended_by": [
+        "concepts/README.md",
+        "tutorials/README.md"
+      ]
+    },
+    {
+      "path": "reference/configuration.md",
+      "title": "Configuration",
+      "category": "reference",
+      "sections": [
+        "Repository configuration",
+        "LaunchAgent plists",
+        "Poller configuration",
+        "OAuth credentials (read-only)",
+        "MCP configuration",
+        "Log rotation",
+        "Seed and mission files",
+        "Related"
+      ],
+      "size_bytes": 7971,
+      "read_time_minutes": 5,
+      "depends_on": [
+        "reference/data-model.md",
+        "reference/environment-variables.md",
+        "subsystems/launchd-best-practices.md",
+        "subsystems/scheduler.md",
+        "subsystems/usage-monitor.md"
+      ],
+      "depended_by": [
+        "INDEX.md",
+        "READING_ORDER.md",
+        "reference/README.md",
+        "reference/data-model.md",
+        "reference/environment-variables.md",
+        "reference/glossary.md"
+      ]
+    },
+    {
+      "path": "reference/data-model.md",
+      "title": "Data Model",
+      "category": "reference",
+      "sections": [
+        "Snapshot: `state.json`",
+        "Usage: `usage.json`",
+        "Meter state: `notify.json`",
+        "Job queue: `jobs.yaml`",
+        "Directory structure summary",
+        "Related"
+      ],
+      "size_bytes": 18387,
+      "read_time_minutes": 11,
+      "depends_on": [
+        "reference/configuration.md",
+        "reference/environment-variables.md",
+        "subsystems/alerts.md",
+        "subsystems/scheduler.md",
+        "subsystems/usage-monitor.md"
+      ],
+      "depended_by": [
+        "INDEX.md",
+        "READING_ORDER.md",
+        "architecture.md",
+        "concepts/mental-model.md",
+        "contributing/engineering-standards.md",
+        "migration/README.md",
+        "reference/README.md",
+        "reference/configuration.md",
+        "reference/environment-variables.md",
+        "reference/glossary.md",
+        "reference/versioning-compatibility.md",
+        "subsystems/README.md",
+        "subsystems/scheduler.md",
+        "subsystems/usage-monitor.md"
+      ]
+    },
+    {
+      "path": "reference/environment-variables.md",
+      "title": "Environment Variables",
+      "category": "reference",
+      "sections": [
+        "Core",
+        "Usage poller (`src/poller/`)",
+        "Scheduler (`src/scheduler/`)",
+        "Alert system and n8n recipe (`src/bin/eco-alerts.sh`, `src/recipes/n8n-start.sh`)",
+        "Widget and audit surfaces (`src/bin/eco-commander.15s.sh`, `scripts/usage-snapshot.sh`)",
+        "Account swap recipe (`src/recipes/account-swap.sh`)",
+        "Hygiene watcher (`src/recipes/hygiene.sh`)",
+        "Arabic proof recipe (`src/recipes/arabic-proof.sh`)",
+        "Gem-smart / research recipes (`src/recipes/snapshot.sh`, `research.sh`, `ask.sh`, `swarm.sh`)",
+        "Dashboard refresh recipe (`src/recipes/dashboard-refresh.sh`)",
+        "Scripts (`scripts/`)",
+        "Related"
+      ],
+      "size_bytes": 13206,
+      "read_time_minutes": 9,
+      "depends_on": [
+        "reference/configuration.md",
+        "reference/data-model.md",
+        "subsystems/alerts.md",
+        "subsystems/scheduler.md"
+      ],
+      "depended_by": [
+        "INDEX.md",
+        "READING_ORDER.md",
+        "api/cli-reference.md",
+        "reference/README.md",
+        "reference/configuration.md",
+        "reference/data-model.md",
+        "reference/glossary.md",
+        "reference/versioning-compatibility.md",
+        "subsystems/README.md",
+        "subsystems/alerts.md",
+        "subsystems/launchd-best-practices.md",
+        "subsystems/recipes.md",
+        "subsystems/scheduler.md",
+        "subsystems/usage-monitor.md"
+      ]
+    },
+    {
+      "path": "reference/glossary.md",
+      "title": "Glossary",
+      "category": "reference",
+      "sections": [
+        "Related"
+      ],
+      "size_bytes": 9417,
+      "read_time_minutes": 7,
+      "depends_on": [
+        "reference/configuration.md",
+        "reference/data-model.md",
+        "reference/environment-variables.md",
+        "subsystems/alerts.md",
+        "subsystems/scheduler.md",
+        "subsystems/usage-monitor.md",
+        "subsystems/widget-health.md"
+      ],
+      "depended_by": [
+        "INDEX.md",
+        "READING_ORDER.md",
+        "reference/README.md",
+        "tutorials/first-run.md"
+      ]
+    },
+    {
+      "path": "reference/versioning-compatibility.md",
+      "title": "Versioning & Compatibility",
+      "category": "reference",
+      "sections": [
+        "Supported platforms",
+        "Runtime dependencies",
+        "SemVer rules for this project",
+        "Schema compatibility",
+        "Pre-1.0 policy",
+        "Deprecation window",
+        "See also"
+      ],
+      "size_bytes": 4799,
+      "read_time_minutes": 3,
+      "depends_on": [
+        "api/cli-reference.md",
+        "contributing/repository-governance.md",
+        "migration/README.md",
+        "reference/data-model.md",
+        "reference/environment-variables.md",
+        "subsystems/recipes.md"
+      ],
+      "depended_by": [
+        "INDEX.md",
+        "contributing/engineering-standards.md"
+      ]
+    },
+    {
+      "path": "rfcs/README.md",
+      "title": "RFCs (Request for Comments)",
+      "category": "rfcs",
+      "sections": [
+        "What Is an RFC?",
+        "RFC vs ADR — When to Use Which",
+        "RFC Lifecycle",
+        "Active RFCs",
+        "RFC Template",
+        "Summary",
+        "Motivation",
+        "Detailed Design",
+        "Alternatives Considered",
+        "Drawbacks",
+        "Unresolved Questions"
+      ],
+      "size_bytes": 3637,
+      "read_time_minutes": 3,
+      "depends_on": [
+        "INDEX.md",
+        "adr/0001-record-architecture-decisions.md",
+        "adr/README.md"
+      ],
+      "depended_by": []
+    },
+    {
+      "path": "subsystems/README.md",
+      "title": "Subsystems",
+      "category": "subsystems",
+      "sections": [
+        "Subsystem catalog",
+        "Subsystem dependency map",
+        "Reading order"
+      ],
+      "size_bytes": 4157,
+      "read_time_minutes": 2,
+      "depends_on": [
+        "adr/0004-usage-monitor-python-carveout.md",
+        "architecture.md",
+        "reference/data-model.md",
+        "reference/environment-variables.md",
+        "subsystems/alerts.md",
+        "subsystems/launchd-best-practices.md",
+        "subsystems/recipes.md",
+        "subsystems/scheduler.md",
+        "subsystems/snapshots.md",
+        "subsystems/usage-monitor-integration.md",
+        "subsystems/usage-monitor.md",
+        "subsystems/widget-health.md"
+      ],
+      "depended_by": [
+        "architecture.md",
+        "concepts/README.md",
+        "examples/README.md"
+      ]
+    },
+    {
+      "path": "subsystems/alerts.md",
+      "title": "Alert System (`eco-alerts.sh`)",
+      "category": "subsystems",
+      "sections": [
+        "Subcommands",
+        "Alert model",
+        "Fix tiers",
+        "Widget integration",
+        "Fix workspaces",
+        "File locations",
+        "Environment variables",
+        "Usage examples",
+        "Related"
+      ],
+      "size_bytes": 9897,
+      "read_time_minutes": 7,
+      "depends_on": [
+        "architecture.md",
+        "diagrams/alert-pipeline.md",
+        "getting-started/troubleshooting.md",
+        "reference/environment-variables.md",
+        "subsystems/snapshots.md",
+        "subsystems/widget-health.md"
+      ],
+      "depended_by": [
+        "INDEX.md",
+        "READING_ORDER.md",
+        "getting-started/usage.md",
+        "operations/README.md",
+        "operations/runbook.md",
+        "reference/README.md",
+        "reference/data-model.md",
+        "reference/environment-variables.md",
+        "reference/glossary.md",
+        "subsystems/README.md",
+        "subsystems/snapshots.md",
+        "subsystems/usage-monitor.md",
+        "subsystems/widget-health.md"
+      ]
+    },
+    {
+      "path": "subsystems/launchd-best-practices.md",
+      "title": "LaunchAgent Best Practices",
+      "category": "subsystems",
+      "sections": [
+        "TL;DR — required settings for every agent",
+        "Plist templates",
+        "What we deliberately don't do",
+        "Energy efficiency",
+        "Log discipline",
+        "Survivability checklist",
+        "Verifying the install",
+        "Installing log rotation",
+        "Sources",
+        "Related"
+      ],
+      "size_bytes": 9068,
+      "read_time_minutes": 6,
+      "depends_on": [
+        "architecture.md",
+        "reference/environment-variables.md",
+        "subsystems/scheduler.md",
+        "subsystems/usage-monitor.md"
+      ],
+      "depended_by": [
+        "INDEX.md",
+        "READING_ORDER.md",
+        "architecture.md",
+        "reference/configuration.md",
+        "subsystems/README.md",
+        "subsystems/scheduler.md",
+        "subsystems/usage-monitor.md",
+        "subsystems/widget-health.md"
+      ]
+    },
+    {
+      "path": "subsystems/recipes.md",
+      "title": "Recipes",
+      "category": "subsystems",
+      "sections": [
+        "Catalog",
+        "Recipe contract",
+        "Related"
+      ],
+      "size_bytes": 8414,
+      "read_time_minutes": 5,
+      "depends_on": [
+        "architecture.md",
+        "reference/environment-variables.md",
+        "subsystems/scheduler.md",
+        "subsystems/snapshots.md"
+      ],
+      "depended_by": [
+        "FAQ.md",
+        "INDEX.md",
+        "READING_ORDER.md",
+        "architecture.md",
+        "concepts/mental-model.md",
+        "examples/README.md",
+        "examples/cookbook.md",
+        "getting-started/usage.md",
+        "reference/versioning-compatibility.md",
+        "subsystems/README.md",
+        "subsystems/scheduler.md",
+        "subsystems/snapshots.md",
+        "tutorials/README.md",
+        "tutorials/first-run.md"
+      ]
+    },
+    {
+      "path": "subsystems/scheduler.md",
+      "title": "Job Scheduler",
+      "category": "subsystems",
+      "sections": [
+        "Overview",
+        "CLI",
+        "Job YAML schema",
+        "Meter system",
+        "Adapters",
+        "Crash safety",
+        "Environment variables",
+        "Files",
+        "LaunchAgent",
+        "Related"
+      ],
+      "size_bytes": 14220,
+      "read_time_minutes": 9,
+      "depends_on": [
+        "adr/0005-job-scheduler.md",
+        "architecture.md",
+        "diagrams/meter-state-machine.md",
+        "diagrams/scheduler-flow.md",
+        "reference/data-model.md",
+        "reference/environment-variables.md",
+        "subsystems/launchd-best-practices.md",
+        "subsystems/recipes.md",
+        "subsystems/usage-monitor.md"
+      ],
+      "depended_by": [
+        "INDEX.md",
+        "READING_ORDER.md",
+        "architecture.md",
+        "concepts/mental-model.md",
+        "examples/README.md",
+        "examples/cookbook.md",
+        "getting-started/usage.md",
+        "reference/README.md",
+        "reference/configuration.md",
+        "reference/data-model.md",
+        "reference/environment-variables.md",
+        "reference/glossary.md",
+        "subsystems/README.md",
+        "subsystems/launchd-best-practices.md",
+        "subsystems/recipes.md",
+        "subsystems/usage-monitor.md"
+      ]
+    },
+    {
+      "path": "subsystems/snapshots.md",
+      "title": "Snapshots",
+      "category": "subsystems",
+      "sections": [
+        "Lifecycle",
+        "Directory layout",
+        "`state.json` schema (v0.2)",
+        "Issue classifier",
+        "Retention",
+        "Triggering a snapshot",
+        "Related"
+      ],
+      "size_bytes": 7401,
+      "read_time_minutes": 5,
+      "depends_on": [
+        "adr/0003-snapshot-immutability.md",
+        "architecture.md",
+        "diagrams/snapshot-lifecycle.md",
+        "subsystems/alerts.md",
+        "subsystems/recipes.md",
+        "subsystems/widget-health.md"
+      ],
+      "depended_by": [
+        "INDEX.md",
+        "READING_ORDER.md",
+        "architecture.md",
+        "concepts/mental-model.md",
+        "reference/README.md",
+        "subsystems/README.md",
+        "subsystems/alerts.md",
+        "subsystems/recipes.md",
+        "subsystems/widget-health.md"
+      ]
+    },
+    {
+      "path": "subsystems/usage-monitor-integration.md",
+      "title": "Usage Monitor — Integration Plan & Audit",
+      "category": "subsystems",
+      "sections": [
+        "1. Goal",
+        "2. Critical recon findings (2026-05-09)",
+        "3. Audit of `eco-commander` integration points",
+        "4. Revised architecture (post-audit)",
+        "5. Phased delivery",
+        "6. Risks & mitigations",
+        "7. Open questions for the operator",
+        "8. Decision log"
+      ],
+      "size_bytes": 15252,
+      "read_time_minutes": 10,
+      "depends_on": [
+        "adr/0004-usage-monitor-python-carveout.md",
+        "subsystems/usage-monitor.md"
+      ],
+      "depended_by": [
+        "INDEX.md",
+        "subsystems/README.md",
+        "subsystems/usage-monitor.md"
+      ]
+    },
+    {
+      "path": "subsystems/usage-monitor.md",
+      "title": "Usage Monitor",
+      "category": "subsystems",
+      "sections": [
+        "What you see",
+        "Install",
+        "Uninstall",
+        "How it works",
+        "Calibration",
+        "Troubleshooting",
+        "Logs",
+        "Related"
+      ],
+      "size_bytes": 11100,
+      "read_time_minutes": 7,
+      "depends_on": [
+        "adr/0004-usage-monitor-python-carveout.md",
+        "architecture.md",
+        "diagrams/meter-state-machine.md",
+        "diagrams/poller-pipeline.md",
+        "reference/data-model.md",
+        "reference/environment-variables.md",
+        "subsystems/alerts.md",
+        "subsystems/launchd-best-practices.md",
+        "subsystems/scheduler.md",
+        "subsystems/usage-monitor-integration.md",
+        "subsystems/widget-health.md"
+      ],
+      "depended_by": [
+        "INDEX.md",
+        "READING_ORDER.md",
+        "architecture.md",
+        "concepts/mental-model.md",
+        "reference/README.md",
+        "reference/configuration.md",
+        "reference/data-model.md",
+        "reference/glossary.md",
+        "subsystems/README.md",
+        "subsystems/launchd-best-practices.md",
+        "subsystems/scheduler.md",
+        "subsystems/usage-monitor-integration.md",
+        "subsystems/widget-health.md"
+      ]
+    },
+    {
+      "path": "subsystems/widget-health.md",
+      "title": "Widget Health Playbook",
+      "category": "subsystems",
+      "sections": [
+        "Health contract",
+        "Icon logic",
+        "Alert states",
+        "Fix tiers",
+        "Ollama count",
+        "Required health surface",
+        "Live runtime probes",
+        "MCP profile switcher",
+        "Data freshness thresholds",
+        "24/7 manager design",
+        "Related"
+      ],
+      "size_bytes": 6492,
+      "read_time_minutes": 5,
+      "depends_on": [
+        "architecture.md",
+        "diagrams/widget-rendering.md",
+        "getting-started/troubleshooting.md",
+        "subsystems/alerts.md",
+        "subsystems/launchd-best-practices.md",
+        "subsystems/snapshots.md",
+        "subsystems/usage-monitor.md"
+      ],
+      "depended_by": [
+        "INDEX.md",
+        "READING_ORDER.md",
+        "examples/cookbook.md",
+        "operations/README.md",
+        "operations/runbook.md",
+        "reference/README.md",
+        "reference/glossary.md",
+        "subsystems/README.md",
+        "subsystems/alerts.md",
+        "subsystems/snapshots.md",
+        "subsystems/usage-monitor.md"
+      ]
+    },
+    {
+      "path": "tutorials/README.md",
+      "title": "Tutorials",
+      "category": "tutorials",
+      "sections": [
+        "Available tutorials",
+        "Learning path",
+        "Contributing a tutorial"
+      ],
+      "size_bytes": 2052,
+      "read_time_minutes": 1,
+      "depends_on": [
+        "architecture.md",
+        "contributing/CONTRIBUTING-DOCS.md",
+        "getting-started/README.md",
+        "getting-started/usage.md",
+        "reference/README.md",
+        "subsystems/recipes.md",
+        "tutorials/first-run.md"
+      ],
+      "depended_by": []
+    },
+    {
+      "path": "tutorials/first-run.md",
+      "title": "Tutorial: Your First Successful Run",
+      "category": "tutorials",
+      "sections": [
+        "What you will build",
+        "Before you start: one safety note",
+        "Step 1 — Install system dependencies",
+        "Step 2 — Clone and enter the repository",
+        "Step 3 — Bootstrap: one command sets everything up",
+        "Step 4 — Add `~/.eco/bin` to your PATH",
+        "Step 5 — Install the background LaunchAgents",
+        "Step 6 — Verify the widget is alive",
+        "Step 7 — Run `eco status` in the terminal",
+        "Step 8 — Verify Gemini CLI access",
+        "Step 9 — Run your first recipe: `eco do ask`",
+        "Step 10 — Inspect `eco list` and understand the recipe catalog",
+        "Step 11 — Run `eco doctor` (the self-test)",
+        "Intentional failure and recovery: `eco: command not found`",
+        "Where to go next"
+      ],
+      "size_bytes": 14276,
+      "read_time_minutes": 10,
+      "depends_on": [
+        "architecture.md",
+        "getting-started/troubleshooting.md",
+        "getting-started/usage.md",
+        "operations/runbook.md",
+        "reference/glossary.md",
+        "subsystems/recipes.md"
+      ],
+      "depended_by": [
+        "INDEX.md",
+        "READING_ORDER.md",
+        "contributing/engineering-standards.md",
+        "tutorials/README.md"
+      ]
+    }
+  ],
+  "adr_documents": [
+    {
+      "path": "adr/0001-record-architecture-decisions.md",
+      "title": "ADR 0001 — Record Architecture Decisions",
+      "status": "Accepted"
+    },
+    {
+      "path": "adr/0002-bash-implementation.md",
+      "title": "ADR 0002 — Implement Core in Bash, Not Python",
+      "status": "Accepted (amended by [ADR 0004](./0004-usage-monitor-python-carveout.md))"
+    },
+    {
+      "path": "adr/0003-snapshot-immutability.md",
+      "title": "ADR 0003 — Snapshots Are Immutable",
+      "status": "Accepted"
+    },
+    {
+      "path": "adr/0004-usage-monitor-python-carveout.md",
+      "title": "ADR 0004 — Usage Monitor: Python Carve-out + LaunchAgent Poller",
+      "status": "Accepted"
+    },
+    {
+      "path": "adr/0005-job-scheduler.md",
+      "title": "ADR 0005 — Job Scheduler: Quota-Aware Multi-Provider Dispatch",
+      "status": "Accepted"
+    }
+  ],
+  "diagrams": [
+    {
+      "path": "diagrams/account-swap-flow.md",
+      "type": "mermaid",
+      "subject": "Account Swap Flow"
+    },
+    {
+      "path": "diagrams/alert-pipeline.md",
+      "type": "mermaid",
+      "subject": "Alert Pipeline"
+    },
+    {
+      "path": "diagrams/architecture.md",
+      "type": "mermaid",
+      "subject": "Architecture Diagram"
+    },
+    {
+      "path": "diagrams/ci-pipeline.md",
+      "type": "mermaid",
+      "subject": "CI/CD Pipeline"
+    },
+    {
+      "path": "diagrams/data-flow.md",
+      "type": "mermaid",
+      "subject": "Data Flow"
+    },
+    {
+      "path": "diagrams/filesystem-layout.md",
+      "type": "mermaid",
+      "subject": "Filesystem Layout — `~/.eco/` Ownership Map"
+    },
+    {
+      "path": "diagrams/install-lifecycle.md",
+      "type": "mermaid",
+      "subject": "Install Lifecycle"
+    },
+    {
+      "path": "diagrams/meter-state-machine.md",
+      "type": "mermaid",
+      "subject": "Meter State Machine"
+    },
+    {
+      "path": "diagrams/module-deps.md",
+      "type": "mermaid",
+      "subject": "Module Dependency Graph"
+    },
+    {
+      "path": "diagrams/poller-pipeline.md",
+      "type": "mermaid",
+      "subject": "Poller Data Pipeline"
+    },
+    {
+      "path": "diagrams/scheduler-flow.md",
+      "type": "mermaid",
+      "subject": "Scheduler Dispatch Flow"
+    },
+    {
+      "path": "diagrams/snapshot-lifecycle.md",
+      "type": "mermaid",
+      "subject": "Snapshot Lifecycle"
+    },
+    {
+      "path": "diagrams/test-architecture.md",
+      "type": "mermaid",
+      "subject": "Test Architecture"
+    },
+    {
+      "path": "diagrams/widget-rendering.md",
+      "type": "mermaid",
+      "subject": "Widget Rendering — Data Sources"
+    }
+  ],
+  "dependency_graph": {
+    "description": "Edges represent 'A links to B' (derived from actual markdown links)",
+    "edges": [
+      [
+        "FAQ.md",
+        "adr/0004-usage-monitor-python-carveout.md"
+      ],
+      [
+        "FAQ.md",
+        "getting-started/troubleshooting.md"
+      ],
+      [
+        "FAQ.md",
+        "subsystems/recipes.md"
+      ],
+      [
+        "INDEX.md",
+        "FAQ.md"
+      ],
+      [
+        "INDEX.md",
+        "READING_ORDER.md"
+      ],
+      [
+        "INDEX.md",
+        "adr/0001-record-architecture-decisions.md"
+      ],
+      [
+        "INDEX.md",
+        "adr/0002-bash-implementation.md"
+      ],
+      [
+        "INDEX.md",
+        "adr/0003-snapshot-immutability.md"
+      ],
+      [
+        "INDEX.md",
+        "adr/0004-usage-monitor-python-carveout.md"
+      ],
+      [
+        "INDEX.md",
+        "adr/0005-job-scheduler.md"
+      ],
+      [
+        "INDEX.md",
+        "api/cli-reference.md"
+      ],
+      [
+        "INDEX.md",
+        "architecture.md"
+      ],
+      [
+        "INDEX.md",
+        "concepts/mental-model.md"
+      ],
+      [
+        "INDEX.md",
+        "contributing/CONTRIBUTING-DOCS.md"
+      ],
+      [
+        "INDEX.md",
+        "contributing/developer-hygiene.md"
+      ],
+      [
+        "INDEX.md",
+        "contributing/engineering-standards.md"
+      ],
+      [
+        "INDEX.md",
+        "contributing/repository-governance.md"
+      ],
+      [
+        "INDEX.md",
+        "contributing/testing.md"
+      ],
+      [
+        "INDEX.md",
+        "diagrams/account-swap-flow.md"
+      ],
+      [
+        "INDEX.md",
+        "diagrams/alert-pipeline.md"
+      ],
+      [
+        "INDEX.md",
+        "diagrams/architecture.md"
+      ],
+      [
+        "INDEX.md",
+        "diagrams/ci-pipeline.md"
+      ],
+      [
+        "INDEX.md",
+        "diagrams/data-flow.md"
+      ],
+      [
+        "INDEX.md",
+        "diagrams/filesystem-layout.md"
+      ],
+      [
+        "INDEX.md",
+        "diagrams/install-lifecycle.md"
+      ],
+      [
+        "INDEX.md",
+        "diagrams/meter-state-machine.md"
+      ],
+      [
+        "INDEX.md",
+        "diagrams/module-deps.md"
+      ],
+      [
+        "INDEX.md",
+        "diagrams/poller-pipeline.md"
+      ],
+      [
+        "INDEX.md",
+        "diagrams/scheduler-flow.md"
+      ],
+      [
+        "INDEX.md",
+        "diagrams/snapshot-lifecycle.md"
+      ],
+      [
+        "INDEX.md",
+        "diagrams/test-architecture.md"
+      ],
+      [
+        "INDEX.md",
+        "diagrams/widget-rendering.md"
+      ],
+      [
+        "INDEX.md",
+        "examples/cookbook.md"
+      ],
+      [
+        "INDEX.md",
+        "getting-started/installation.md"
+      ],
+      [
+        "INDEX.md",
+        "getting-started/troubleshooting.md"
+      ],
+      [
+        "INDEX.md",
+        "getting-started/usage.md"
+      ],
+      [
+        "INDEX.md",
+        "operations/runbook.md"
+      ],
+      [
+        "INDEX.md",
+        "operations/security-model.md"
+      ],
+      [
+        "INDEX.md",
+        "reference/configuration.md"
+      ],
+      [
+        "INDEX.md",
+        "reference/data-model.md"
+      ],
+      [
+        "INDEX.md",
+        "reference/environment-variables.md"
+      ],
+      [
+        "INDEX.md",
+        "reference/glossary.md"
+      ],
+      [
+        "INDEX.md",
+        "reference/versioning-compatibility.md"
+      ],
+      [
+        "INDEX.md",
+        "subsystems/alerts.md"
+      ],
+      [
+        "INDEX.md",
+        "subsystems/launchd-best-practices.md"
+      ],
+      [
+        "INDEX.md",
+        "subsystems/recipes.md"
+      ],
+      [
+        "INDEX.md",
+        "subsystems/scheduler.md"
+      ],
+      [
+        "INDEX.md",
+        "subsystems/snapshots.md"
+      ],
+      [
+        "INDEX.md",
+        "subsystems/usage-monitor-integration.md"
+      ],
+      [
+        "INDEX.md",
+        "subsystems/usage-monitor.md"
+      ],
+      [
+        "INDEX.md",
+        "subsystems/widget-health.md"
+      ],
+      [
+        "INDEX.md",
+        "tutorials/first-run.md"
+      ],
+      [
+        "READING_ORDER.md",
+        "architecture.md"
+      ],
+      [
+        "READING_ORDER.md",
+        "concepts/mental-model.md"
+      ],
+      [
+        "READING_ORDER.md",
+        "contributing/CONTRIBUTING-DOCS.md"
+      ],
+      [
+        "READING_ORDER.md",
+        "contributing/developer-hygiene.md"
+      ],
+      [
+        "READING_ORDER.md",
+        "contributing/repository-governance.md"
+      ],
+      [
+        "READING_ORDER.md",
+        "contributing/testing.md"
+      ],
+      [
+        "READING_ORDER.md",
+        "getting-started/installation.md"
+      ],
+      [
+        "READING_ORDER.md",
+        "getting-started/usage.md"
+      ],
+      [
+        "READING_ORDER.md",
+        "operations/runbook.md"
+      ],
+      [
+        "READING_ORDER.md",
+        "operations/security-model.md"
+      ],
+      [
+        "READING_ORDER.md",
+        "reference/configuration.md"
+      ],
+      [
+        "READING_ORDER.md",
+        "reference/data-model.md"
+      ],
+      [
+        "READING_ORDER.md",
+        "reference/environment-variables.md"
+      ],
+      [
+        "READING_ORDER.md",
+        "reference/glossary.md"
+      ],
+      [
+        "READING_ORDER.md",
+        "subsystems/alerts.md"
+      ],
+      [
+        "READING_ORDER.md",
+        "subsystems/launchd-best-practices.md"
+      ],
+      [
+        "READING_ORDER.md",
+        "subsystems/recipes.md"
+      ],
+      [
+        "READING_ORDER.md",
+        "subsystems/scheduler.md"
+      ],
+      [
+        "READING_ORDER.md",
+        "subsystems/snapshots.md"
+      ],
+      [
+        "READING_ORDER.md",
+        "subsystems/usage-monitor.md"
+      ],
+      [
+        "READING_ORDER.md",
+        "subsystems/widget-health.md"
+      ],
+      [
+        "READING_ORDER.md",
+        "tutorials/first-run.md"
+      ],
+      [
+        "adr/README.md",
+        "INDEX.md"
+      ],
+      [
+        "adr/README.md",
+        "adr/0001-record-architecture-decisions.md"
+      ],
+      [
+        "adr/README.md",
+        "adr/0002-bash-implementation.md"
+      ],
+      [
+        "adr/README.md",
+        "adr/0003-snapshot-immutability.md"
+      ],
+      [
+        "adr/README.md",
+        "adr/0004-usage-monitor-python-carveout.md"
+      ],
+      [
+        "adr/README.md",
+        "adr/0005-job-scheduler.md"
+      ],
+      [
+        "api/cli-reference.md",
+        "reference/environment-variables.md"
+      ],
+      [
+        "architecture.md",
+        "adr/0004-usage-monitor-python-carveout.md"
+      ],
+      [
+        "architecture.md",
+        "adr/0005-job-scheduler.md"
+      ],
+      [
+        "architecture.md",
+        "api/cli-reference.md"
+      ],
+      [
+        "architecture.md",
+        "concepts/mental-model.md"
+      ],
+      [
+        "architecture.md",
+        "diagrams/architecture.md"
+      ],
+      [
+        "architecture.md",
+        "operations/security-model.md"
+      ],
+      [
+        "architecture.md",
+        "reference/data-model.md"
+      ],
+      [
+        "architecture.md",
+        "subsystems/README.md"
+      ],
+      [
+        "architecture.md",
+        "subsystems/launchd-best-practices.md"
+      ],
+      [
+        "architecture.md",
+        "subsystems/recipes.md"
+      ],
+      [
+        "architecture.md",
+        "subsystems/scheduler.md"
+      ],
+      [
+        "architecture.md",
+        "subsystems/snapshots.md"
+      ],
+      [
+        "architecture.md",
+        "subsystems/usage-monitor.md"
+      ],
+      [
+        "concepts/README.md",
+        "architecture.md"
+      ],
+      [
+        "concepts/README.md",
+        "concepts/mental-model.md"
+      ],
+      [
+        "concepts/README.md",
+        "getting-started/README.md"
+      ],
+      [
+        "concepts/README.md",
+        "reference/README.md"
+      ],
+      [
+        "concepts/README.md",
+        "subsystems/README.md"
+      ],
+      [
+        "concepts/mental-model.md",
+        "adr/0003-snapshot-immutability.md"
+      ],
+      [
+        "concepts/mental-model.md",
+        "adr/0004-usage-monitor-python-carveout.md"
+      ],
+      [
+        "concepts/mental-model.md",
+        "adr/0005-job-scheduler.md"
+      ],
+      [
+        "concepts/mental-model.md",
+        "architecture.md"
+      ],
+      [
+        "concepts/mental-model.md",
+        "diagrams/meter-state-machine.md"
+      ],
+      [
+        "concepts/mental-model.md",
+        "diagrams/scheduler-flow.md"
+      ],
+      [
+        "concepts/mental-model.md",
+        "diagrams/snapshot-lifecycle.md"
+      ],
+      [
+        "concepts/mental-model.md",
+        "diagrams/widget-rendering.md"
+      ],
+      [
+        "concepts/mental-model.md",
+        "reference/data-model.md"
+      ],
+      [
+        "concepts/mental-model.md",
+        "subsystems/recipes.md"
+      ],
+      [
+        "concepts/mental-model.md",
+        "subsystems/scheduler.md"
+      ],
+      [
+        "concepts/mental-model.md",
+        "subsystems/snapshots.md"
+      ],
+      [
+        "concepts/mental-model.md",
+        "subsystems/usage-monitor.md"
+      ],
+      [
+        "contributing/CONTRIBUTING-DOCS.md",
+        "contributing/developer-hygiene.md"
+      ],
+      [
+        "contributing/CONTRIBUTING-DOCS.md",
+        "contributing/repository-governance.md"
+      ],
+      [
+        "contributing/README.md",
+        "contributing/CONTRIBUTING-DOCS.md"
+      ],
+      [
+        "contributing/README.md",
+        "contributing/developer-hygiene.md"
+      ],
+      [
+        "contributing/README.md",
+        "contributing/repository-governance.md"
+      ],
+      [
+        "contributing/README.md",
+        "contributing/testing.md"
+      ],
+      [
+        "contributing/developer-hygiene.md",
+        "contributing/repository-governance.md"
+      ],
+      [
+        "contributing/developer-hygiene.md",
+        "contributing/testing.md"
+      ],
+      [
+        "contributing/engineering-standards.md",
+        "INDEX.md"
+      ],
+      [
+        "contributing/engineering-standards.md",
+        "api/cli-reference.md"
+      ],
+      [
+        "contributing/engineering-standards.md",
+        "architecture.md"
+      ],
+      [
+        "contributing/engineering-standards.md",
+        "concepts/mental-model.md"
+      ],
+      [
+        "contributing/engineering-standards.md",
+        "contributing/CONTRIBUTING-DOCS.md"
+      ],
+      [
+        "contributing/engineering-standards.md",
+        "contributing/developer-hygiene.md"
+      ],
+      [
+        "contributing/engineering-standards.md",
+        "contributing/repository-governance.md"
+      ],
+      [
+        "contributing/engineering-standards.md",
+        "contributing/testing.md"
+      ],
+      [
+        "contributing/engineering-standards.md",
+        "examples/cookbook.md"
+      ],
+      [
+        "contributing/engineering-standards.md",
+        "getting-started/installation.md"
+      ],
+      [
+        "contributing/engineering-standards.md",
+        "reference/data-model.md"
+      ],
+      [
+        "contributing/engineering-standards.md",
+        "reference/versioning-compatibility.md"
+      ],
+      [
+        "contributing/engineering-standards.md",
+        "tutorials/first-run.md"
+      ],
+      [
+        "contributing/repository-governance.md",
+        "contributing/CONTRIBUTING-DOCS.md"
+      ],
+      [
+        "contributing/repository-governance.md",
+        "contributing/developer-hygiene.md"
+      ],
+      [
+        "contributing/repository-governance.md",
+        "contributing/testing.md"
+      ],
+      [
+        "contributing/testing.md",
+        "contributing/developer-hygiene.md"
+      ],
+      [
+        "contributing/testing.md",
+        "contributing/repository-governance.md"
+      ],
+      [
+        "examples/README.md",
+        "examples/cookbook.md"
+      ],
+      [
+        "examples/README.md",
+        "getting-started/usage.md"
+      ],
+      [
+        "examples/README.md",
+        "operations/runbook.md"
+      ],
+      [
+        "examples/README.md",
+        "subsystems/README.md"
+      ],
+      [
+        "examples/README.md",
+        "subsystems/recipes.md"
+      ],
+      [
+        "examples/README.md",
+        "subsystems/scheduler.md"
+      ],
+      [
+        "examples/cookbook.md",
+        "operations/runbook.md"
+      ],
+      [
+        "examples/cookbook.md",
+        "subsystems/recipes.md"
+      ],
+      [
+        "examples/cookbook.md",
+        "subsystems/scheduler.md"
+      ],
+      [
+        "examples/cookbook.md",
+        "subsystems/widget-health.md"
+      ],
+      [
+        "getting-started/README.md",
+        "architecture.md"
+      ],
+      [
+        "getting-started/README.md",
+        "getting-started/installation.md"
+      ],
+      [
+        "getting-started/README.md",
+        "getting-started/troubleshooting.md"
+      ],
+      [
+        "getting-started/README.md",
+        "getting-started/usage.md"
+      ],
+      [
+        "getting-started/installation.md",
+        "architecture.md"
+      ],
+      [
+        "getting-started/installation.md",
+        "diagrams/install-lifecycle.md"
+      ],
+      [
+        "getting-started/installation.md",
+        "getting-started/troubleshooting.md"
+      ],
+      [
+        "getting-started/installation.md",
+        "getting-started/usage.md"
+      ],
+      [
+        "getting-started/troubleshooting.md",
+        "architecture.md"
+      ],
+      [
+        "getting-started/troubleshooting.md",
+        "getting-started/installation.md"
+      ],
+      [
+        "getting-started/troubleshooting.md",
+        "getting-started/usage.md"
+      ],
+      [
+        "getting-started/troubleshooting.md",
+        "operations/runbook.md"
+      ],
+      [
+        "getting-started/usage.md",
+        "architecture.md"
+      ],
+      [
+        "getting-started/usage.md",
+        "getting-started/installation.md"
+      ],
+      [
+        "getting-started/usage.md",
+        "getting-started/troubleshooting.md"
+      ],
+      [
+        "getting-started/usage.md",
+        "subsystems/alerts.md"
+      ],
+      [
+        "getting-started/usage.md",
+        "subsystems/recipes.md"
+      ],
+      [
+        "getting-started/usage.md",
+        "subsystems/scheduler.md"
+      ],
+      [
+        "migration/README.md",
+        "INDEX.md"
+      ],
+      [
+        "migration/README.md",
+        "adr/README.md"
+      ],
+      [
+        "migration/README.md",
+        "reference/data-model.md"
+      ],
+      [
+        "operations/README.md",
+        "architecture.md"
+      ],
+      [
+        "operations/README.md",
+        "getting-started/troubleshooting.md"
+      ],
+      [
+        "operations/README.md",
+        "operations/runbook.md"
+      ],
+      [
+        "operations/README.md",
+        "operations/security-model.md"
+      ],
+      [
+        "operations/README.md",
+        "subsystems/alerts.md"
+      ],
+      [
+        "operations/README.md",
+        "subsystems/widget-health.md"
+      ],
+      [
+        "operations/runbook.md",
+        "getting-started/troubleshooting.md"
+      ],
+      [
+        "operations/runbook.md",
+        "operations/security-model.md"
+      ],
+      [
+        "operations/runbook.md",
+        "subsystems/alerts.md"
+      ],
+      [
+        "operations/runbook.md",
+        "subsystems/widget-health.md"
+      ],
+      [
+        "operations/security-model.md",
+        "architecture.md"
+      ],
+      [
+        "operations/security-model.md",
+        "operations/runbook.md"
+      ],
+      [
+        "reference/README.md",
+        "architecture.md"
+      ],
+      [
+        "reference/README.md",
+        "reference/configuration.md"
+      ],
+      [
+        "reference/README.md",
+        "reference/data-model.md"
+      ],
+      [
+        "reference/README.md",
+        "reference/environment-variables.md"
+      ],
+      [
+        "reference/README.md",
+        "reference/glossary.md"
+      ],
+      [
+        "reference/README.md",
+        "subsystems/alerts.md"
+      ],
+      [
+        "reference/README.md",
+        "subsystems/scheduler.md"
+      ],
+      [
+        "reference/README.md",
+        "subsystems/snapshots.md"
+      ],
+      [
+        "reference/README.md",
+        "subsystems/usage-monitor.md"
+      ],
+      [
+        "reference/README.md",
+        "subsystems/widget-health.md"
+      ],
+      [
+        "reference/configuration.md",
+        "reference/data-model.md"
+      ],
+      [
+        "reference/configuration.md",
+        "reference/environment-variables.md"
+      ],
+      [
+        "reference/configuration.md",
+        "subsystems/launchd-best-practices.md"
+      ],
+      [
+        "reference/configuration.md",
+        "subsystems/scheduler.md"
+      ],
+      [
+        "reference/configuration.md",
+        "subsystems/usage-monitor.md"
+      ],
+      [
+        "reference/data-model.md",
+        "reference/configuration.md"
+      ],
+      [
+        "reference/data-model.md",
+        "reference/environment-variables.md"
+      ],
+      [
+        "reference/data-model.md",
+        "subsystems/alerts.md"
+      ],
+      [
+        "reference/data-model.md",
+        "subsystems/scheduler.md"
+      ],
+      [
+        "reference/data-model.md",
+        "subsystems/usage-monitor.md"
+      ],
+      [
+        "reference/environment-variables.md",
+        "reference/configuration.md"
+      ],
+      [
+        "reference/environment-variables.md",
+        "reference/data-model.md"
+      ],
+      [
+        "reference/environment-variables.md",
+        "subsystems/alerts.md"
+      ],
+      [
+        "reference/environment-variables.md",
+        "subsystems/scheduler.md"
+      ],
+      [
+        "reference/glossary.md",
+        "reference/configuration.md"
+      ],
+      [
+        "reference/glossary.md",
+        "reference/data-model.md"
+      ],
+      [
+        "reference/glossary.md",
+        "reference/environment-variables.md"
+      ],
+      [
+        "reference/glossary.md",
+        "subsystems/alerts.md"
+      ],
+      [
+        "reference/glossary.md",
+        "subsystems/scheduler.md"
+      ],
+      [
+        "reference/glossary.md",
+        "subsystems/usage-monitor.md"
+      ],
+      [
+        "reference/glossary.md",
+        "subsystems/widget-health.md"
+      ],
+      [
+        "reference/versioning-compatibility.md",
+        "api/cli-reference.md"
+      ],
+      [
+        "reference/versioning-compatibility.md",
+        "contributing/repository-governance.md"
+      ],
+      [
+        "reference/versioning-compatibility.md",
+        "migration/README.md"
+      ],
+      [
+        "reference/versioning-compatibility.md",
+        "reference/data-model.md"
+      ],
+      [
+        "reference/versioning-compatibility.md",
+        "reference/environment-variables.md"
+      ],
+      [
+        "reference/versioning-compatibility.md",
+        "subsystems/recipes.md"
+      ],
+      [
+        "rfcs/README.md",
+        "INDEX.md"
+      ],
+      [
+        "rfcs/README.md",
+        "adr/0001-record-architecture-decisions.md"
+      ],
+      [
+        "rfcs/README.md",
+        "adr/README.md"
+      ],
+      [
+        "subsystems/README.md",
+        "adr/0004-usage-monitor-python-carveout.md"
+      ],
+      [
+        "subsystems/README.md",
+        "architecture.md"
+      ],
+      [
+        "subsystems/README.md",
+        "reference/data-model.md"
+      ],
+      [
+        "subsystems/README.md",
+        "reference/environment-variables.md"
+      ],
+      [
+        "subsystems/README.md",
+        "subsystems/alerts.md"
+      ],
+      [
+        "subsystems/README.md",
+        "subsystems/launchd-best-practices.md"
+      ],
+      [
+        "subsystems/README.md",
+        "subsystems/recipes.md"
+      ],
+      [
+        "subsystems/README.md",
+        "subsystems/scheduler.md"
+      ],
+      [
+        "subsystems/README.md",
+        "subsystems/snapshots.md"
+      ],
+      [
+        "subsystems/README.md",
+        "subsystems/usage-monitor-integration.md"
+      ],
+      [
+        "subsystems/README.md",
+        "subsystems/usage-monitor.md"
+      ],
+      [
+        "subsystems/README.md",
+        "subsystems/widget-health.md"
+      ],
+      [
+        "subsystems/alerts.md",
+        "architecture.md"
+      ],
+      [
+        "subsystems/alerts.md",
+        "diagrams/alert-pipeline.md"
+      ],
+      [
+        "subsystems/alerts.md",
+        "getting-started/troubleshooting.md"
+      ],
+      [
+        "subsystems/alerts.md",
+        "reference/environment-variables.md"
+      ],
+      [
+        "subsystems/alerts.md",
+        "subsystems/snapshots.md"
+      ],
+      [
+        "subsystems/alerts.md",
+        "subsystems/widget-health.md"
+      ],
+      [
+        "subsystems/launchd-best-practices.md",
+        "architecture.md"
+      ],
+      [
+        "subsystems/launchd-best-practices.md",
+        "reference/environment-variables.md"
+      ],
+      [
+        "subsystems/launchd-best-practices.md",
+        "subsystems/scheduler.md"
+      ],
+      [
+        "subsystems/launchd-best-practices.md",
+        "subsystems/usage-monitor.md"
+      ],
+      [
+        "subsystems/recipes.md",
+        "architecture.md"
+      ],
+      [
+        "subsystems/recipes.md",
+        "reference/environment-variables.md"
+      ],
+      [
+        "subsystems/recipes.md",
+        "subsystems/scheduler.md"
+      ],
+      [
+        "subsystems/recipes.md",
+        "subsystems/snapshots.md"
+      ],
+      [
+        "subsystems/scheduler.md",
+        "adr/0005-job-scheduler.md"
+      ],
+      [
+        "subsystems/scheduler.md",
+        "architecture.md"
+      ],
+      [
+        "subsystems/scheduler.md",
+        "diagrams/meter-state-machine.md"
+      ],
+      [
+        "subsystems/scheduler.md",
+        "diagrams/scheduler-flow.md"
+      ],
+      [
+        "subsystems/scheduler.md",
+        "reference/data-model.md"
+      ],
+      [
+        "subsystems/scheduler.md",
+        "reference/environment-variables.md"
+      ],
+      [
+        "subsystems/scheduler.md",
+        "subsystems/launchd-best-practices.md"
+      ],
+      [
+        "subsystems/scheduler.md",
+        "subsystems/recipes.md"
+      ],
+      [
+        "subsystems/scheduler.md",
+        "subsystems/usage-monitor.md"
+      ],
+      [
+        "subsystems/snapshots.md",
+        "adr/0003-snapshot-immutability.md"
+      ],
+      [
+        "subsystems/snapshots.md",
+        "architecture.md"
+      ],
+      [
+        "subsystems/snapshots.md",
+        "diagrams/snapshot-lifecycle.md"
+      ],
+      [
+        "subsystems/snapshots.md",
+        "subsystems/alerts.md"
+      ],
+      [
+        "subsystems/snapshots.md",
+        "subsystems/recipes.md"
+      ],
+      [
+        "subsystems/snapshots.md",
+        "subsystems/widget-health.md"
+      ],
+      [
+        "subsystems/usage-monitor-integration.md",
+        "adr/0004-usage-monitor-python-carveout.md"
+      ],
+      [
+        "subsystems/usage-monitor-integration.md",
+        "subsystems/usage-monitor.md"
+      ],
+      [
+        "subsystems/usage-monitor.md",
+        "adr/0004-usage-monitor-python-carveout.md"
+      ],
+      [
+        "subsystems/usage-monitor.md",
+        "architecture.md"
+      ],
+      [
+        "subsystems/usage-monitor.md",
+        "diagrams/meter-state-machine.md"
+      ],
+      [
+        "subsystems/usage-monitor.md",
+        "diagrams/poller-pipeline.md"
+      ],
+      [
+        "subsystems/usage-monitor.md",
+        "reference/data-model.md"
+      ],
+      [
+        "subsystems/usage-monitor.md",
+        "reference/environment-variables.md"
+      ],
+      [
+        "subsystems/usage-monitor.md",
+        "subsystems/alerts.md"
+      ],
+      [
+        "subsystems/usage-monitor.md",
+        "subsystems/launchd-best-practices.md"
+      ],
+      [
+        "subsystems/usage-monitor.md",
+        "subsystems/scheduler.md"
+      ],
+      [
+        "subsystems/usage-monitor.md",
+        "subsystems/usage-monitor-integration.md"
+      ],
+      [
+        "subsystems/usage-monitor.md",
+        "subsystems/widget-health.md"
+      ],
+      [
+        "subsystems/widget-health.md",
+        "architecture.md"
+      ],
+      [
+        "subsystems/widget-health.md",
+        "diagrams/widget-rendering.md"
+      ],
+      [
+        "subsystems/widget-health.md",
+        "getting-started/troubleshooting.md"
+      ],
+      [
+        "subsystems/widget-health.md",
+        "subsystems/alerts.md"
+      ],
+      [
+        "subsystems/widget-health.md",
+        "subsystems/launchd-best-practices.md"
+      ],
+      [
+        "subsystems/widget-health.md",
+        "subsystems/snapshots.md"
+      ],
+      [
+        "subsystems/widget-health.md",
+        "subsystems/usage-monitor.md"
+      ],
+      [
+        "tutorials/README.md",
+        "architecture.md"
+      ],
+      [
+        "tutorials/README.md",
+        "contributing/CONTRIBUTING-DOCS.md"
+      ],
+      [
+        "tutorials/README.md",
+        "getting-started/README.md"
+      ],
+      [
+        "tutorials/README.md",
+        "getting-started/usage.md"
+      ],
+      [
+        "tutorials/README.md",
+        "reference/README.md"
+      ],
+      [
+        "tutorials/README.md",
+        "subsystems/recipes.md"
+      ],
+      [
+        "tutorials/README.md",
+        "tutorials/first-run.md"
+      ],
+      [
+        "tutorials/first-run.md",
+        "architecture.md"
+      ],
+      [
+        "tutorials/first-run.md",
+        "getting-started/troubleshooting.md"
+      ],
+      [
+        "tutorials/first-run.md",
+        "getting-started/usage.md"
+      ],
+      [
+        "tutorials/first-run.md",
+        "operations/runbook.md"
+      ],
+      [
+        "tutorials/first-run.md",
+        "reference/glossary.md"
+      ],
+      [
+        "tutorials/first-run.md",
+        "subsystems/recipes.md"
+      ]
+    ]
+  }
+}

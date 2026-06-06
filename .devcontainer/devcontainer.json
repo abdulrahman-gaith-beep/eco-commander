@@ -1,0 +1,101 @@
+{
+  "$schema": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainer.schema.json",
+  "name": "eco-commander",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "username": "vscode",
+      "upgradePackages": false
+    },
+    "ghcr.io/devcontainers/features/node:2": {
+      "version": "lts"
+    },
+    "ghcr.io/devcontainers/features/go:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "containerEnv": {
+    "ECO_DEVCONTAINER": "1",
+    "ECO_HOME": "/home/vscode/.eco",
+    "ECO_INSTALL_LAUNCHAGENTS": "0",
+    "ECO_SCHEDULER_AUTO_LOAD": "0",
+    "ECO_SCHEDULER_PERSIST": "0",
+    "ECO_ALLOW_LIVE_CREDENTIAL_PROBE": "0",
+    "ECO_ALERT_OPEN_TERMINAL": "0",
+    "ECO_HEALTHCHECK_MACOS_SURFACES": "0",
+    "ECO_HEALTHCHECK_LIVE_RUNTIME": "0",
+    "ECO_SNAPSHOT_CLIPBOARD": "0",
+    "ECO_SNAPSHOT_REVEAL": "0",
+    "ECO_SNAPSHOT_NOTIFY": "0",
+    "ECO_NOTIFICATIONS": "0",
+    "ECO_NOTIFY_LOG_ONLY": "1",
+    "PIP_DISABLE_PIP_VERSION_CHECK": "1",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHON_BIN": "python3.13",
+    "VENV_DIR": "/home/vscode/.venvs/eco-commander"
+  },
+  "remoteEnv": {
+    "ECO_COMMANDER_REPO": "${containerWorkspaceFolder}",
+    "PATH": "${containerWorkspaceFolder}/.devcontainer/bin:/home/vscode/.venvs/eco-commander/bin:/home/vscode/.eco/bin:/home/vscode/go/bin:${containerEnv:PATH}",
+    "PYTHON": "/home/vscode/.venvs/eco-commander/bin/python",
+    "PYTHONPATH": "${containerWorkspaceFolder}/src",
+    "VIRTUAL_ENV": "/home/vscode/.venvs/eco-commander"
+  },
+  "mounts": [
+    "source=eco-commander-pip-cache,target=/home/vscode/.cache/pip,type=volume",
+    "source=eco-commander-pre-commit-cache,target=/home/vscode/.cache/pre-commit,type=volume",
+    "source=eco-commander-go-cache,target=/home/vscode/go,type=volume"
+  ],
+  "postCreateCommand": "bash .devcontainer/scripts/post-create.sh",
+  "postAttachCommand": "bash .devcontainer/scripts/post-attach.sh",
+  "init": true,
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "/home/vscode/.venvs/eco-commander/bin/python",
+        "python.analysis.typeCheckingMode": "basic",
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "editor.formatOnSave": true,
+        "editor.rulers": [120],
+        "[python]": {
+          "editor.defaultFormatter": "charliermarsh.ruff",
+          "editor.codeActionsOnSave": {
+            "source.fixAll.ruff": "explicit",
+            "source.organizeImports.ruff": "explicit"
+          }
+        },
+        "[shellscript]": {
+          "editor.defaultFormatter": "mkhl.shfmt"
+        },
+        "files.trimTrailingWhitespace": true,
+        "files.insertFinalNewline": true,
+        "files.eol": "\n",
+        "json.schemas": [
+          {
+            "fileMatch": ["/.devcontainer/devcontainer.json"],
+            "url": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainer.schema.json"
+          }
+        ]
+      },
+      "extensions": [
+        "charliermarsh.ruff",
+        "davidanson.vscode-markdownlint",
+        "eamodio.gitlens",
+        "github.vscode-github-actions",
+        "github.vscode-pull-request-github",
+        "ms-python.mypy-type-checker",
+        "ms-python.python",
+        "redhat.vscode-yaml",
+        "tamasfe.even-better-toml",
+        "timonwong.shellcheck",
+        "mkhl.shfmt"
+      ]
+    }
+  },
+  "forwardPorts": [5678],
+  "remoteUser": "vscode"
+}

@@ -1,0 +1,56 @@
+# Example audit-mission file
+# ---------------------------------------------------------------------------
+# A small, generic set of read-only "audit" jobs. Loading these queues a few
+# self-contained review tasks against a single project directory.
+#
+#   eco scheduler add --file examples/missions/audit-missions.example.yaml
+#
+# Then:  eco scheduler status   and   ECO_DRY_RUN=1 eco scheduler run-once
+#
+# Set each `workdir` to an absolute path for a directory where the job can run;
+# the scheduler stores this field as given when you add/seed jobs, and providers
+# later execute in that directory. Replace `demo-project`,
+# `/absolute/path/to/demo-project`, and the prompts with your own. These are
+# illustrative review prompts only. Both jobs use raw_prompt templates that ask
+# for findings-only reports; nothing here writes, applies patches, or deploys.
+# ---------------------------------------------------------------------------
+
+version: 1
+jobs:
+  - id: "audit-repo-health"
+    project: "demo-project"
+    workdir: "/absolute/path/to/demo-project"  # absolute path to the runnable project/worktree
+    template: "raw_prompt"
+    template_vars:
+      prompt: >-
+        Review this repository for hygiene issues: missing .gitignore entries,
+        committed build artifacts, and stale TODO comments. List findings only.
+    model_preference:
+      - { provider: gemini, model: gemini-3.1-flash-lite-preview, meter: gemini.tiers.flash_lite }
+      - { provider: codex, model: gpt-5.5, meter: codex.session }
+    priority: P1
+    earliest_iso: ""
+    timeout_s: 600
+    retry:
+      max: 3
+      backoff_s: [60, 300, 1800]
+    notes: "Read-only repo hygiene review."
+
+  - id: "audit-dependency-licenses"
+    project: "demo-project"
+    workdir: "/absolute/path/to/demo-project"  # absolute path to the runnable project/worktree
+    template: "raw_prompt"
+    template_vars:
+      prompt: >-
+        Inspect the dependency manifests and report any dependency whose license
+        is unknown or incompatible with an open-source release. Findings only.
+    model_preference:
+      - { provider: gemini, model: gemini-3.1-pro-preview, meter: gemini.tiers.pro }
+      - { provider: gemini, model: gemini-3.1-flash-lite-preview, meter: gemini.tiers.flash_lite }
+    priority: P2
+    earliest_iso: ""
+    timeout_s: 600
+    retry:
+      max: 2
+      backoff_s: [60, 300]
+    notes: "Surfaces license risks before a public release."

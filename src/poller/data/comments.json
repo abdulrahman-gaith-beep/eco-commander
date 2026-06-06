@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "tiers": {
+    "gentle": [
+      "wow that was hot 🔥",
+      "ease off the accelerator",
+      "someone's caffeinated this morning",
+      "pacing? what pacing?",
+      "we're cooking with gas now 🍳",
+      "tokens are flying",
+      "you in a hurry?",
+      "the meter is moving fast",
+      "burning the candle from both ends",
+      "somebody loves their AI today"
+    ],
+    "bold": [
+      "fire in the hole 💥",
+      "is this thing on fire?",
+      "slow down for a minute",
+      "agent swarm in 5… 4… 3…",
+      "reset is closer than you think ⏰",
+      "budget the remaining window",
+      "that's a lot of GPU",
+      "the meter is spinning",
+      "throttle approaching",
+      "that is a lot of compute"
+    ],
+    "alarmed": [
+      "you're going to break that WIP 😱",
+      "the hard wall is close",
+      "the meter is taking notes",
+      "switch to a fallback",
+      "that escalated quickly 🚀",
+      "ok now we're just showing off",
+      "capacity panic mode engaged",
+      "the API gateway is sweating",
+      "someone fetch a fire extinguisher",
+      "by the time you read this you've burned 3% more"
+    ]
+  }
+}

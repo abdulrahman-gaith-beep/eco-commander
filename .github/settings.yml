@@ -1,0 +1,76 @@
+repository:
+  name: eco-commander
+  description: Unified CLI and SwiftBar control surface for a macOS AI ecosystem.
+  homepage: https://github.com/abdulrahman-gaith-beep/eco-commander
+  private: false
+  has_issues: true
+  has_projects: false
+  has_wiki: false
+  has_discussions: true
+  delete_branch_on_merge: true
+  allow_squash_merge: true
+  allow_merge_commit: false
+  allow_rebase_merge: true
+
+labels:
+  - name: bug
+    color: d73a4a
+    description: Something is broken.
+  - name: dependencies
+    color: 0366d6
+    description: Dependency or toolchain update.
+  - name: discussion
+    color: cfd3d7
+    description: Needs design or operator discussion.
+  - name: enhancement
+    color: a2eeef
+    description: New capability or behavior.
+  - name: security
+    color: b60205
+    description: Security-sensitive change or vulnerability fix.
+  - name: area:docs
+    color: 0075ca
+    description: Documentation changes.
+  - name: area:github
+    color: 5319e7
+    description: GitHub metadata, workflows, and repo policy.
+  - name: area:python
+    color: 3572a5
+    description: Python poller or scheduler changes.
+  - name: area:scripts
+    color: fef2c0
+    description: Shell scripts, recipes, or install tooling.
+  - name: area:tests
+    color: 0e8a16
+    description: Test fixtures or test suites.
+  - name: area:audits
+    color: ffa500
+    description: Audit tooling, reports, and metadata.
+  - name: area:config
+    color: c5def5
+    description: Root config files, linter settings, Makefile.
+  - name: stale
+    color: ededed
+    description: Inactive for 60+ days; auto-managed by the Stale workflow.
+
+branches:
+  - name: main
+    protection:
+      required_pull_request_reviews:
+        # Solo-maintainer repo: green required status checks are the gate; a
+        # second approving reviewer is not required for every maintenance fix.
+        required_approving_review_count: 0
+        dismiss_stale_reviews: true
+        require_code_owner_reviews: false
+      required_status_checks:
+        strict: true
+        contexts:
+          - CI / Python 3.10
+          - CI / Python 3.13
+          - Repository Hygiene / Hygiene
+          - Security / Secret and dependency scan
+          - CodeQL / CodeQL
+          - Commitlint / Commitlint
+          - Dependency Review / Dependency review
+      enforce_admins: true
+      restrictions: null

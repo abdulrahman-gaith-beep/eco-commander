@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# stub: sysctl — responds to -n hw.pagesize only
+if [ "$1" = "-n" ] && [ "$2" = "hw.pagesize" ]; then
+  echo "${STUB_PAGE_SIZE:-16384}"
+  exit 0
+fi
+exit 1

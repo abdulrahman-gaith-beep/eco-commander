@@ -1,0 +1,7 @@
+brew "actionlint"
+brew "bats-core"
+brew "coreutils"
+brew "gitleaks"
+brew "jq"
+brew "shellcheck"
+brew "shfmt"

@@ -1,0 +1,108 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Existing tag to publish, for example v0.3.0"
+        required: true
+
+permissions:
+  contents: write
+  attestations: write
+  id-token: write
+
+jobs:
+  publish:
+    name: Publish GitHub release
+    runs-on: macos-15
+    timeout-minutes: 40
+
+    env:
+      HOMEBREW_NO_AUTO_UPDATE: "1"
+      HOMEBREW_NO_INSTALL_CLEANUP: "1"
+
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-dev.txt
+
+      - name: Resolve tag
+        id: tag
+        env:
+          INPUT_TAG: ${{ github.event.inputs.tag || '' }}
+        run: |
+          if [ -n "$INPUT_TAG" ]; then
+            tag="$INPUT_TAG"
+          else
+            tag="${GITHUB_REF_NAME}"
+          fi
+          semver_re='^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$'
+          if ! printf '%s\n' "$tag" | grep -Eq "$semver_re"; then
+            echo "Invalid semver tag: $tag" >&2
+            exit 2
+          fi
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+
+      - name: Checkout release tag
+        run: |
+          git fetch --tags --force
+          git checkout --detach "${{ steps.tag.outputs.tag }}"
+
+      - name: Install deps
+        run: |
+          brew bundle --file=Brewfile
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt -r requirements-dev.txt
+
+      - name: Validate release checks
+        run: |
+          make lint
+          make test
+
+      - name: Validate changelog
+        run: |
+          version="${{ steps.tag.outputs.tag }}"
+          version="${version#v}"
+          version_file="$(cat VERSION)"
+          if [ "$version_file" != "$version" ]; then
+            echo "VERSION mismatch: tag ${{ steps.tag.outputs.tag }} resolves to $version, but VERSION contains $version_file" >&2
+            exit 2
+          fi
+          grep -q "## \\[$version\\]" CHANGELOG.md
+          grep -qx "__version__ = \"$version\"" src/scheduler/__init__.py
+          grep -qx "version: \"$version\"" CITATION.cff
+          awk -v version="$version" '
+            $0 == "## [" version "]" || $0 ~ "^## \\[" version "\\]" { in_section=1; next }
+            in_section && /^## \[/ { exit }
+            in_section { print }
+          ' CHANGELOG.md > release-notes.md
+          test -s release-notes.md
+
+      - name: Generate SBOM
+        run: |
+          cyclonedx-py requirements requirements.txt -o sbom.json --of JSON
+          test -s sbom.json
+          python -m json.tool sbom.json > /dev/null
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release create "${{ steps.tag.outputs.tag }}" sbom.json --verify-tag --title "eco-commander ${{ steps.tag.outputs.tag }}" --notes-file release-notes.md
+
+      - name: Attest build provenance
+        uses: actions/attest-build-provenance@ef244123eb79f2f7a7e75d99086184180e6d0018 # v2.2.3
+        with:
+          subject-path: sbom.json

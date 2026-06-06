@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# stub: curl — logs args, exits with $STUB_CURL_EXIT (default 0)
+echo "curl $*" >> "$HOME/.stub-curl.log"
+exit "${STUB_CURL_EXIT:-0}"

@@ -1,0 +1,34 @@
+# eco-commander antigravity ignore
+# Prevents agent indexing of large, volatile, or irrelevant directories.
+
+# Python environments and caches
+.venv/
+__pycache__/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+*.pyc
+
+# Test artifacts
+tests/reports/
+tests/.tmp/
+tests/e2e/results/
+
+# Build output
+build/
+dist/
+*.egg-info/
+
+# Git internals
+.git/
+
+# Editor and IDE scratch
+.idea/
+.vscode/
+
+# Agent compaction snapshots
+.claude/compaction-snapshots/
+tests/.claude/
+
+# macOS noise
+.DS_Store

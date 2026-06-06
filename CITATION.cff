@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata below."
+type: software
+title: eco-commander
+abstract: >-
+  Unified CLI and SwiftBar control surface for a macOS AI ecosystem.
+  Provides usage monitoring, account rotation, and multi-model orchestration
+  for Claude, Gemini, and Codex AI tools.
+authors:
+  - family-names: "Al-Sayyari"
+    given-names: "Abdulrahman bin Ghaith"
+    email: 245627891+abdulrahman-gaith-beep@users.noreply.github.com
+repository-code: "https://github.com/abdulrahman-gaith-beep/eco-commander"
+license: MIT
+version: "0.2.0"
+date-released: "2026-04-18"

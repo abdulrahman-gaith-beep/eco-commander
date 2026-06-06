@@ -1,0 +1,290 @@
+# scripts/MANIFEST.yaml — Machine-readable index for AI agent navigation
+# Last updated: 2026-06-04
+# Usage: AI agents parse this file to understand script purposes, dependencies,
+#        and relationships without reading each file individually.
+
+meta:
+  description: "Automation, lifecycle, and operational scripts for eco-commander"
+  total_scripts: 20
+  total_libraries: 2
+  total_configs: 1
+  total_plist_templates: 3
+
+scripts:
+  - path: bootstrap.sh
+    category: lifecycle
+    description: "One-command dev environment setup: Brewfile, venv, hooks, install, smoke test"
+    depends_on: [Brewfile, setup-venv.sh, install-hooks.sh]
+    calls: [setup-venv.sh, install-hooks.sh, "make install"]
+    called_by: [CONTRIBUTING.md]
+    env_vars: []
+    required_binaries: [bash, brew, python3, make, pre-commit]
+    lines: 89
+    risk: low
+    notes: "Idempotent. Entry point for new contributors."
+
+  - path: setup-venv.sh
+    category: lifecycle
+    description: "Create Python venv and install dev dependencies (Python 3.10–3.13)"
+    depends_on: [requirements-dev.txt, pyproject.toml]
+    calls: []
+    called_by: [bootstrap.sh, Makefile]
+    env_vars: [PYTHON_BIN]
+    required_binaries: [bash, python3, pip]
+    lines: 61
+    risk: low
+    notes: "Auto-selects python3.13→3.10. Refuses Python 3.14 (breaks deps)."
+
+  - path: install.sh
+    category: lifecycle
+    description: "Symlink src/ into ~/.eco/ and register SwiftBar plugin"
+    depends_on: [lib/common.sh]
+    calls: [install-launchagents.sh]
+    called_by: [Makefile]
+    env_vars: [ECO_HOME, SWIFTBAR_PLUGIN_DIR, ECO_INSTALL_LAUNCHAGENTS]
+    required_binaries: [bash, python3]
+    lines: 140
+    risk: medium
+    notes: "Refuses sudo/root. Safe for re-runs (idempotent symlinks)."
+
+  - path: uninstall.sh
+    category: lifecycle
+    description: "Remove symlinks created by install.sh, preserves user data"
+    depends_on: [lib/common.sh]
+    calls: [uninstall-launchagents.sh, uninstall-log-rotation.sh]
+    called_by: [Makefile]
+    env_vars: [ECO_HOME, SWIFTBAR_PLUGIN_DIR]
+    required_binaries: [bash, python3]
+    lines: 60
+    risk: low
+    notes: "Only removes links owned by this repo."
+
+  - path: install-launchagents.sh
+    category: lifecycle
+    description: "Register macOS LaunchAgents for poller, scheduler, SwiftBar"
+    depends_on: [lib/common.sh]
+    calls: []
+    called_by: [install.sh]
+    env_vars: [ECO_HOME, ECO_LAUNCHAGENTS_DIR, ECO_SCHEDULER_AUTO_LOAD, ECO_SCHEDULER_PERSIST, PYTHON, PYTHON_BIN]
+    required_binaries: [bash, "Python 3.10-3.13", launchctl, plutil]
+    lines: 134
+    risk: medium
+    notes: "Selects a supported Python runner, renders plist templates, and reloads agents via launchctl."
+
+  - path: uninstall-launchagents.sh
+    category: lifecycle
+    description: "Stop and remove eco-commander LaunchAgents"
+    depends_on: [lib/common.sh]
+    calls: []
+    called_by: [uninstall.sh]
+    env_vars: [ECO_LAUNCHAGENTS_DIR]
+    required_binaries: [bash, python3, launchctl]
+    lines: 42
+    risk: low
+    notes: "Validates plist labels before removal."
+
+  - path: install-hooks.sh
+    category: lifecycle
+    description: "Install pre-commit and commit-msg Git hooks"
+    depends_on: []
+    calls: []
+    called_by: [Makefile]
+    env_vars: []
+    required_binaries: [bash, pre-commit]
+    lines: 12
+    risk: low
+
+  - path: install-log-rotation.sh
+    category: lifecycle
+    description: "Install newsyslog rotation rules (requires sudo)"
+    depends_on: [log-rotate.conf]
+    calls: []
+    called_by: []
+    env_vars: [ECO_HOME]
+    required_binaries: [bash, sudo, newsyslog, sed]
+    lines: 87
+    risk: low
+    notes: "Renders __ECO_HOME__ and __USER__ template vars before installing."
+
+  - path: uninstall-log-rotation.sh
+    category: lifecycle
+    description: "Remove the marked newsyslog rotation rule, preserving logs"
+    depends_on: []
+    calls: []
+    called_by: [uninstall.sh]
+    env_vars: []
+    required_binaries: [bash, sudo]
+    lines: 33
+    risk: low
+    notes: "Removes only the eco-commander-marked newsyslog drop-in."
+
+  - path: healthcheck.sh
+    category: runtime
+    description: "End-to-end health check for widget + poller + snapshot"
+    depends_on: []
+    calls: [usage-snapshot.sh]
+    called_by: []
+    env_vars: [ECO_HOME, ECO_HEALTHCHECK_MACOS_SURFACES, ECO_HEALTHCHECK_LIVE_RUNTIME]
+    required_binaries: [bash, jq, python3, qlmanage, osascript, pbcopy]
+    lines: 167
+    risk: low
+    notes: "Supports --json output. macOS and live runtime checks are opt-in."
+
+  - path: usage-snapshot.sh
+    category: runtime
+    description: "Generate shareable PNG+TXT usage snapshot card"
+    depends_on: [lib/snapshot-helpers.sh]
+    calls: []
+    called_by: [healthcheck.sh, "SwiftBar widget"]
+    env_vars: [ECO_HOME, ECO_SNAPSHOT_DIR, ECO_SNAPSHOT_CLIPBOARD, ECO_SNAPSHOT_REVEAL, ECO_SNAPSHOT_NOTIFY]
+    required_binaries: [bash, jq, python3, qlmanage, osascript, pbcopy]
+    lines: 607
+    risk: medium
+    notes: "Largest script. Handles data extraction, text/HTML rendering, qlmanage PNG, clipboard, Finder, notifications."
+
+  - path: run-poller.sh
+    category: runtime
+    description: "Thin wrapper to run the usage poller with correct PYTHONPATH"
+    depends_on: []
+    calls: []
+    called_by: ["SwiftBar 'Refresh now' action"]
+    env_vars: [PYTHONPATH, PYTHON, PYTHON_BIN]
+    required_binaries: [bash, "Python 3.10-3.13"]
+    lines: 32
+    risk: low
+
+  - path: run-scheduler.sh
+    category: runtime
+    description: "Thin wrapper to run the scheduler dispatcher with correct PYTHONPATH"
+    depends_on: []
+    calls: []
+    called_by: []
+    env_vars: [PYTHONPATH, PYTHON, PYTHON_BIN]
+    required_binaries: [bash, "Python 3.10-3.13"]
+    lines: 36
+    risk: low
+
+  - path: toggle-precise.sh
+    category: runtime
+    description: "Toggle per-tool server-truth (precise tracking) in config.json"
+    depends_on: []
+    calls: []
+    called_by: ["SwiftBar widget menu"]
+    env_vars: [ECO_HOME, ECO_ALLOW_LIVE_CREDENTIAL_PROBE]
+    required_binaries: [bash, jq, osascript, python3]
+    lines: 161
+    risk: medium
+    notes: "Race-safe via flock or mkdir fallback. Default-OFF — requires explicit opt-in for credential probes."
+
+  - path: lint.sh
+    category: ci
+    description: "Run shellcheck across src/ and scripts/"
+    depends_on: []
+    calls: []
+    called_by: [Makefile, release.sh]
+    env_vars: []
+    required_binaries: [bash, shellcheck]
+    lines: 94
+    risk: low
+
+  - path: release.sh
+    category: ci
+    description: "Tag and push a semver release"
+    depends_on: []
+    calls: [lint.sh]
+    called_by: [Makefile]
+    env_vars: []
+    required_binaries: [bash, git, make]
+    lines: 35
+    risk: high
+    notes: "Must run from main branch. Validates CHANGELOG.md and __version__."
+
+  - path: validate-commit-message.sh
+    category: ci
+    description: "Validate commit subject against Conventional Commits"
+    depends_on: []
+    calls: []
+    called_by: ["commit-msg Git hook"]
+    env_vars: []
+    required_binaries: [bash]
+    lines: 22
+    risk: low
+
+  - path: doctor.sh
+    category: runtime
+    description: "Diagnose and repair eco-commander installation (symlinks, config, logs)"
+    depends_on: []
+    calls: []
+    called_by: []
+    env_vars: [ECO_HOME]
+    required_binaries: [bash, jq, python3]
+    lines: 235
+    risk: low
+    notes: "Supports --fix for safe auto-repair of broken symlinks and config."
+
+  - path: run-alerts.sh
+    category: runtime
+    description: "Thin wrapper to run eco-alerts with correct PYTHONPATH"
+    depends_on: []
+    calls: ["src/bin/eco-alerts.sh"]
+    called_by: []
+    env_vars: [PYTHONPATH]
+    required_binaries: [bash]
+    lines: 14
+    risk: low
+
+  - path: verify-manifest.sh
+    category: ci
+    description: "Verify MANIFEST.yaml against actual filesystem (paths, line counts, unlisted scripts)"
+    depends_on: []
+    calls: []
+    called_by: []
+    env_vars: []
+    required_binaries: [bash, python3]
+    lines: 120
+    risk: low
+    notes: "Supports --fix to auto-update line counts in MANIFEST.yaml."
+
+libraries:
+  - path: lib/common.sh
+    description: "Shared functions: validate_install_path, plist_label_matches, die"
+    sourced_by: [install.sh, uninstall.sh, install-launchagents.sh, uninstall-launchagents.sh]
+    exports: [validate_install_path, plist_label_matches, die]
+    lines: 234
+    notes: "Source-guarded via _ECO_LIB_COMMON_LOADED."
+
+  - path: lib/snapshot-helpers.sh
+    description: "Pure formatting functions for usage-snapshot.sh"
+    sourced_by: [usage-snapshot.sh]
+    exports: [humanize, bar_fill, safe_pct, html_escape, color_for, pace_glyph, target_mark, acct_label, _join]
+    lines: 98
+    notes: "Source-guarded. All functions are pure (no side effects)."
+
+configs:
+  - path: log-rotate.conf
+    description: "newsyslog(5) template for log rotation"
+    template_vars: [__ECO_HOME__, __USER__]
+    installed_to: /etc/newsyslog.d/eco-commander.conf
+    rendered_by: install-log-rotation.sh
+
+plist_templates:
+  - path: launchagents/com.eco-commander.usage-poller.plist
+    label: com.eco-commander.usage-poller
+    interval_s: 60
+    template_vars: [__POLLER_PATH__, __SRC_DIR__, __ECO_HOME__]
+
+  - path: launchagents/com.eco-commander.scheduler.plist
+    label: com.eco-commander.scheduler
+    interval_s: 120
+    template_vars: [__SRC_DIR__, __ECO_HOME__]
+
+  - path: launchagents/com.eco-commander.swiftbar.plist
+    label: com.eco-commander.swiftbar
+    interval_s: null
+    template_vars: [__ECO_HOME__]
+    notes: "KeepAlive on crash only. Launches SwiftBar.app."
+
+examples:
+  - path: examples/missions/seed-jobs.example.yaml
+    description: "Example scheduler seed-jobs file for run-scheduler.sh"
+    notes: "Copy and adapt for your own scheduled jobs."

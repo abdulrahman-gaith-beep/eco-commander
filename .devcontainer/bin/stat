@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Minimal BSD stat format shim for Linux devcontainers.
+set -euo pipefail
+
+if [ "$(uname -s)" = "Darwin" ]; then
+  exec /usr/bin/stat "$@"
+fi
+
+if [ "${1:-}" = "-f" ] && [ -n "${2:-}" ]; then
+  fmt="$2"
+  shift 2
+  case "$fmt" in
+    "%m") exec /usr/bin/stat -c "%Y" "$@" ;;
+    "%Lp") exec /usr/bin/stat -c "%a" "$@" ;;
+    "%Sm %N") exec /usr/bin/stat -c "%y %n" "$@" ;;
+  esac
+fi
+
+exec /usr/bin/stat "$@"

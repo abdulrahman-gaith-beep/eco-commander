@@ -1,0 +1,122 @@
+name: 🐛 Bug report
+description: Create a report to help us improve the tool and fix broken functionality.
+title: "bug: <short description>"
+labels: [bug]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+        > [!IMPORTANT]
+        > Do not include secrets, private logs, OAuth tokens, or security reports in a public issue. Use the [Security Policy](https://github.com/abdulrahman-gaith-beep/eco-commander/security/policy) for vulnerabilities.
+
+  - type: checkboxes
+    id: pre-check
+    attributes:
+      label: Pre-flight Checklist
+      description: Please ensure you have completed the following before submitting.
+      options:
+        - label: I have searched the existing issues to ensure this bug has not already been reported.
+          required: true
+        - label: I am using the latest version of `eco-commander`.
+          required: true
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Bug Summary
+      description: A clear and concise description of what the bug is.
+      placeholder: One or two sentences describing the bug.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: Please provide step-by-step instructions to reproduce the behavior.
+      value: |
+        1. Run command '...'
+        2. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: A clear and concise description of what you expected to happen.
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: A clear and concise description of what actually happened.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Affected Component
+      description: Which part of eco-commander is affected?
+      options:
+        - CLI (eco)
+        - Recipes
+        - SwiftBar widget
+        - Poller
+        - Scheduler
+        - Scripts / install
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: macos
+    attributes:
+      label: macOS Version
+      description: What version of macOS are you running?
+      placeholder: "e.g., 15.5"
+    validations:
+      required: true
+
+  - type: input
+    id: bash
+    attributes:
+      label: Bash Version
+      description: Run `bash --version | head -n1`
+      placeholder: "e.g., GNU bash, version 5.2.26..."
+    validations:
+      required: true
+
+  - type: input
+    id: python
+    attributes:
+      label: Python Version
+      description: What version of Python is running in the `.venv`? Run `python3 --version`.
+      placeholder: "e.g., Python 3.11.4"
+    validations:
+      required: true
+
+  - type: input
+    id: commit
+    attributes:
+      label: eco-commander Commit
+      description: Run `git rev-parse --short HEAD`
+      placeholder: "e.g., a1b2c3d"
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant Logs or Output
+      description: Include output of `eco status`, or paste terminal errors. Please format as code.
+      render: shell
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: If applicable, add screenshots or recordings to help explain your problem.

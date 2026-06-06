@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.eco-commander.swiftbar</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/bin/open</string>
+        <string>-gja</string>
+        <string>/Applications/SwiftBar.app</string>
+    </array>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <!-- Restart only on crash, not after deliberate user quit -->
+    <key>KeepAlive</key>
+    <dict>
+        <key>SuccessfulExit</key>
+        <false/>
+        <key>Crashed</key>
+        <true/>
+    </dict>
+
+    <!-- Throttle to avoid restart loops if SwiftBar crashes immediately -->
+    <key>ThrottleInterval</key>
+    <integer>30</integer>
+
+    <key>StandardOutPath</key>
+    <string>__ECO_HOME__/logs/swiftbar-autostart.out.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>__ECO_HOME__/logs/swiftbar-autostart.err.log</string>
+</dict>
+</plist>

@@ -1,0 +1,20 @@
+purpose: "Version-to-version migration guides for breaking changes — upgrade steps, rollback instructions, and affected subsystems"
+audience: ["human", "operator"]
+difficulty: "beginner"
+
+files:
+  README.md: "Migration hub — explains what constitutes a breaking change, the guide template, and a status note for pre-1.0 (no guides yet)"
+
+read_order:
+  - README.md
+
+related_directories:
+  adr: "ADRs document the decisions that may produce breaking changes; check for 'Amends:' or 'Supersedes:' fields"
+  reference: "environment-variables.md and data-model.md describe the schemas and env vars that migration guides reference"
+  getting-started: "Quickstart and troubleshooting guides complement migration guides for operators upgrading in production"
+
+agent_tips:
+  - "If you are implementing a breaking change, add a migration guide here BEFORE merging — not after"
+  - "Follow the template in README.md exactly: What changed, Why, Migration steps, Rollback"
+  - "Name guides as vX.Y-to-vX.Z.md so they sort chronologically and are easy to locate"
+  - "No guides exist yet (pre-1.0); the first guide will be needed when snapshot format, CLI contract, or env vars change"

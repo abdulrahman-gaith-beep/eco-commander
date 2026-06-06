@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Deterministic vm_stat shim for Linux devcontainers.
+set -euo pipefail
+
+cat <<'OUT'
+Mach Virtual Memory Statistics: (page size of 16384 bytes)
+Pages free:                               100000.
+Pages active:                             200000.
+Pages inactive:                           200000.
+Pages speculative:                         10000.
+Pages wired down:                         100000.
+Pages purgeable:                           50000.
+OUT

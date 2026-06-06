@@ -1,0 +1,17 @@
+{
+  "claude": {
+    "plan": "Unknown",
+    "accounts": 1
+  },
+  "gemini": {
+    "plan": "Unknown"
+  },
+  "codex": {
+    "plan": "Unknown"
+  },
+  "server_truth": {
+    "claude": false,
+    "gemini": false,
+    "codex": false
+  }
+}

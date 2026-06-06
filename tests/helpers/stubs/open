@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# stub: open — records args, never actually opens anything
+echo "open $*" >> "$HOME/.stub-open.log"
+exit 0

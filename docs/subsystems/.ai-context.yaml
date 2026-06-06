@@ -1,0 +1,39 @@
+purpose: "Deep-dive documentation for eco-commander's major subsystems"
+audience: ["agent", "human", "operator"]
+difficulty: "intermediate-to-advanced"
+
+files:
+  scheduler.md: "Job scheduler — queue, dispatch, adapters, meters, crash safety. Source: src/scheduler/"
+  usage-monitor.md: "Usage poller + menu-bar widget — per-tool sources, calibration, account pools. Source: src/poller/"
+  alerts.md: "Alert system — doctor, repo-health, delegate-fix subcommands. Source: src/bin/eco-alerts.sh"
+  widget-health.md: "Widget health — alert truth verification, fix tiers, 24/7 manager design"
+  recipes.md: "Recipe catalog and contract — header annotations, output conventions. Source: src/recipes/*.sh"
+  snapshots.md: "Snapshot format, immutability guarantees, lifecycle. Source: src/recipes/snapshot.sh"
+  launchd-best-practices.md: "LaunchAgent energy efficiency — ProcessType, Nice, LowPriorityIO rationale"
+  usage-monitor-integration.md: "HISTORICAL — original usage monitor integration plan (superseded by usage-monitor.md)"
+
+read_order:
+  - recipes.md
+  - snapshots.md
+  - usage-monitor.md
+  - scheduler.md
+  - alerts.md
+  - widget-health.md
+  - launchd-best-practices.md
+
+related_directories:
+  reference: "JSON schemas consumed by these subsystems (data-model.md)"
+  operations: "Runbook procedures for when subsystems malfunction"
+  adr: "Architecture decisions behind key subsystem designs"
+
+subsystem_to_source:
+  scheduler: "src/scheduler/"
+  poller: "src/poller/"
+  widget: "src/bin/eco-commander.15s.sh"
+  alerts: "src/bin/eco-alerts.sh"
+  recipes: "src/recipes/"
+
+agent_tips:
+  - "usage-monitor-integration.md is historical — read usage-monitor.md for current state"
+  - "scheduler.md §Adapters explains how to add new provider adapters"
+  - "alerts.md and widget-health.md are closely coupled — read together"

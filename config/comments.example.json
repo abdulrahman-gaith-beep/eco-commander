@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "tiers": {
+    "gentle": [
+      "usage is warming up",
+      "steady pace checkpoint"
+    ],
+    "bold": [
+      "meter is moving quickly",
+      "consider checking the reset window"
+    ],
+    "alarmed": [
+      "quota burn is unusually high",
+      "pause and confirm this run is intentional"
+    ]
+  }
+}

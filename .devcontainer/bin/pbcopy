@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Clipboard sink for Linux devcontainers.
+set -euo pipefail
+
+cat >/dev/null

@@ -1,0 +1,29 @@
+# Default owner for every path.
+* @abdulrahman-gaith-beep
+
+# Repository governance and release controls.
+.github/ @abdulrahman-gaith-beep
+.github/workflows/*.yml @abdulrahman-gaith-beep
+CHANGELOG.md @abdulrahman-gaith-beep
+SECURITY.md @abdulrahman-gaith-beep
+GOVERNANCE.md @abdulrahman-gaith-beep
+scripts/release.sh @abdulrahman-gaith-beep
+
+# Supply-chain security surfaces.
+.pre-commit-config.yaml @abdulrahman-gaith-beep
+pyproject.toml @abdulrahman-gaith-beep
+requirements*.txt @abdulrahman-gaith-beep
+Brewfile @abdulrahman-gaith-beep
+
+# Local-install and credential-adjacent surfaces.
+scripts/install*.sh @abdulrahman-gaith-beep
+scripts/uninstall*.sh @abdulrahman-gaith-beep
+src/poller/*oauth.py @abdulrahman-gaith-beep
+src/poller/claude.py @abdulrahman-gaith-beep
+src/poller/codex.py @abdulrahman-gaith-beep
+src/poller/gemini.py @abdulrahman-gaith-beep
+
+# Core CLI entrypoint and scheduler (release-affecting).
+src/bin/ @abdulrahman-gaith-beep
+src/scheduler/ @abdulrahman-gaith-beep
+src/tools/ @abdulrahman-gaith-beep

@@ -1,0 +1,61 @@
+area:config:
+  - changed-files:
+      - any-glob-to-any-file:
+          - .editorconfig
+          - .yamllint.yml
+          - .shellcheckrc
+          - .pre-commit-config.yaml
+          - .markdownlint.json
+          - .markdownlintignore
+          - .gitattributes
+          - .gitignore
+          - .gitleaks.toml
+          - .antigravityignore
+          - .devcontainer/**
+          - .env.example
+          - .claude/**
+          - commitlint.config.cjs
+          - config/**
+          - pyproject.toml
+          - Makefile
+          - Brewfile
+          - VERSION
+          - requirements*.txt
+
+area:docs:
+  - changed-files:
+      - any-glob-to-any-file:
+          - README.md
+          - docs/**
+          - "*.md"
+
+area:github:
+  - changed-files:
+      - any-glob-to-any-file:
+          - .github/**
+
+area:scripts:
+  - changed-files:
+      - any-glob-to-any-file:
+          - scripts/**
+          - src/bin/**
+          - src/recipes/**
+
+area:python:
+  - changed-files:
+      - any-glob-to-any-file:
+          - src/poller/**
+          - src/scheduler/**
+          - src/tools/**
+          - tests/python/**
+
+area:tests:
+  - changed-files:
+      - any-glob-to-any-file:
+          - tests/**
+
+dependencies:
+  - changed-files:
+      - any-glob-to-any-file:
+          - Brewfile
+          - requirements*.txt

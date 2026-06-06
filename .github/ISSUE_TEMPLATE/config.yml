@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/abdulrahman-gaith-beep/eco-commander/security/policy
+    about: Please report vulnerabilities privately through the security policy.
+  - name: Documentation
+    url: https://github.com/abdulrahman-gaith-beep/eco-commander/blob/main/docs/INDEX.md
+    about: Start here for installation, usage, troubleshooting, and runbooks.
+  - name: Direct support
+    url: mailto:245627891+abdulrahman-gaith-beep@users.noreply.github.com
+    about: Use email for private operational support requests.

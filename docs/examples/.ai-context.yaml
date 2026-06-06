@@ -1,0 +1,26 @@
+purpose: "Task-oriented how-to scenarios — copy-pasteable end-to-end workflows verified against the live source code"
+audience: ["human", "agent", "operator"]
+difficulty: "beginner-to-intermediate"
+
+files:
+  README.md: "Landing page: scenario index, prerequisite checklist, and routing guide to other doc clusters"
+  cookbook.md: "8 Diátaxis how-to scenarios covering: research queries, scheduler job queuing, stale meter debugging, account rotation, snapshot capture, recipe authoring, widget CLI inspection, and mission-directory seeding"
+
+read_order:
+  - README.md
+  - cookbook.md
+
+related_directories:
+  getting-started: "Installation, first-run usage.md (full CLI reference), and troubleshooting"
+  subsystems: "Architecture and contracts for recipes, scheduler, snapshots, alerts, and widget health"
+  operations: "Step-by-step runbook for recovery procedures referenced by cookbook troubleshooting sections"
+  reference: "Environment variables, data model JSON schemas, and glossary for terms used in examples"
+
+agent_tips:
+  - "Start with README.md scenario index to identify the right recipe for the task"
+  - "Every bash block in cookbook.md is verified against src/bin/eco, src/recipes/*.sh, and src/scheduler/cli.py — treat as authoritative"
+  - "All eco commands route through src/bin/eco; check that file if a command behaves unexpectedly"
+  - "If eco doctor fails before a scenario, resolve it with docs/operations/runbook.md before proceeding"
+  - "usage.json at ~/.eco/current/usage.json is the canonical quota source; jq queries in Scenario 7 show the exact field paths"
+  - "Job ids must match [A-Za-z0-9._-]+ and be unique across the queue — re-adding a known id is a safe no-op"
+  - "account-swap slugs must match [A-Za-z0-9_-]+ — the recipe enforces this at runtime"

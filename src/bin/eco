@@ -1,0 +1,393 @@
+#!/usr/bin/env bash
+# eco — the one CLI to route everything
+# ECO_HELP_BEGIN
+# Usage:
+#   eco                         List recipes and utility commands.
+#   eco list                    List recipes and utility commands.
+#   eco do <name> [args]        Run a recipe.
+#   eco <name> [args]           Run a recipe shortcut.
+#   eco status                  Show one-screen ecosystem state.
+#   eco dashboard               Open dashboard.html.
+#   eco map                     Open map.md.
+#   eco audit                   Open the configured ecosystem audit directory.
+#   eco scheduler <sub>         Run scheduler commands.
+#   eco hygiene <sub>           Run hygiene watcher commands.
+#   eco account-swap <sub>      Rotate configured AI accounts.
+#   eco doctor                  Self-test the installation.
+#   eco help                    Show this help.
+#
+# Scheduler subcommands: status, add, run-once, tail, drain, seed, cancel.
+# Hygiene subcommands: watch, snapshot, stop, status, tail.
+# ECO_HELP_END
+
+set -eu
+ECO="$HOME/.eco"
+RECIPES="$ECO/recipes"
+CMD="${1:-list}"
+
+print_help() {
+  awk '
+    /^# ECO_HELP_BEGIN$/ { in_help=1; next }
+    /^# ECO_HELP_END$/ { exit }
+    in_help {
+      sub(/^# ?/, "")
+      print
+    }
+  ' "$0"
+}
+
+python_is_supported() {
+  "$1" - <<'PY' >/dev/null 2>&1
+import sys
+raise SystemExit(0 if (3, 10) <= sys.version_info[:2] < (3, 14) else 1)
+PY
+}
+
+select_repo_python() {
+  local repo="$1"
+  local candidate
+  for candidate in "$repo/.venv/bin/python" "${PYTHON:-}" "${PYTHON_BIN:-}" python3.13 python3.12 python3.11 python3.10 python3; do
+    [ -n "$candidate" ] || continue
+    if command -v "$candidate" >/dev/null 2>&1 && python_is_supported "$candidate"; then
+      command -v "$candidate"
+      return 0
+    fi
+  done
+  return 1
+}
+
+check_scheduler_deps() {
+  local repo="$1"
+  local python_runner="$2"
+  PYTHONPATH="$repo/src${PYTHONPATH:+:$PYTHONPATH}" "$python_runner" - <<'PY' >/dev/null 2>&1
+import yaml
+import scheduler.cli
+PY
+}
+
+file_mtime_epoch() {
+  local file="$1" mtime
+  mtime="$(stat -f %m "$file" 2>/dev/null || true)"
+  case "$mtime" in
+    ""|*[!0-9]*) ;;
+    *) printf '%s\n' "$mtime"; return 0 ;;
+  esac
+
+  mtime="$(stat -c %Y "$file" 2>/dev/null || true)"
+  case "$mtime" in
+    ""|*[!0-9]*) return 1 ;;
+    *) printf '%s\n' "$mtime" ;;
+  esac
+}
+
+recipe_name_is_safe() {
+  local name="$1"
+  case "$name" in
+    ""|*[!A-Za-z0-9_-]*) return 1 ;;
+    *) return 0 ;;
+  esac
+}
+
+canonical_existing_dir() {
+  local dir="$1"
+  [ -d "$dir" ] || return 1
+  (cd "$dir" 2>/dev/null && pwd -P)
+}
+
+canonical_existing_path() {
+  local path="$1"
+  if command -v realpath >/dev/null 2>&1; then
+    realpath "$path"
+    return
+  fi
+
+  local dir base
+  dir="$(dirname "$path")"
+  base="$(basename "$path")"
+  dir="$(canonical_existing_dir "$dir")" || return 1
+  [ -e "$dir/$base" ] || [ -L "$dir/$base" ] || return 1
+  printf '%s/%s\n' "$dir" "$base"
+}
+
+resolve_script_path() {
+  local source="${BASH_SOURCE[0]:-$0}"
+  local dir
+
+  while [ -L "$source" ]; do
+    dir="$(cd -P "$(dirname "$source")" 2>/dev/null && pwd)" || return 1
+    source="$(readlink "$source")" || return 1
+    case "$source" in
+      /*) ;;
+      *) source="$dir/$source" ;;
+    esac
+  done
+
+  dir="$(cd -P "$(dirname "$source")" 2>/dev/null && pwd)" || return 1
+  printf '%s/%s\n' "$dir" "$(basename "$source")"
+}
+
+script_repo_root() {
+  local script_path script_dir repo
+  script_path="$(resolve_script_path)" || return 1
+  script_dir="$(cd "$(dirname "$script_path")" 2>/dev/null && pwd -P)" || return 1
+  repo="$(cd "$script_dir/../.." 2>/dev/null && pwd -P)" || return 1
+  [ -d "$repo/src" ] || return 1
+  printf '%s\n' "$repo"
+}
+
+resolve_repo_root() {
+  local repo
+  if [ -n "${ECO_COMMANDER_REPO:-}" ]; then
+    if repo="$(cd "$ECO_COMMANDER_REPO" 2>/dev/null && pwd -P)"; then
+      printf '%s\n' "$repo"
+      return 0
+    fi
+  fi
+
+  if repo="$(script_repo_root 2>/dev/null)"; then
+    printf '%s\n' "$repo"
+    return 0
+  fi
+
+  echo "eco: could not locate eco-commander repo root." >&2
+  echo "Set ECO_COMMANDER_REPO to the repository path." >&2
+  return 1
+}
+
+path_under_dir() {
+  local path="$1" dir="$2"
+  case "$path" in
+    "$dir"/*) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
+repo_recipes_dir() {
+  local script_path script_dir
+  script_path="${BASH_SOURCE[0]:-$0}"
+  if command -v realpath >/dev/null 2>&1; then
+    script_path="$(realpath "$script_path" 2>/dev/null || printf '%s\n' "$script_path")"
+  fi
+  script_dir="$(cd "$(dirname "$script_path")" 2>/dev/null && pwd -P)" || return 1
+  canonical_existing_dir "$script_dir/../recipes"
+}
+
+run_recipe_by_name() {
+  local name="$1"
+  shift
+
+  if ! recipe_name_is_safe "$name"; then
+    echo "Invalid recipe name: $name" >&2
+    echo "Recipe names may contain only letters, numbers, dash, and underscore." >&2
+    exit 2
+  fi
+
+  local recipes_real recipe recipe_real trusted_recipes
+  if ! recipes_real="$(canonical_existing_dir "$RECIPES")"; then
+    echo "Recipes directory not found: $RECIPES" >&2
+    exit 1
+  fi
+
+  recipe="$recipes_real/$name.sh"
+  if [ ! -f "$recipe" ]; then
+    echo "Recipe not found: $name"
+    echo "Run 'eco list' to see available recipes."
+    exit 1
+  fi
+
+  recipe_real="$(canonical_existing_path "$recipe")" || {
+    echo "Could not resolve recipe path: $name" >&2
+    exit 1
+  }
+
+  if ! path_under_dir "$recipe_real" "$recipes_real"; then
+    trusted_recipes="$(repo_recipes_dir 2>/dev/null || true)"
+    if [ -z "$trusted_recipes" ] || ! path_under_dir "$recipe_real" "$trusted_recipes"; then
+      echo "Refusing to run recipe outside recipes directory: $name" >&2
+      exit 1
+    fi
+  fi
+
+  bash "$recipe_real" "$@"
+}
+
+case "$CMD" in
+  list|"")
+    echo "=== Eco Recipes ==="
+    echo "(call with: eco do <name>)"
+    echo
+    for r in "$RECIPES"/*.sh; do
+      [ -f "$r" ] || continue
+      name="$(basename "$r" .sh)"
+      [ "$name" = "_lib" ] && continue
+      desc=$(grep -m1 '^# DESC:' "$r" 2>/dev/null | sed 's/^# DESC: *//')
+      inputs=$(grep -m1 '^# INPUTS:' "$r" 2>/dev/null | sed 's/^# INPUTS: *//')
+      printf "  %-20s %s\n" "$name" "${desc:-(no description)}"
+      [ -n "${inputs:-}" ] && printf "  %-20s  inputs: %s\n" "" "$inputs"
+    done
+    echo
+    echo "=== Utility commands ==="
+    echo "  status              one-screen ecosystem state"
+    echo "  dashboard           open dashboard.html"
+    echo "  map                 open map.md"
+    echo "  audit               open configured ecosystem audit dir"
+    echo "  hygiene <sub>       Mac hygiene watcher (watch|snapshot|stop|status|tail)"
+    echo "  account-swap <sub>  rotate auth across Claude/Gemini/Codex accounts"
+    echo "  scheduler <sub>     recurring scheduled agents"
+    echo "  doctor              self-test installation"
+    echo "  help                show this help"
+    ;;
+  do)
+    shift
+    name="${1:-}"
+    if [ -z "$name" ]; then
+      echo "Usage: eco do <recipe> [args]"
+      echo "Available:"
+      find "$RECIPES" -maxdepth 1 -name '*.sh' -type f -print0 2>/dev/null \
+        | xargs -0 -n1 basename \
+        | sed 's/\.sh$//' \
+        | grep -v '^_' \
+        | sed 's/^/  /'
+      exit 1
+    fi
+    shift
+    run_recipe_by_name "$name" "$@"
+    ;;
+  status)
+    bash "$ECO/bin/eco-commander.15s.sh" --cli
+    ;;
+  dashboard)
+    dashboard_path="$ECO/current/dashboard.html"
+    if [ ! -f "$dashboard_path" ]; then
+      echo "Dashboard not found: $dashboard_path" >&2
+      echo "Run 'eco snapshot' first, then retry 'eco dashboard'." >&2
+      exit 1
+    fi
+    open "$dashboard_path"
+    ;;
+  map)
+    open "$ECO/current/map.md"
+    ;;
+  audit)
+    audit_dir="${ECO_AUDIT_DIR:-$HOME/.eco/ecosystem-audit}"
+    if [ ! -d "$audit_dir" ]; then
+      echo "Audit directory not found: $audit_dir" >&2
+      echo "Set ECO_AUDIT_DIR to your ecosystem audit directory." >&2
+      exit 1
+    fi
+    open "$audit_dir"
+    ;;
+  scheduler|sched)
+    shift
+    REPO="$(resolve_repo_root)" || exit 1
+    PYTHON_RUNNER="$(select_repo_python "$REPO")" || {
+      echo "eco scheduler: no supported Python found (requires 3.10-3.13)." >&2
+      echo "Create a venv and install dependencies: python3 -m venv \"$REPO/.venv\" && \"$REPO/.venv/bin/pip\" install -e \"$REPO\"" >&2
+      exit 1
+    }
+    if ! check_scheduler_deps "$REPO" "$PYTHON_RUNNER"; then
+      echo "eco scheduler: missing scheduler Python dependencies for $PYTHON_RUNNER." >&2
+      echo "Install them with: cd \"$REPO\" && \"$PYTHON_RUNNER\" -m pip install -e ." >&2
+      exit 1
+    fi
+    PYTHONPATH="$REPO/src${PYTHONPATH:+:$PYTHONPATH}" exec "$PYTHON_RUNNER" -m scheduler.cli "$@"
+    ;;
+  hygiene|hyg)
+    # Mac hygiene watcher — RAM/swap/MCP/gemini-stuck monitor
+    shift
+    bash "$RECIPES/hygiene.sh" "$@"
+    ;;
+  account-swap|account|swap)
+    # Rotate auth across Claude/Gemini/Codex accounts.
+    shift
+    bash "$RECIPES/account-swap.sh" "$@"
+    ;;
+  doctor|doc)
+    # Quick self-test of the eco-commander installation.
+    echo "=== eco doctor ==="
+    errors=0
+
+    # Check optional launchd agents
+    for label in com.eco-commander.usage-poller com.eco-commander.scheduler com.eco-commander.swiftbar; do
+      if launchctl list "$label" >/dev/null 2>&1; then
+        echo "  ✅ $label loaded"
+      else
+        echo "  ℹ️  $label not loaded (optional LaunchAgent)"
+      fi
+    done
+
+    # Check eco CLI symlink
+    if command -v eco >/dev/null 2>&1; then
+      echo "  ✅ eco CLI on PATH"
+    else
+      echo "  ❌ eco CLI not on PATH"
+      errors=$((errors + 1))
+    fi
+
+    # Check Python deps
+    if REPO="$(resolve_repo_root)"; then
+      :
+    else
+      REPO=""
+    fi
+    if PYTHON_RUNNER="$(select_repo_python "$REPO")"; then
+      :
+    else
+      PYTHON_RUNNER=""
+    fi
+    if [ -n "$PYTHON_RUNNER" ] && PYTHONPATH="$REPO/src${PYTHONPATH:+:$PYTHONPATH}" "$PYTHON_RUNNER" -c "from poller import main; from scheduler import dispatcher" 2>/dev/null; then
+      echo "  ✅ Python imports OK"
+    else
+      echo "  ❌ Python import failed"
+      errors=$((errors + 1))
+    fi
+
+    # Check usage.json freshness
+    usage_file="$ECO/current/usage.json"
+    if [ -f "$usage_file" ]; then
+      usage_mtime="$(file_mtime_epoch "$usage_file" || echo 0)"
+      age=$(( $(date +%s) - usage_mtime ))
+      if [ "$age" -lt 120 ]; then
+        echo "  ✅ usage.json fresh (${age}s ago)"
+      else
+        echo "  ⚠️  usage.json stale (${age}s ago)"
+      fi
+    else
+      echo "  ℹ️  usage.json missing (usage poller optional)"
+    fi
+
+    # Check queue writable
+    queue_dir="$ECO/queue"
+    if [ -d "$queue_dir" ] && [ -w "$queue_dir" ]; then
+      echo "  ✅ queue directory writable"
+    else
+      echo "  ⚠️  queue directory missing or not writable"
+    fi
+
+    echo
+    if [ "$errors" -eq 0 ]; then
+      echo "All checks passed ✅"
+    else
+      echo "$errors issue(s) found"
+      exit 1
+    fi
+    ;;
+  help|-h|--help)
+    print_help
+    ;;
+  *)
+    # Maybe it's a shortcut for `do`
+    if ! recipe_name_is_safe "$CMD"; then
+      echo "Invalid recipe name: $CMD" >&2
+      echo "Recipe names may contain only letters, numbers, dash, and underscore." >&2
+      exit 2
+    fi
+    if [ ! -f "$RECIPES/$CMD.sh" ]; then
+      echo "Unknown command: $CMD"
+      echo "Run 'eco help' or 'eco list'."
+      exit 1
+    fi
+    shift
+    run_recipe_by_name "$CMD" "$@"
+    ;;
+esac

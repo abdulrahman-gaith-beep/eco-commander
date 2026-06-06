@@ -1,0 +1,27 @@
+title: "[Idea]: "
+labels: ["enhancement", "discussion"]
+body:
+  - type: markdown
+    attributes:
+      value: "Use this for early ideas before they are ready for an issue."
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What operator pain would this remove?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: What should eco-commander do differently?
+    validations:
+      required: true
+  - type: textarea
+    id: risks
+    attributes:
+      label: Risks
+      description: What could break, become noisy, or need migration?
+    validations:
+      required: false

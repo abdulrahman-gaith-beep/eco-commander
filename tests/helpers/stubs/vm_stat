@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# stub: vm_stat — deterministic output driven by env vars
+cat <<EOF
+Mach Virtual Memory Statistics: (page size of ${STUB_PAGE_SIZE:-16384} bytes)
+Pages free:                               ${STUB_PAGES_FREE:-100000}.
+Pages active:                             500000.
+Pages inactive:                           ${STUB_PAGES_INACTIVE:-200000}.
+Pages speculative:                        ${STUB_PAGES_SPECULATIVE:-10000}.
+Pages throttled:                          0.
+Pages wired down:                         400000.
+Pages purgeable:                          ${STUB_PAGES_PURGEABLE:-50000}.
+EOF
+exit 0

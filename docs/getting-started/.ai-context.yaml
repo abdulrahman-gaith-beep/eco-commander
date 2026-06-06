@@ -1,0 +1,23 @@
+purpose: "Quick-start documentation for installing, using, and troubleshooting eco-commander"
+audience: ["human", "operator"]
+difficulty: "beginner"
+
+files:
+  installation.md: "Install eco-commander, SwiftBar plugin, and LaunchAgents via make install"
+  usage.md: "Complete CLI reference — every command, subcommand, flag, and exit code"
+  troubleshooting.md: "Common problems and their solutions with step-by-step fixes"
+
+read_order:
+  - installation.md
+  - usage.md
+  - troubleshooting.md
+
+related_directories:
+  operations: "Deeper operational procedures in operations/runbook.md"
+  subsystems: "Subsystem-specific deep dives"
+  reference: "JSON schemas and config file reference"
+
+prerequisites:
+  - "macOS (Apple Silicon or Intel)"
+  - "Bash 5+ (via Homebrew)"
+  - "Python 3.10-3.13 (for poller and scheduler)"

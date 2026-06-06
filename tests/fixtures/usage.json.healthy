@@ -1,0 +1,65 @@
+{
+  "ts": 1767225600,
+  "version": 1,
+  "duration_ms": 125,
+  "claude": {
+    "ok": true,
+    "source": "jsonl",
+    "plan": "Unknown",
+    "accounts": 1,
+    "session": {
+      "pct": 15.0,
+      "resets_in": "4h 30m",
+      "reset_epoch": 1767241800
+    },
+    "weekly": {
+      "pct": 22.0,
+      "pct_all": 22.0,
+      "pct_sonnet": 10.0,
+      "resets_in": "5d 2h",
+      "reset_epoch": 1767679200
+    }
+  },
+  "gemini": {
+    "ok": true,
+    "plan": "Unknown",
+    "accounts": 1,
+    "tiers": {
+      "flash": {
+        "pct": 5.0,
+        "target_pct": 80.0,
+        "resets_in": "23h",
+        "reset_epoch": 1767308400
+      },
+      "flash_lite": {
+        "pct": 2.0,
+        "target_pct": 80.0,
+        "resets_in": "23h",
+        "reset_epoch": 1767308400
+      },
+      "pro": {
+        "pct": 8.0,
+        "target_pct": 80.0,
+        "resets_in": "23h",
+        "reset_epoch": 1767308400
+      }
+    }
+  },
+  "codex": {
+    "ok": true,
+    "source": "jsonl",
+    "plan": "Unknown",
+    "accounts": 1,
+    "session": {
+      "pct": 18.0,
+      "resets_in": "3h 10m",
+      "reset_epoch": 1767237000
+    },
+    "weekly": {
+      "pct": 26.0,
+      "resets_in": "6d 1h",
+      "reset_epoch": 1767747600
+    }
+  },
+  "alternatives": []
+}

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# No-op macOS open shim for Linux devcontainers.
+set -euo pipefail
+
+printf "[devcontainer open shim] %s\n" "$*" >&2

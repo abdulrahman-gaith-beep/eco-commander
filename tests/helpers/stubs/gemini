@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# stub: gemini CLI — logs args, echoes $STUB_GEMINI_OUTPUT
+echo "gemini $*" >> "$HOME/.stub-gemini.log"
+
+# Simulate failure if requested
+if [ "${STUB_GEMINI_EXIT:-0}" -ne 0 ]; then
+  echo "${STUB_GEMINI_STDERR:-stub gemini error}" >&2
+  exit "$STUB_GEMINI_EXIT"
+fi
+
+[ -n "${STUB_GEMINI_SLEEP:-}" ] && sleep "$STUB_GEMINI_SLEEP"
+
+echo "${STUB_GEMINI_OUTPUT:-stub gemini response}"
+exit 0

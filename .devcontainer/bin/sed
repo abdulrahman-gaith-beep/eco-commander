@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# BSD-compatible sed shim for Linux devcontainers.
+set -euo pipefail
+
+if [ "$(uname -s)" = "Darwin" ]; then
+  exec /usr/bin/sed "$@"
+fi
+
+if [ "${1:-}" = "-i" ] && [ "${2+x}" = "x" ] && [ "$2" = "" ]; then
+  shift 2
+  exec /usr/bin/sed -i "$@"
+fi
+
+exec /usr/bin/sed "$@"

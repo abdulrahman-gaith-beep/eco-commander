@@ -1,0 +1,22 @@
+* text=auto eol=lf
+
+*.bash text eol=lf
+*.bats text eol=lf
+*.env text eol=lf
+*.json text eol=lf
+*.md text eol=lf diff=markdown
+*.plist text eol=lf
+*.py text eol=lf
+*.sh text eol=lf
+*.txt text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+Makefile text eol=lf
+src/bin/eco text eol=lf
+
+*.gif binary
+*.jpg binary
+*.jpeg binary
+*.pdf binary
+*.png binary
+*.webp binary

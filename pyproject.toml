@@ -1,0 +1,162 @@
+[build-system]
+requires = ["setuptools>=68.0", "setuptools-scm>=8"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "eco-commander"
+dynamic = ["version"]
+description = "Unified CLI and SwiftBar control surface for a macOS AI ecosystem."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10,<3.14"
+authors = [
+  { name = "Abdulrahman Al-Sayyari", email = "245627891+abdulrahman-gaith-beep@users.noreply.github.com" },
+]
+keywords = ["macos", "ai", "cli", "ecosystem", "swiftbar"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: MacOS X",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: MacOS",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: System :: Systems Administration",
+  "Topic :: Utilities",
+]
+dependencies = [
+  "PyYAML>=6.0.3",
+]
+
+[project.optional-dependencies]
+dev = [
+  "coverage>=7.9",
+  "mypy>=2.1",
+  "pip-audit>=2.10",
+  "pre-commit>=4.6",
+  "ruff>=0.11",
+  "types-PyYAML>=6.0.12",
+]
+
+[project.urls]
+Homepage = "https://github.com/abdulrahman-gaith-beep/eco-commander"
+Repository = "https://github.com/abdulrahman-gaith-beep/eco-commander"
+Documentation = "https://github.com/abdulrahman-gaith-beep/eco-commander/tree/main/docs"
+Issues = "https://github.com/abdulrahman-gaith-beep/eco-commander/issues"
+Changelog = "https://github.com/abdulrahman-gaith-beep/eco-commander/blob/main/CHANGELOG.md"
+
+# ---------------------------------------------------------------------------
+# setuptools configuration
+# ---------------------------------------------------------------------------
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.dynamic]
+version = { attr = "scheduler.__version__" }
+
+# ---------------------------------------------------------------------------
+# Ruff — fast Python linter + formatter
+# ---------------------------------------------------------------------------
+[tool.ruff]
+target-version = "py310"
+line-length = 120
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = [
+  "E",    # pycodestyle errors
+  "W",    # pycodestyle warnings
+  "F",    # pyflakes
+  "I",    # isort
+  "UP",   # pyupgrade
+  "B",    # flake8-bugbear
+  "SIM",  # flake8-simplify
+  "S",    # flake8-bandit (security)
+  "C4",   # flake8-comprehensions
+  "DTZ",  # flake8-datetimez
+  "T20",  # flake8-print
+  "RUF",  # Ruff-specific rules
+]
+ignore = [
+  "T201",   # allow print() — CLI tool uses print extensively
+  "S603",   # allow subprocess calls (core functionality)
+  "S607",   # allow partial executable paths
+  "S101",   # allow assert in tests
+  "E501",   # line length managed by formatter
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = [
+  "B017",   # tests intentionally assert broad exception boundaries
+  "B023",   # secret-redaction tests intentionally bind loop data in closures
+  "RUF012", # unittest fixtures use class-level mutable sample data
+  "S101",
+  "S105",   # tests use fake token-like strings
+  "S108",   # tests use /tmp literals as fake paths
+  "S603",
+  "S607",
+  "SIM117", # nested context managers keep subtest failures readable
+  "T201",
+]
+"src/poller/claude_oauth.py" = ["S310"]
+"src/poller/codex_oauth.py" = ["S310"]
+"src/poller/gemini.py" = ["S105", "S310"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["poller", "scheduler", "common", "tools"]
+
+# ---------------------------------------------------------------------------
+# mypy — static type checking
+# ---------------------------------------------------------------------------
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+strict_optional = true
+check_untyped_defs = true
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+ignore_errors = true
+
+# ---------------------------------------------------------------------------
+# pytest
+# ---------------------------------------------------------------------------
+[tool.pytest.ini_options]
+testpaths = ["tests/python"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+markers = [
+  "security: Security and hardening tests",
+  "slow: Tests that take >2 seconds",
+  "integration: Cross-subsystem integration tests",
+  "poller: Tests for the poller subsystem",
+  "scheduler: Tests for the scheduler subsystem",
+]
+addopts = "--tb=short -q"
+minversion = "3.10"
+
+# ---------------------------------------------------------------------------
+# coverage
+# ---------------------------------------------------------------------------
+[tool.coverage.run]
+source = ["src"]
+omit = [
+  "src/tools/dep_graph.py",
+  "**/__pycache__/*",
+]
+
+[tool.coverage.report]
+fail_under = 60
+show_missing = true
+exclude_lines = [
+  "pragma: no cover",
+  "if __name__ == .__main__.",
+  "if TYPE_CHECKING:",
+  "@overload",
+]

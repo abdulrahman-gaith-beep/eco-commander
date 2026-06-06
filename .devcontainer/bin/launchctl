@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Minimal launchctl shim for Linux devcontainers.
+set -euo pipefail
+
+case "${1:-}" in
+  list)
+    exit 1
+    ;;
+  bootout|bootstrap|enable|kickstart|load|unload)
+    printf "[devcontainer launchctl shim] %s\n" "$*" >&2
+    exit 0
+    ;;
+  *)
+    printf "[devcontainer launchctl shim] unsupported: %s\n" "$*" >&2
+    exit 1
+    ;;
+esac

@@ -1,0 +1,47 @@
+purpose: "Mermaid flow diagrams and architecture visuals covering every major subsystem of eco-commander"
+audience: ["agent", "human", "contributor"]
+difficulty: "intermediate"
+
+files:
+  account-swap-flow.md: "Credential rotation lifecycle for eco account-swap — credential snapshot, guard, and restore sequence"
+  alert-pipeline.md: "Mermaid flowchart of the full alert pipeline from meter threshold breach to desktop notification"
+  architecture.md: "Top-level architecture diagram showing user interface, SwiftBar plugin, poller, scheduler, and ~/.eco/ store"
+  ci-pipeline.md: "GitHub Actions workflow topology — triggers, jobs, shellcheck, Bats tests, and release gates"
+  data-flow.md: "End-to-end data flow from launchd-fired poller through usage.json to SwiftBar widget rendering"
+  filesystem-layout.md: "~/.eco/ runtime directory tree with writer attribution, file permissions, and ownership map"
+  install-lifecycle.md: "Installation, setup, and teardown flow covering make install, LaunchAgent wiring, and make uninstall"
+  meter-state-machine.md: "State machine for quota meters (ok → warn → critical → hard_wall → ok) used by poller and scheduler"
+  module-deps.md: "Auto-generated module dependency graph from src/tools/dep_graph.py — regenerate after structural changes"
+  poller-pipeline.md: "Detailed view of src/poller/main.py 60-second collection cycle — OAuth refresh, JSONL parsing, cap comparison"
+  scheduler-flow.md: "Scheduler dispatch loop — launchd fires every 120s, loads notify.json, walks model-preference ladder, fires jobs"
+  snapshot-lifecycle.md: "Write and read paths for prompt-layer snapshots and the ~/.eco/current symlink swap"
+  test-architecture.md: "Testing strategy and layer map — unit (Bats/pytest), integration, and end-to-end fixture design"
+  widget-rendering.md: "How eco-commander.15s.sh assembles the SwiftBar menu-bar widget from usage.json and state.json"
+
+read_order:
+  - architecture.md
+  - data-flow.md
+  - filesystem-layout.md
+  - poller-pipeline.md
+  - meter-state-machine.md
+  - scheduler-flow.md
+  - snapshot-lifecycle.md
+  - widget-rendering.md
+  - alert-pipeline.md
+  - account-swap-flow.md
+  - install-lifecycle.md
+  - ci-pipeline.md
+  - test-architecture.md
+  - module-deps.md
+
+related_directories:
+  adr: "ADR 0004 and 0005 are the decision records that specified the flows shown in poller-pipeline.md and scheduler-flow.md"
+  subsystems: "Narrative prose that accompanies these visual diagrams"
+  reference: "data-model.md provides the JSON schemas for the data structures flowing through these diagrams"
+
+agent_tips:
+  - "Start with architecture.md for a 30-second orientation, then drill into the specific subsystem diagram"
+  - "meter-state-machine.md is essential before editing src/poller/notify.py or src/scheduler/routing.py"
+  - "module-deps.md is auto-generated — regenerate with src/tools/dep_graph.py after any import changes"
+  - "Diagrams use Mermaid syntax; GitHub renders them natively in PRs and the repo browser"
+  - "scheduler-flow.md and poller-pipeline.md together explain why the two processes are kept separate (see ADR 0004)"

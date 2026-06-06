@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+echo "tavily $*" >> "$HOME/.stub-tavily.log"
+exit 0

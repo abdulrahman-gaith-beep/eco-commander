@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+echo "perplexity $*" >> "$HOME/.stub-perplexity.log"
+echo "${STUB_PERPLEXITY_OUTPUT:-stub perplexity response}"
+exit 0

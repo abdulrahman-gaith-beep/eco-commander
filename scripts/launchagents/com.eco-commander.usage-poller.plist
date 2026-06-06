@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.eco-commander.usage-poller</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>__PYTHON_BIN__</string>
+        <string>__POLLER_PATH__</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>__SRC_DIR__</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+        <key>ECO_HOME</key>
+        <string>__ECO_HOME__</string>
+        <key>PYTHONPATH</key>
+        <string>__SRC_DIR__</string>
+    </dict>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>KeepAlive</key>
+    <false/>
+
+    <key>StandardOutPath</key>
+    <string>__ECO_HOME__/logs/usage-poller.out.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>__ECO_HOME__/logs/usage-poller.err.log</string>
+
+    <!-- Energy + I/O hygiene (Apple-recommended for periodic agents) -->
+    <key>ProcessType</key>
+    <string>Background</string>
+
+    <key>Nice</key>
+    <integer>5</integer>
+
+    <!-- Low-priority disk I/O so poller never fights with foreground apps -->
+    <key>LowPriorityIO</key>
+    <true/>
+
+    <!-- Background QoS class; OS may delay on battery/Low Power Mode -->
+    <key>LowPriorityBackgroundIO</key>
+    <true/>
+
+    <!-- Don't relaunch faster than every 30s if it crashes; prevents flap -->
+    <key>ThrottleInterval</key>
+    <integer>30</integer>
+
+    <!-- Allow up to 30s for a clean shutdown before SIGKILL -->
+    <key>ExitTimeOut</key>
+    <integer>30</integer>
+
+    <!-- Reduce wake-from-sleep aggression (deferral allowed up to 5 min) -->
+    <key>StartInterval</key>
+    <integer>60</integer>
+</dict>
+</plist>

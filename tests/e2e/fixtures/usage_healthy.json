@@ -1,0 +1,28 @@
+{
+  "ts": __NOW__,
+  "comment": "test fixture: healthy state",
+  "claude": {
+    "ok": true, "plan": "Unknown", "accounts": 1, "stale": false, "source": "jsonl",
+    "session": {"pct": 12, "resets_in": "1h 30m", "tokens": 120, "input_tokens": 50, "output_tokens": 30, "cache_creation_tokens": 25, "cache_read_tokens": 15},
+    "weekly": {"pct": 25, "pct_all": 25, "pct_sonnet": 10, "resets_in": "100h 30m", "tokens": 240, "input_tokens": 100, "output_tokens": 60, "cache_creation_tokens": 50, "cache_read_tokens": 30, "sessions": 1}
+  },
+  "gemini": {
+    "ok": true, "plan": "Unknown", "accounts": 1,
+    "tiers": {
+      "flash": {"pct": 5, "resets_in": "23h 50m"},
+      "flash_lite": {"pct": 2, "resets_in": "23h 55m"},
+      "pro": {"pct": 8, "resets_in": "23h 45m"}
+    }
+  },
+  "codex": {
+    "ok": true, "plan": "Unknown", "accounts": 1, "stale": false, "source": "jsonl",
+    "session": {"pct": 3, "resets_in": "2h 30m", "tokens": 80, "input_tokens": 40, "output_tokens": 24, "cached_input_tokens": 16},
+    "weekly": {"pct": 5, "resets_in": "146h 30m", "tokens": 160, "input_tokens": 80, "output_tokens": 50, "cached_input_tokens": 30}
+  },
+  "alternatives": {
+    "antigravity": {"status": "stub"},
+    "cursor": {"status": "stub"},
+    "vs_code": {"status": "always_available"},
+    "ollama": {"models": ["qwen2.5-coder:latest", "llama3:latest"]}
+  }
+}

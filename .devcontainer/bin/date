@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Minimal BSD `date -v-Nd` shim for Linux devcontainers.
+set -euo pipefail
+
+if [ "$(uname -s)" = "Darwin" ]; then
+  exec /bin/date "$@"
+fi
+
+if [[ "${1:-}" =~ ^-v([+-][0-9]+)([dhm])$ ]]; then
+  amount="${BASH_REMATCH[1]}"
+  unit="${BASH_REMATCH[2]}"
+  shift
+  case "$unit" in
+    d) unit_name="days" ;;
+    h) unit_name="hours" ;;
+    m) unit_name="minutes" ;;
+    *) unit_name="days" ;;
+  esac
+  exec /usr/bin/date -d "$amount $unit_name" "$@"
+fi
+
+exec /usr/bin/date "$@"

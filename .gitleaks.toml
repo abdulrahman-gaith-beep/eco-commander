@@ -1,0 +1,7 @@
+title = "eco-commander secret scanning"
+
+[allowlist]
+description = "Test fixtures are reviewed separately."
+paths = [
+  '''^tests/fixtures/''',
+]

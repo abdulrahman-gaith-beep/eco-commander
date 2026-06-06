@@ -1,0 +1,24 @@
+purpose: "Technical reference — JSON schemas, configuration files, environment variables, and terminology"
+audience: ["agent", "human", "operator"]
+difficulty: "intermediate"
+
+files:
+  data-model.md: "JSON schemas for state.json, usage.json, notify.json, jobs.yaml, and ~/.eco/ directory layout"
+  configuration.md: "All config files: Makefile targets, LaunchAgent plists, poller caps, OAuth stores, MCP config, log rotation, seed files"
+  environment-variables.md: "Every environment variable eco-commander reads or sets, grouped by subsystem"
+  glossary.md: "20+ project-specific terms with canonical definitions — essential for agents to understand domain vocabulary"
+
+read_order:
+  - glossary.md
+  - data-model.md
+  - configuration.md
+  - environment-variables.md
+
+related_directories:
+  subsystems: "Subsystems that consume these schemas and config"
+  operations: "Operational procedures that reference these configs"
+
+agent_tips:
+  - "glossary.md is the fastest way to understand project vocabulary"
+  - "data-model.md contains the canonical JSON schemas — use for validation"
+  - "environment-variables.md lists all override points for testing"

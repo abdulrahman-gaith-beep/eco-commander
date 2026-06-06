@@ -1,0 +1,25 @@
+purpose: "Guidelines and standards for contributing to eco-commander's codebase and documentation"
+audience: ["human"]
+difficulty: "beginner"
+
+files:
+  CONTRIBUTING-DOCS.md: "When to update docs (change-type matrix), quality checklist, ADR conventions, glossary rules, staleness prevention"
+  developer-hygiene.md: "Git hygiene: conventional commits, pre-commit hooks, local quality gates"
+  repository-governance.md: "Branch protection rules, PR labels, and release gates"
+  testing.md: "Test architecture: Bats (bash integration), pytest (Python unit), fixtures, helpers, CI integration"
+
+read_order:
+  - developer-hygiene.md
+  - testing.md
+  - CONTRIBUTING-DOCS.md
+  - repository-governance.md
+
+related_directories:
+  adr: "Architecture Decision Records — format defined in CONTRIBUTING-DOCS.md"
+  subsystems: "What you're likely contributing to"
+  reference: "Schemas your code must conform to"
+
+related_root_files:
+  - "../../CONTRIBUTING.md — full contributor workflow"
+  - "../../CODE_OF_CONDUCT.md — Contributor Covenant 2.1"
+  - "../../.pre-commit-config.yaml — pre-commit hook configuration"

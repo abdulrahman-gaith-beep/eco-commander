@@ -1,0 +1,48 @@
+purpose: "Technical documentation for eco-commander — a macOS AI ecosystem orchestrator"
+scope: "Core CLI/widget/recipe/poller/scheduler docs plus supporting alert and snapshot docs"
+entry_point: "INDEX.md"
+manifest: "MANIFEST.json"
+reading_order: "READING_ORDER.md"
+
+structure:
+  tutorials: "Learning-oriented guided walkthroughs (Diátaxis: tutorial)"
+  concepts: "Mental models and explanations (Diátaxis: explanation)"
+  getting-started: "Onboarding: install, use, troubleshoot (Diátaxis: how-to)"
+  examples: "Task-oriented cookbook scenarios (Diátaxis: how-to)"
+  reference: "Schemas, config, env vars, versioning, glossary (Diátaxis: reference)"
+  subsystems: "Deep dives into each major subsystem"
+  operations: "Runbooks and security model"
+  contributing: "Guidelines, testing, governance"
+  adr: "Architecture Decision Records"
+  rfcs: "Request-for-comments design proposals"
+  migration: "Version-to-version upgrade notes"
+  api: "Generated CLI reference"
+  diagrams: "Mermaid diagrams of system topology"
+  scripts: "Utility scripts for search, extraction, validation, manifest generation"
+
+quick_answers:
+  what_is_eco_commander: "architecture.md §1"
+  how_to_install: "getting-started/installation.md"
+  all_cli_commands: "getting-started/usage.md"
+  json_schemas: "reference/data-model.md"
+  glossary: "reference/glossary.md"
+  scheduler_reference: "subsystems/scheduler.md"
+  usage_monitor: "subsystems/usage-monitor.md"
+  alert_system: "subsystems/alerts.md"
+  security_review: "operations/security-model.md"
+  operational_procedures: "operations/runbook.md"
+
+agent_rules:
+  - "Parse MANIFEST.json FIRST for metadata and dependency graph before reading docs"
+  - "Follow READING_ORDER.md paths for multi-doc tasks"
+  - "Do NOT read ~/.eco logs or credential files — use redacted excerpts from operations/runbook.md"
+  - "operations/security-model.md §Credential handling defines the agent audit boundary"
+  - "Do NOT probe live Keychain or OAuth stores — use mocked subprocesses and synthetic fixtures"
+  - "Treat snapshots and job queue contents as confidential"
+
+tools:
+  search: "scripts/search-docs.sh <query> [--context N] [--category <name>]"
+  extract_section: "scripts/extract-section.sh <file> <heading>"
+  validate_links: "scripts/validate-links.sh"
+  doc_stats: "scripts/doc-stats.sh [--json]"
+  extract_glossary: "scripts/extract-glossary.sh [--format json|csv|plain]"

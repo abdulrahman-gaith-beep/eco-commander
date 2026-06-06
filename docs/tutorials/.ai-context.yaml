@@ -1,0 +1,25 @@
+purpose: "Beginner tutorials — guided, narrative paths to a first working outcome with eco-commander"
+audience: ["human", "agent"]
+difficulty: "beginner"
+
+files:
+  README.md: "Tutorials cluster landing page — what tutorials are, the learning path, and how to contribute"
+  first-run.md: "End-to-end tutorial: clone → bootstrap → install LaunchAgents → verify widget → run first recipe → recover from PATH failure"
+
+read_order:
+  - README.md
+  - first-run.md
+
+related_directories:
+  getting-started: "Prerequisite installation steps and complete CLI usage reference"
+  subsystems: "Deeper technical reference for recipes, scheduler, snapshots, and alerts"
+  operations: "Operational runbook — procedures for when things go wrong post-install"
+  reference: "Glossary, data model, environment variables, and configuration reference"
+  architecture: "System component overview and data-flow diagrams"
+
+agent_tips:
+  - "first-run.md is the canonical learner journey — read it before answering new-user questions about installation or first steps"
+  - "All commands in first-run.md are verified against src/bin/eco, scripts/bootstrap.sh, scripts/install.sh, scripts/install-launchagents.sh, and src/recipes/ask.sh"
+  - "Expected outputs in first-run.md are illustrative — token percentages and timestamps will differ per user; do not treat them as literal assertions"
+  - "The failure-and-recovery section (eco: command not found) is intentionally included — it teaches the PATH fix pattern used most often in support"
+  - "Tutorials do not replace the reference docs; link users onward to getting-started/usage.md and subsystems/recipes.md after completing first-run.md"

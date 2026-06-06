@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# stub: python3 — only used by note.sh to trigger memory_router rebuild
+echo "python3 $*" >> "$HOME/.stub-python3.log"
+# If the script being invoked is memory_router, succeed silently
+for arg in "$@"; do
+  case "$arg" in
+    *memory_router*) exit "${STUB_PYTHON3_EXIT:-0}" ;;
+  esac
+done
+# Fallback: execute the real Python for scripts that assemble local fixtures.
+if [ -x /usr/bin/python3 ]; then
+  exec /usr/bin/python3 "$@"
+fi
+if [ -x /opt/homebrew/bin/python3 ]; then
+  exec /opt/homebrew/bin/python3 "$@"
+fi
+echo "python3 stub: real python3 not found" >&2
+exit 127

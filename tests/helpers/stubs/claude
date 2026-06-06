@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+echo "claude $*" >> "$HOME/.stub-claude.log"
+echo "${STUB_CLAUDE_OUTPUT:-stub claude response}"
+exit 0

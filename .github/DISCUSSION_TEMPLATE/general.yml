@@ -1,0 +1,20 @@
+title: "[General]: "
+labels: ["discussion"]
+body:
+  - type: markdown
+    attributes:
+      value: "Use this for operating questions, field notes, and design tradeoffs that are not bugs."
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: What are you trying to do?
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Relevant commands, docs, or screenshots.
+    validations:
+      required: false

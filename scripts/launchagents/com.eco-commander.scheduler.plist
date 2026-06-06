@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.eco-commander.scheduler</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>__PYTHON_BIN__</string>
+        <string>-m</string>
+        <string>scheduler.dispatcher</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>__SRC_DIR__</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+        <key>PYTHONPATH</key>
+        <string>__SRC_DIR__</string>
+        <key>ECO_HOME</key>
+        <string>__ECO_HOME__</string>
+        <key>ECO_MAX_JOBS_PER_TICK</key>
+        <string>1</string>
+    </dict>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>KeepAlive</key>
+    <false/>
+
+    <key>StandardOutPath</key>
+    <string>__ECO_HOME__/logs/scheduler.out.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>__ECO_HOME__/logs/scheduler.err.log</string>
+
+    <key>ProcessType</key>
+    <string>Background</string>
+
+    <key>Nice</key>
+    <integer>5</integer>
+
+    <key>LowPriorityIO</key>
+    <true/>
+
+    <key>LowPriorityBackgroundIO</key>
+    <true/>
+
+    <key>ThrottleInterval</key>
+    <integer>60</integer>
+
+    <key>ExitTimeOut</key>
+    <integer>900</integer>
+
+    <!-- Fire every 2 minutes — fast enough to catch quota windows, slow enough
+         that a long job from a previous tick can finish before re-entry. -->
+    <key>StartInterval</key>
+    <integer>120</integer>
+</dict>
+</plist>

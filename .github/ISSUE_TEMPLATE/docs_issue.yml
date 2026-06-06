@@ -1,0 +1,45 @@
+name: 📚 Documentation issue
+description: Report a typo, missing page, broken link, or unclear explanation in the docs.
+title: "docs: <short description>"
+labels: [area:docs]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping us improve our documentation!
+        > [!NOTE]
+        > If you are reporting a broken link, please include the URL where you found the broken link.
+
+  - type: checkboxes
+    id: pre-check
+    attributes:
+      label: Pre-flight Checklist
+      description: Please ensure you have completed the following before submitting.
+      options:
+        - label: I have searched the existing issues to ensure this docs issue has not already been reported.
+          required: true
+
+  - type: input
+    id: page
+    attributes:
+      label: Affected Page or File
+      description: Which file or URL contains the issue?
+      placeholder: "e.g., docs/architecture.md or README.md"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What's Wrong?
+      description: Describe the error, typo, broken link, or confusing section.
+      placeholder: "e.g., The setup instructions in section 2 are missing a step about..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested Fix (Optional)
+      description: If you know what the correct text or code should be, please provide it here! Alternatively, feel free to open a Pull Request directly.

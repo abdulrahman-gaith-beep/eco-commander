@@ -1,0 +1,115 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  HOMEBREW_NO_AUTO_UPDATE: "1"
+  HOMEBREW_NO_INSTALL_CLEANUP: "1"
+
+jobs:
+  install-lint-typecheck-test:
+    name: Python ${{ matrix.python-version }}
+    runs-on: macos-15
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.13"]
+
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-dev.txt
+
+      - name: Install deps
+        run: |
+          brew bundle --file=Brewfile
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt -r requirements-dev.txt
+
+      - name: Install smoke
+        run: |
+          set -euo pipefail
+          home="$RUNNER_TEMP/eco-home"
+          stubs="$RUNNER_TEMP/stubs"
+          swiftbar_root="$RUNNER_TEMP/swiftbar"
+          mkdir -p "$home" "$stubs" "$swiftbar_root"
+          cat > "$stubs/launchctl" <<'SH'
+          #!/usr/bin/env bash
+          exit 0
+          SH
+          chmod +x "$stubs/launchctl"
+          HOME="$home" ECO_HOME="$home/.eco" \
+            SWIFTBAR_PLUGIN_DIR="$swiftbar_root/Plugins" \
+            PATH="$stubs:$PATH" \
+            bash scripts/install.sh
+          test -L "$home/.eco/bin/eco"
+          test -L "$home/.eco/recipes/ask.sh"
+          test -L "$swiftbar_root/Plugins/eco-commander.15s.sh"
+
+      - name: Lint
+        run: |
+          make lint
+          actionlint
+
+      - name: Typecheck
+        run: PYTHONPATH=src python -m mypy --python-version "${{ matrix.python-version }}" --ignore-missing-imports src/scheduler src/poller
+
+      - name: Build and syntax checks
+        run: |
+          find src scripts -type f \( -name "*.sh" -o -name "eco" \) -print0 | xargs -0 -n1 bash -n
+          python - <<'PY'
+          import ast
+          import plistlib
+          from pathlib import Path
+
+          import yaml
+
+          for root in ("src", "tests/python"):
+              for path in Path(root).rglob("*.py"):
+                  ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+
+          for path in Path("scripts").glob("*.yaml"):
+              yaml.safe_load(path.read_text(encoding="utf-8"))
+
+          for path in Path("scripts/launchagents").glob("*.plist"):
+              import re
+              text = path.read_text(encoding="utf-8")
+              text = re.sub(r'__[A-Z_]+__', '/tmp/placeholder', text)
+              plistlib.loads(text.encode("utf-8"))
+          PY
+
+      - name: Test
+        run: |
+          make test-bats test-e2e
+          PYTHONPATH=src coverage run --source=src -m unittest discover -s tests/python -p "test_*.py"
+          coverage xml -o coverage.xml
+          coverage report --fail-under=60
+
+      - name: Upload coverage
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: coverage-py${{ matrix.python-version }}
+          path: coverage.xml
+          retention-days: 30

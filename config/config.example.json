@@ -1,0 +1,18 @@
+{
+  "_note": "Illustrative public example only. Copy selected keys to $ECO_HOME/config.json for local overrides; keep public defaults neutral and do not publish real labels or counts.",
+  "claude": {
+    "plan": "Unknown",
+    "accounts": 0
+  },
+  "gemini": {
+    "plan": "Unknown"
+  },
+  "codex": {
+    "plan": "Unknown"
+  },
+  "server_truth": {
+    "claude": false,
+    "gemini": false,
+    "codex": false
+  }
+}

@@ -1,0 +1,22 @@
+purpose: "Operational procedures, runbooks, and security model for production eco-commander"
+audience: ["operator"]
+difficulty: "intermediate-to-advanced"
+
+files:
+  runbook.md: "10 step-by-step procedures: system recovery, poller issues, scheduler stuck, OAuth expired, SwiftBar missing, reinstall, account rotation, adding jobs, health checks, crash-looping"
+  security-model.md: "Expanded threat model: trust boundaries, credential handling (agent audit boundary), data sensitivity, attack surface, required permissions"
+
+read_order:
+  - runbook.md
+  - security-model.md
+
+related_directories:
+  getting-started: "troubleshooting.md for quick common-problem fixes"
+  subsystems: "Subsystem-specific docs for deeper debugging"
+  reference: "Configuration reference for understanding what to change"
+
+agent_boundary:
+  - "Commands in runbook.md that read ~/.eco logs are MANUAL OPERATOR steps only"
+  - "Do not paste raw log output into agent prompts — use redacted excerpts"
+  - "security-model.md §Product vs audit behavior defines what agents may access"
+  - "Agent audits must use mocked subprocesses, synthetic ECO_HOME, and redacted excerpts"

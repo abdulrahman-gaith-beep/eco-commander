@@ -1,0 +1,58 @@
+exclude: ^(\.claude/|tests/\.claude/)
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+      - id: end-of-file-fixer
+      - id: check-added-large-files
+        args: [--maxkb=1024]
+      - id: check-case-conflict
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-yaml
+      - id: detect-private-key
+      - id: mixed-line-ending
+        args: [--fix=lf]
+
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.9.0.6
+    hooks:
+      - id: shellcheck
+        args: [-x, --severity=error]
+        files: (^src/bin/eco$|^src/.*\.sh$|^scripts/.*\.sh$)
+
+  - repo: https://github.com/adrienverge/yamllint.git
+    rev: v1.38.0
+    hooks:
+      - id: yamllint
+        args: [-c, .yamllint.yml]
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.11.12
+    hooks:
+      - id: ruff
+        args: [--fix, --exit-non-zero-on-fix]
+      - id: ruff-format
+
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.48.0
+    hooks:
+      - id: markdownlint
+        args: [-c, .markdownlint.json]
+
+  - repo: local
+    hooks:
+      - id: conventional-commit-msg
+        name: Conventional Commit message
+        entry: scripts/validate-commit-message.sh
+        language: system
+        stages: [commit-msg]
+
+      - id: validate-docs
+        name: Validate Documentation Links
+        entry: docs/scripts/validate-links.sh
+        language: system
+        files: ^docs/.*\.md$
+        pass_filenames: false

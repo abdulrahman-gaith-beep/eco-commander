@@ -1,0 +1,32 @@
+purpose: "Documentation tooling scripts — search, extraction, validation, and statistics utilities for the docs corpus"
+audience: ["agent", "human", "contributor"]
+difficulty: "beginner"
+
+files:
+  doc-stats.sh: "Generate file count, line count, size, ADR, diagram, and glossary statistics for the docs corpus; supports --json output"
+  extract-glossary.sh: "Export the glossary from reference/glossary.md as structured data in JSON, CSV, or plain text"
+  extract-section.sh: "Extract a specific heading section from any doc file by heading text; useful for targeted agent context injection"
+  generate-manifest.py: "Generate docs/MANIFEST.json from the current docs tree; supports --check for drift detection"
+  search-docs.sh: "Full-text search across all eco-commander docs with optional context lines and category filter"
+  validate-links.sh: "Check that all internal Markdown links resolve to real files; reports orphan and INDEX coverage warnings"
+  validate-mermaid.sh: "Check Mermaid code blocks for raw angle-bracket placeholders that break rendering"
+
+read_order:
+  - validate-links.sh
+  - validate-mermaid.sh
+  - search-docs.sh
+  - extract-section.sh
+  - extract-glossary.sh
+  - doc-stats.sh
+  - generate-manifest.py
+
+related_directories:
+  reference: "extract-glossary.sh reads from reference/glossary.md; other scripts operate across the full docs/ tree"
+  api: "generate-cli-reference.sh in docs/api/ is a related but separate generator — it targets src/bin/, not the docs corpus"
+
+agent_tips:
+  - "Run validate-links.sh before every PR that moves or renames docs files to catch broken internal links"
+  - "search-docs.sh is the fastest way to find which doc covers a concept without reading every file"
+  - "extract-section.sh is useful for injecting a specific subsection into a prompt without pulling in a full large file"
+  - "Shell scripts require Bash 5 and must pass shellcheck; run from the repo root or docs/ directory"
+  - "doc-stats.sh --json is available for ad-hoc coverage checks; validate-links.sh and validate-mermaid.sh are the docs CI gates"

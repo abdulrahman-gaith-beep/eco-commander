@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "last_poll_ts": 1767225600,
+  "meters": {
+    "claude.session": {
+      "available": true,
+      "pct": 15.0,
+      "current_kind": "ok",
+      "current_seen_ts": 1767225600,
+      "last_fired_ts": 0,
+      "last_fired_by_kind": {}
+    },
+    "codex.session": {
+      "available": true,
+      "pct": 20.0,
+      "current_kind": "ok",
+      "current_seen_ts": 1767225600,
+      "last_fired_ts": 0,
+      "last_fired_by_kind": {}
+    },
+    "gemini.tiers.flash": {
+      "available": true,
+      "pct": 5.0,
+      "current_kind": "ok",
+      "current_seen_ts": 1767225600,
+      "last_fired_ts": 0,
+      "last_fired_by_kind": {}
+    }
+  },
+  "last_comment_ts": {
+    "gentle": 0.0,
+    "bold": 0.0,
+    "alarmed": 0.0
+  }
+}

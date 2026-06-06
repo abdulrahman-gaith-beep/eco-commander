@@ -1,0 +1,25 @@
+purpose: "Understanding-oriented explanations — the 'why' behind eco-commander's design, not how-to steps or reference data"
+audience: ["human", "agent", "contributor"]
+difficulty: "beginner-intermediate"
+
+files:
+  mental-model.md: "Core concepts explained as a coherent system: operator console model, snapshot immutability, quota meters and the ladder, the recipe contract, widget vs CLI router, scheduler run-once semantics, and the single-user trust boundary"
+  README.md: "Concepts cluster landing page — Diataxis orientation and links to complementary doc directories"
+
+read_order:
+  - README.md
+  - mental-model.md
+
+related_directories:
+  architecture: "Structural complement — component diagram and ASCII data-flow to read alongside mental-model.md"
+  subsystems: "Deep-dive how-to and reference for each subsystem referenced in the mental model"
+  reference: "Schemas, glossary, environment variables — the precise reference layer this explanation does not duplicate"
+  diagrams: "Mermaid diagrams linked from mental-model.md for visual reinforcement"
+  adr: "Architectural decisions that explain specific design choices discussed in the mental model"
+
+agent_tips:
+  - "Read mental-model.md before reading any subsystem doc — it establishes vocabulary and the operator-console framing"
+  - "When a glossary term is unclear, cross-check ../reference/glossary.md; mental-model.md uses all canonical terms"
+  - "This directory is explanation-only; do not search it for JSON schemas, CLI flags, or config syntax"
+  - "The 'What eco-commander deliberately is NOT' section in mental-model.md is a fast way to rule out scopes before deeper investigation"
+  - "Cross-links in mental-model.md are verified against existing files — follow them to reach the authoritative source for each concept"

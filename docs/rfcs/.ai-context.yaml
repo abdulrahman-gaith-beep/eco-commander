@@ -1,0 +1,21 @@
+purpose: "Request for Comments — upfront design proposals for substantial multi-week features that require community discussion before implementation"
+audience: ["agent", "human", "contributor"]
+difficulty: "intermediate"
+
+files:
+  README.md: "RFC process hub — defines what an RFC is, when to write one vs an ADR, the Draft→Discussion→Accepted/Rejected lifecycle, and the RFC template"
+
+read_order:
+  - README.md
+
+related_directories:
+  adr: "Accepted RFCs graduate into ADRs; read the ADR directory to see which proposals have been ratified"
+  diagrams: "RFCs for new subsystems should include or link to diagrams in docs/diagrams/"
+  migration: "Accepted RFCs that introduce breaking changes require a companion migration guide"
+
+agent_tips:
+  - "RFCs are heavier than ADRs — only write one for multi-week features that need design consensus before coding starts"
+  - "Use the template in README.md; the Status field must be one of: Draft, Under Review, Accepted, Rejected, Superseded"
+  - "No RFCs exist yet; the first one will be filed when a substantial feature proposal requires upfront design discussion"
+  - "An RFC is accepted on the PR via reviewer consensus; once accepted, open implementation issues and link them to the RFC"
+  - "If a feature can be decided unilaterally by one author in a single session, write an ADR instead of an RFC"

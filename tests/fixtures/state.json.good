@@ -1,0 +1,27 @@
+{
+  "schema_version": "0.1",
+  "snapshot_id": "2026-04-18T00-00Z",
+  "generated_at": "2026-04-18T00:00:00+03:00",
+  "gate_status": {
+    "G1_evidence": "pass",
+    "G7_freshness": "pass"
+  },
+  "overall_verdict": "provisional",
+  "layers": {
+    "L0_hardware": {
+      "state": "ok",
+      "cpu": "Example CPU",
+      "ram_gb": 0
+    },
+    "L1_local_llms": {
+      "state": "ok",
+      "models_present": 2
+    },
+    "Linf_wiring": {
+      "issues": [
+        {"severity": "high", "id": "W1", "desc": "example issue 1"},
+        {"severity": "med",  "id": "W2", "desc": "example issue 2"}
+      ]
+    }
+  }
+}

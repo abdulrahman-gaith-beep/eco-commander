@@ -1,0 +1,29 @@
+purpose: "Architecture Decision Records — immutable log of every major design choice made for eco-commander"
+audience: ["agent", "human", "contributor"]
+difficulty: "intermediate"
+
+files:
+  0001-record-architecture-decisions.md: "Establishes the ADR practice itself: Nygard format, sequential numbering, append-only policy"
+  0002-bash-implementation.md: "Decides Bash 5 as the primary runtime (recipes, router, plugin) with Python only as an exception"
+  0003-snapshot-immutability.md: "Mandates immutable snapshot directories under ~/.eco/snapshots/ with atomic symlink swap"
+  0004-usage-monitor-python-carveout.md: "Carves out src/poller/ as a Python-only zone for OAuth polling; adds two LaunchAgents"
+  0005-job-scheduler.md: "Adds src/scheduler/ for quota-aware multi-provider job dispatch; amends ADR 0004 Python carve-out"
+
+read_order:
+  - 0001-record-architecture-decisions.md
+  - 0002-bash-implementation.md
+  - 0003-snapshot-immutability.md
+  - 0004-usage-monitor-python-carveout.md
+  - 0005-job-scheduler.md
+
+related_directories:
+  diagrams: "Visual flow diagrams that correspond to decisions in ADR 0004 and 0005"
+  rfcs: "RFCs are the upstream proposal stage; accepted RFCs often produce an ADR"
+  reference: "data-model.md and configuration.md document the schemas these ADRs specify"
+
+agent_tips:
+  - "Read ADRs in numbered order — later ADRs amend or supersede earlier ones"
+  - "ADR 0004 and 0005 are the most load-bearing; understand them before editing src/poller/ or src/scheduler/"
+  - "Every PR touching the CLI contract, snapshot format, or external integration must include a new or updated ADR"
+  - "ADRs are append-only — never edit a committed ADR; add a new one that references the old"
+  - "Check 'Amends:' and 'Supersedes:' frontmatter fields to follow the decision chain"

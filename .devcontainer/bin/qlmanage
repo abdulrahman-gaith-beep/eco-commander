@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# Minimal qlmanage shim for scripts/usage-snapshot.sh in Linux devcontainers.
+set -euo pipefail
+
+outdir=""
+input=""
+
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+    -o)
+      outdir="${2:-}"
+      shift 2
+      ;;
+    -s)
+      shift 2
+      ;;
+    -t)
+      shift
+      ;;
+    -*)
+      shift
+      ;;
+    *)
+      input="$1"
+      shift
+      ;;
+  esac
+done
+
+if [ -z "$outdir" ] || [ -z "$input" ]; then
+  printf "usage: qlmanage -t -o <outdir> <input>\n" >&2
+  exit 2
+fi
+
+mkdir -p "$outdir"
+target="$outdir/$(basename "$input").png"
+
+# 1x1 transparent PNG.
+printf '%s' 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+/p9sAAAAASUVORK5CYII=' \
+  | base64 -d > "$target"
+
+printf "Wrote %s\n" "$target" >&2

@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+# stub: ollama — simulates running/not-running, list, ps, run
+echo "ollama $*" >> "$HOME/.stub-ollama.log"
+
+sub="${1:-}"
+
+# If the whole daemon is "not installed", the caller checks `command -v ollama`
+# via PATH — our stub being here means installed=true always.
+# Tests that want "not installed" unset PATH or remove the stub.
+
+if [ "${STUB_OLLAMA_RUNNING:-1}" -ne 1 ]; then
+  # Daemon down: ps and list should both fail quietly, run should error
+  case "$sub" in
+    ps|list) exit 1 ;;
+    run)     echo "Error: could not connect to ollama daemon" >&2; exit 1 ;;
+    *)       exit 1 ;;
+  esac
+fi
+
+case "$sub" in
+  ps)
+    # Header + loaded models (tab-sep approximation)
+    echo -e "NAME\tID\tSIZE\tPROCESSOR\tUNTIL"
+    if [ -n "${STUB_OLLAMA_LOADED:-}" ]; then
+      IFS=',' read -ra loaded <<< "$STUB_OLLAMA_LOADED"
+      for m in "${loaded[@]}"; do
+        [ -n "$m" ] && echo -e "${m}\tabc\t2.0 GB\tGPU\t10m"
+      done
+    fi
+    exit 0
+    ;;
+  list)
+    echo -e "NAME\tID\tSIZE\tMODIFIED"
+    if [ -n "${STUB_OLLAMA_LIST:-}" ]; then
+      printf '%s\n' "$STUB_OLLAMA_LIST"
+    fi
+    exit 0
+    ;;
+  run)
+    shift
+    # Pretend to run: read stdin, echo a stub response
+    cat >/dev/null
+    echo "${STUB_OLLAMA_OUTPUT:-[stub ollama output]}"
+    exit 0
+    ;;
+  stop)
+    exit 0
+    ;;
+  *)
+    exit 0
+    ;;
+esac

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# No-op AppleScript shim for Linux devcontainers.
+set -euo pipefail
+
+printf "[devcontainer osascript shim] %s\n" "$*" >&2

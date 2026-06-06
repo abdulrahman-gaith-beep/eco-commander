@@ -1,0 +1,22 @@
+purpose: "CLI API reference — hand-maintained command surface plus a scaffold generator"
+audience: ["agent", "human", "operator"]
+difficulty: "beginner"
+
+files:
+  cli-reference.md: "Canonical CLI reference for eco-commander subcommands, flags, and exit codes; regenerated skeletons must be hand-verified"
+  generate-cli-reference.sh: "Bash script that scaffolds cli-reference.md from src/bin/ and recipe annotations after large command-surface changes"
+
+read_order:
+  - cli-reference.md
+  - generate-cli-reference.sh
+
+related_directories:
+  reference: "environment-variables.md and configuration.md complement the CLI reference with runtime config detail"
+  scripts: "docs/scripts/ contains search and extraction utilities that work across the full docs corpus including this directory"
+  getting-started: "Quickstart guides reference specific CLI commands documented here"
+
+agent_tips:
+  - "cli-reference.md is maintained by hand; use generate-cli-reference.sh only as a starting scaffold"
+  - "If a command is missing from cli-reference.md, check whether its help text is parseable by the generator script"
+  - "Use cli-reference.md as the authoritative source for flag names and exit codes when writing tests or docs"
+  - "generate-cli-reference.sh targets the repository Bash scripts and should be run from the repo root"

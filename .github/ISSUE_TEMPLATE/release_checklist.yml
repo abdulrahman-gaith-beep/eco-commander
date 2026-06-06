@@ -1,0 +1,39 @@
+name: Release Checklist
+description: Pre-release checklist for tagging a new version
+labels: ["area:config"]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Target version
+      description: Semantic version to release (e.g. 0.3.0)
+      placeholder: "0.3.0"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: pre-release
+    attributes:
+      label: Pre-release checklist
+      description: Complete all items before tagging.
+      options:
+        - label: "CHANGELOG.md: `[Unreleased]` section moved to `[X.Y.Z] - YYYY-MM-DD`"
+        - label: "`VERSION` file updated to `X.Y.Z`"
+        - label: "`src/scheduler/__init__.py` `__version__` updated to `X.Y.Z`"
+        - label: "`CITATION.cff` `version` and `date-released` updated"
+        - label: "`make lint` passes"
+        - label: "`make test` passes (all suites)"
+        - label: "`make hygiene` passes"
+        - label: "README and docs reflect any new features"
+        - label: "Migration guide added (if breaking changes)"
+        - label: "ADR added (if architectural change)"
+
+  - type: checkboxes
+    id: release
+    attributes:
+      label: Release
+      options:
+        - label: "`make release V=X.Y.Z` run successfully"
+        - label: "GitHub Release published with correct notes"
+        - label: "SBOM attached to release"
+        - label: "Post-release smoke test (`eco status`) passes"

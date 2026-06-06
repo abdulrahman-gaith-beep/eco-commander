@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Minimal sysctl shim for Linux devcontainers.
+set -euo pipefail
+
+if [ "${1:-}" = "-n" ] && [ "${2:-}" = "hw.pagesize" ]; then
+  printf "16384\n"
+  exit 0
+fi
+
+exec /sbin/sysctl "$@"

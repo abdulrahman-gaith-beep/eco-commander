@@ -1,0 +1,5 @@
+{
+  "snapshot_id": "bad",
+  "layers": {
+    "Linf_wiring": { "issues": [
+  // missing close

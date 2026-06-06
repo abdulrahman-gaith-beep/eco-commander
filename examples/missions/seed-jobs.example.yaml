@@ -1,0 +1,81 @@
+# Example scheduler mission file
+# ---------------------------------------------------------------------------
+# Load it into the queue with either of:
+#
+#   eco scheduler add --file examples/missions/seed-jobs.example.yaml
+#   eco scheduler seed --dir examples/missions
+#
+# Then inspect with `eco scheduler status` and dry-run a tick with:
+#
+#   ECO_DRY_RUN=1 eco scheduler run-once
+#
+# Everything here uses neutral placeholders. Set each `workdir` to an absolute
+# path for a directory where the job can run; the scheduler stores this field as
+# given when you add/seed jobs, and providers later execute in that directory.
+# Replace `demo-project`, `/absolute/path/to/demo-project`, the prompts, and
+# `earliest_iso` with your own values.
+# ---------------------------------------------------------------------------
+
+version: 1
+jobs:
+  # 1. A simple "raw prompt" job. The first provider whose meter is open wins;
+  #    the scheduler walks the model_preference ladder top to bottom.
+  - id: "demo-summarize-readme"
+    project: "demo-project"
+    workdir: "/absolute/path/to/demo-project"  # absolute path to the runnable project/worktree
+    template: "raw_prompt"
+    template_vars:
+      prompt: "Summarize this project's README in five bullet points."
+    model_preference:
+      - { provider: gemini, model: gemini-3.1-flash-lite-preview, meter: gemini.tiers.flash_lite }
+      - { provider: codex, model: gpt-5.5, meter: codex.session }
+      - { provider: ollama, model: qwen3:4b, meter: ollama.local }
+    priority: P2
+    earliest_iso: ""          # empty = eligible immediately
+    timeout_s: 300
+    retry:
+      max: 2
+      backoff_s: [60, 300]
+    notes: "Cheap warm-up job — routes to the first available provider."
+
+  # 2. A research-template job, deferred to a future time. The `research`
+  #    template wraps the prompt with TL;DR / Findings / Open-Questions framing.
+  - id: "demo-research-deps"
+    project: "demo-project"
+    workdir: "/absolute/path/to/demo-project"  # absolute path to the runnable project/worktree
+    template: "research"
+    template_vars:
+      prompt: "Survey the project's third-party dependencies and flag stale ones."
+    model_preference:
+      - { provider: gemini, model: gemini-3.1-pro-preview, meter: gemini.tiers.pro }
+      - { provider: gemini, model: gemini-3.1-flash-lite-preview, meter: gemini.tiers.flash_lite }
+    priority: P3
+    earliest_iso: "2030-01-01T09:00:00+00:00"   # won't run before this time
+    timeout_s: 900
+    retry:
+      max: 3
+      backoff_s: [60, 300, 1800]
+    notes: "Lower priority; only runs after the earliest_iso window opens."
+
+  # 3. A dependent job that waits for job #1 to complete. The dispatcher treats
+  #    requires_confirm: true as an unapproved gate and will not dispatch it
+  #    until a human clears the flag after review.
+  - id: "demo-followup-notes"
+    project: "demo-project"
+    workdir: "/absolute/path/to/demo-project"  # absolute path to the runnable project/worktree
+    template: "raw_prompt"
+    template_vars:
+      prompt: "Turn the README summary into a one-paragraph project description."
+    model_preference:
+      - { provider: codex, model: gpt-5.5, meter: codex.session }
+      - { provider: gemini, model: gemini-3-flash-preview, meter: gemini.tiers.flash }
+    priority: P2
+    earliest_iso: ""
+    timeout_s: 300
+    retry:
+      max: 2
+      backoff_s: [60, 300]
+    depends_on_jobs:
+      - "demo-summarize-readme"
+    requires_confirm: true
+    notes: "Gated until demo-summarize-readme completes and requires_confirm is cleared after review."

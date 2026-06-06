@@ -1,0 +1,76 @@
+# macOS
+.DS_Store
+._*
+
+# Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Local AI-agent scratch
+**/.claude/compaction-snapshots/
+tests/.claude/
+**/.claude/projects/
+**/.claude/compaction-snapshots/
+
+# Test artefacts
+tests/reports/
+tests/.tmp/
+tests/e2e/results/
+*.log
+*.bak
+
+# Test/tool caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# Local snapshots dropped into the repo by mistake
+snapshots/
+
+# Output staging
+src/recipes/_outputs/
+
+# Runtime process/output noise
+*.stdout
+*.stderr
+*.out
+*.err
+*.pid
+*.tmp
+*.temp
+
+# Local environments / dependency dirs
+.venv/
+venv/
+env/
+__pypackages__/
+node_modules/
+
+# Build/package output
+build/
+dist/
+*.egg-info/
+.eggs/
+Brewfile.lock.json
+
+# Secrets / local config
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Python bytecode (poller)
+__pycache__/
+*.pyc
+*.pyo
