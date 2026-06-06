@@ -6,7 +6,7 @@
 
 A unified CLI and SwiftBar control surface for managing a multi-tool AI
 ecosystem on macOS. It orchestrates Claude Code, Gemini CLI, Codex CLI,
-Ollama, Cursor, and MCP servers from a single dashboard.
+Ollama, and MCP servers from a single dashboard, and monitors Cursor status.
 
 ### Does eco-commander run AI models?
 
@@ -47,7 +47,7 @@ It depends on the recipe. Core features like `eco status`, `eco list`, and the b
 
 ### What is `gem-smart` and do I need it?
 
-`gem-smart` is an optional opinionated wrapper around the Gemini CLI used in some workflows for smarter model selection and parameter defaults. Recipes like `ask` and `research` prefer `gem-smart 3.5f` if available but will automatically fall back to plain `gemini` if it is not. You do not need it if you have the standard Gemini CLI configured on your `PATH`.
+`gem-smart` is an optional opinionated wrapper around the Gemini CLI used in some workflows for smarter model selection and parameter defaults. Recipes use the model shortcut from `ECO_GEM_MODEL` (default `3f`) if `gem-smart` is available but will automatically fall back to plain `gemini` if it is not. You do not need it if you have the standard Gemini CLI configured on your `PATH`.
 
 ### How do I run a fully private/local query?
 

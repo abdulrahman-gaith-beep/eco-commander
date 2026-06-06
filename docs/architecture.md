@@ -165,7 +165,7 @@ See [Recipes](./subsystems/recipes.md).
 The snapshot recipe creates `$ECO_HOME/snapshots/<timestamp>/`, runs prompt
 layers from the selected prompt library, assembles `state.json`, `map.md`, and
 `dashboard.html`, then publishes `$ECO_HOME/current` with a temporary symlink
-and `mv`. It uses `gem-smart 3.5f` when available, falls back to plain `gemini`
+and `mv`. It uses `gem-smart` with the `ECO_GEM_MODEL` shortcut (default `3f`) when available, falls back to plain `gemini`
 when allowed, and ships a public example prompt library. The fixed seven layer
 IDs are used only when a canonical prompt set is present.
 
