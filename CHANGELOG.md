@@ -47,11 +47,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `~/.eco/` is now a runtime directory of symlinks + state.
 
 ### Fixed
+- Deep Audit Wave 1-3 Fixes:
+  - Fixed hardcoded `3.5f` model IDs in recipes (`swarm.sh`, `research.sh`, `ask.sh`, `snapshot.sh`) to use `ECO_GEM_MODEL` (falling back to `3f`).
+  - Added `hard_wall` error classification for 404 responses in Gemini, Claude, and Codex adapters.
+  - Sanitized test paths in `tests/test_queue.py` to remove privacy-sensitive sibling user references.
 - Snapshot layer failures: `snapshot.sh` now uses a bounded per-layer timeout
   (`GEMINI_LAYER_TIMEOUT_SEC`, default 180s), captures stderr, reports rc=124
   timeouts, and keeps the `gem-smart` to plain `gemini` fallback path.
 - Optional memory-router alert handling now treats cross-project dependency
   fixes as delegated work unless direct complex fixes are explicitly enabled.
+
+### Security
+- Added 34 comprehensive unit tests for `scheduler.queue` validating job ID path traversal prevention, timeout bounds, and workdir privacy blocklists.
 
 ## [0.2.0] - 2026-04-18
 
