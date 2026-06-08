@@ -1,5 +1,5 @@
 mypy==2.1.0
-ruff==0.11.12
+ruff==0.15.16
 coverage==7.9.1
 pip-audit==2.10.0
 pre-commit==4.6.0
